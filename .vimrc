@@ -10,6 +10,7 @@ set autoindent
 set smartindent
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+cnoremap tree NERDTreeToggle
 
 "dein Scripts-----------------------------
 if &compatible
