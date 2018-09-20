@@ -9,6 +9,8 @@ set tabstop=4
 set autoindent
 set smartindent
 
+set backspace=2
+
 if has("autocmd")
     filetype plugin on
     filetype indent on
