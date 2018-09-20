@@ -2,12 +2,20 @@ set number
 set laststatus=2 "show filename
 
 set expandtab "i add these 2018_2_21
-set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set tabstop=4
 
 set autoindent
 set smartindent
+
+if has("autocmd")
+    filetype plugin on
+    filetype indent on
+    autocmd BufRead,BufNewFile *.launch setfiletype xml
+    "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtab
+    autocmd FileType tex    setlocal sw=2 sts=2 ts=2 et
+endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 cnoremap tree NERDTreeToggle
