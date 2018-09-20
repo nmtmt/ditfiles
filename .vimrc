@@ -13,7 +13,7 @@ if has("autocmd")
     filetype plugin on
     filetype indent on
     autocmd BufRead,BufNewFile *.launch setfiletype xml
-    "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtab
+    "sw=shiftwidth, sts=softtabstop, ts=tabstop, et=expandtab
     autocmd FileType tex    setlocal sw=2 sts=2 ts=2 et
 endif
 
