@@ -1,2 +1,3 @@
-mkdir -p ~/.vim/dein/repos/github.com/Shougo/dein.vim
-git clone https://github.com/Shougo/dein.vim.git ~/.vim/dein/repos/github.com/Shougo/dein.vim
+mkdir -p ~/.vim/.cache/dein
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh installer.sh ~/.vim/.cache/dein
