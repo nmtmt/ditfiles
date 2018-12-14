@@ -53,6 +53,9 @@ if dein#load_state('~/.vim/.cache/dein')
     " You can specify revision/branch/tag.
     call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
 
+    call dein#add('lervag/vimtex')
+    call dein#add('thinca/vim-quickrun')
+
     " Required:
     call dein#end()
     call dein#save_state()
