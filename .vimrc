@@ -54,7 +54,7 @@ if dein#load_state('~/.vim/.cache/dein')
     call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
 
     call dein#add('lervag/vimtex')
-    call dein#add('thinca/vim-quickrun')
+    "call dein#add('thinca/vim-quickrun')
 
     " Required:
     call dein#end()
@@ -83,4 +83,19 @@ set background=dark
 set t_Co=256
 let g:lighline = { 'colorscheme': 'gruvbox' }
 " === gruvbox ===
+
+" for latexmk
+let g:vimtex_compiler_latexmk_engines = {
+            \ 'background' : 0,
+            \ 'build_dir' : '',
+            \ 'continuous' : 1,
+            \ 'options' : [
+            \   '-pdfdvi',
+            \   '-verbose',
+            \   '-file-line-error',
+            \   '-synctex=1',
+            \   '-interaction=nonstopmode',
+            \ ],
+            \}
 "
+
