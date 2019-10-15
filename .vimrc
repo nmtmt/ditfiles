@@ -98,4 +98,5 @@ let g:vimtex_compiler_latexmk_engines = {
             \ ],
             \}
 "
-
+" for bash on windows
+set visualbell t_vb=
