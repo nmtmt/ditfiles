@@ -18,10 +18,12 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.log    setlocal readonly
     "sw=shiftwidth, sts=softtabstop, ts=tabstop, et=expandtab
     autocmd FileType tex    setlocal sw=2 sts=2 ts=2 et
+    autocmd BufRead,BufNewFile *.md  set filetype=markdown
 endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 cnoremap tree NERDTreeToggle
+cnoremap md PrevimOpen
 
 "dein Scripts-----------------------------
 if &compatible
@@ -55,6 +57,11 @@ if dein#load_state('~/.vim/.cache/dein')
 
     call dein#add('lervag/vimtex')
     "call dein#add('thinca/vim-quickrun')
+    
+    " for Markdown
+    call dein#add('tpope/vim-markdown')
+    call dein#add('kannokanno/previm')
+    call dein#add('tyru/open-browser.vim')
 
     " Required:
     call dein#end()
@@ -77,12 +84,17 @@ set nocompatible
 filetype plugin on
 runtime macros/matchit.vim
 
-" === gruvbox ===
+" gruvbox
 colorscheme gruvbox
 set background=dark
 set t_Co=256
 let g:lighline = { 'colorscheme': 'gruvbox' }
-" === gruvbox ===
+
+" spell check highlight
+hi clear SpellBad
+hi SpellBad cterm=underline
+" Set style for gVim
+hi SpellBad gui=undercurl
 
 " for latexmk
 let g:vimtex_compiler_latexmk_engines = {
@@ -100,3 +112,7 @@ let g:vimtex_compiler_latexmk_engines = {
 "
 " for bash on windows
 set visualbell t_vb=
+
+" for Markdown
+let g:vim_markdown_folding_disabled=1
+let g:previm_enable_realtime = 1
