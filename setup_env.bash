@@ -12,3 +12,4 @@ rm installer.sh
 # link dotfiles
 ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
+ln -sf ~/dotfiles/.zshrc ~/.zshrc
