@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # required packages
 sudo apt install curl
