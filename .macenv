@@ -1,0 +1,3 @@
+#!/bin/bash
+echo darwin > $HOME/.terminalenv
+source .bashrc
