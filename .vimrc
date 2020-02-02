@@ -1,15 +1,33 @@
 set number
-set laststatus=2 "show filename
-
-set expandtab "i add these 2018_2_21
+set laststatus=2      " show filename
+set expandtab 
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
-
 set autoindent
 set smartindent
-
 set backspace=2
+set fileencoding=utf-8 " default file encoding
+
+set undofile           " enable undo folder
+
+let tmpdirectory =expand("~/.vim/tmp")
+let undodirectory=expand("~/.vim/undo")
+
+function! Mkdir(path)
+    if !isdirectory(a:path)
+        call mkdir(a:path, 'p')
+    endif
+endfunction
+
+call Mkdir(tmpdirectory)
+call Mkdir(undodirectory)
+
+if has("mac") || has("unix")
+    let &directory=tmpdirectory
+    let &backupdir=tmpdirectory
+    let &undodir=undodirectory
+endif
 
 if has("autocmd")
     filetype plugin on

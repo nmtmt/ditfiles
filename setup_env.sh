@@ -10,6 +10,7 @@ sh installer.sh ~/.vim/.cache/dein
 rm installer.sh
 
 # link dotfiles
-ln -sf ~/dotfiles/.vimrc ~/.vimrc
+ln -sf ~/dotfiles/.vimrc     ~/.vimrc
+ln -sf ~/dotfiles/.gvimrc    ~/.gvimrc
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
-ln -sf ~/dotfiles/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/.zshrc     ~/.zshrc
