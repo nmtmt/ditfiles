@@ -17,7 +17,7 @@ function! Mkdir(path)
     endif
 endfunction
 
-if has("mac") || has("unix")
+if has("mac") || has("unix") 
     let tmpdirectory   =expand("~/.vim/tmp")
     let undodirectory  =expand("~/.vim/undo")
     let dein_dir       =expand('~/.vim/.cache/dein')
@@ -63,15 +63,11 @@ if &compatible
 endif
 
 " Required:
-"if dein#load_state('~/.vim/.cache/dein')
-    "call dein#begin('~/.vim/.cache/dein')
 if dein#load_state(dein_dir)
-    " call dein#begin('~/.vim/.cache/dein')
     call dein#begin(dein_dir)
 
     " Let dein manage dein
     " Required:
-    " call dein#add("~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim")
     call dein#add(dein_plugin_dir)
 
     " Add or remove your plugins here:
