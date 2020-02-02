@@ -14,3 +14,6 @@ ln -sf ~/dotfiles/.vimrc     ~/.vimrc
 ln -sf ~/dotfiles/.gvimrc    ~/.gvimrc
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
 ln -sf ~/dotfiles/.zshrc     ~/.zshrc
+ln -sf ~/dotfiles/.unixenv   ~/.unixenv
+ln -sf ~/dotfiles/.macenv    ~/.macenv
+ln -sf ~/dotfiles/select_termenv ~/select_termenv

@@ -1,0 +1,12 @@
+#!/bin/bash
+echo select terminal environment setting 0:unix, 1:mac
+read -n1 -r num
+if [ $num = 0 ];then
+    . $HOME/.unixenv
+elif [ $num = 1 ]; then
+    . $HOME/.macenv
+else
+    echo invalid number! 
+    echo exit...
+fi 
+
