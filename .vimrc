@@ -11,23 +11,37 @@ set fileencoding=utf-8 " default file encoding
 
 set undofile           " enable undo folder
 
-let tmpdirectory =expand("~/.vim/tmp")
-let undodirectory=expand("~/.vim/undo")
-
 function! Mkdir(path)
     if !isdirectory(a:path)
         call mkdir(a:path, 'p')
     endif
 endfunction
 
+if has("mac") || has("unix")
+    let tmpdirectory   =expand("~/.vim/tmp")
+    let undodirectory  =expand("~/.vim/undo")
+    let dein_dir       =expand('~/.vim/.cache/dein')
+    let dein_plugin_dir=expand('~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+    " Required for dein
+    set runtimepath+=~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim
+
+elseif has("win64") || has("win32") || has("win32unix")
+    let tmpdirectory   =expand("~/vimfiles/tmp")
+    let undodirectory  =expand("~/vimfiles/undo")
+    let dein_dir       =expand('~/vimfiles/cache/dein')
+    let dein_plugin_dir=expand('~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim')
+
+    " Required for dein
+    set runtimepath+=~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim
+endif
+
 call Mkdir(tmpdirectory)
 call Mkdir(undodirectory)
 
-if has("mac") || has("unix")
-    let &directory=tmpdirectory
-    let &backupdir=tmpdirectory
-    let &undodir=undodirectory
-endif
+let &directory=tmpdirectory
+let &backupdir=tmpdirectory
+let &undodir=undodirectory
 
 if has("autocmd")
     filetype plugin on
@@ -49,15 +63,16 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state('~/.vim/.cache/dein')
-    call dein#begin('~/.vim/.cache/dein')
+"if dein#load_state('~/.vim/.cache/dein')
+    "call dein#begin('~/.vim/.cache/dein')
+if dein#load_state(dein_dir)
+    " call dein#begin('~/.vim/.cache/dein')
+    call dein#begin(dein_dir)
 
     " Let dein manage dein
     " Required:
-    call dein#add('~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim')
+    " call dein#add("~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim")
+    call dein#add(dein_plugin_dir)
 
     " Add or remove your plugins here:
     call dein#add('Shougo/neosnippet.vim')
@@ -87,7 +102,6 @@ if dein#load_state('~/.vim/.cache/dein')
 endif
 
 " Required:
-filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
@@ -98,8 +112,6 @@ endif
 "End dein Scripts-------------------------
 
 "match it plugin
-set nocompatible
-filetype plugin on
 runtime macros/matchit.vim
 
 " gruvbox
