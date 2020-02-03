@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# required packages
-
 if [ "$(uname)" == "Darwin" ]; then
     os=mac
     if !(type curl > /dev/null 2>&1);then 
@@ -18,7 +16,6 @@ else
     os=unknown
 fi
 
-# download install script and execute it
 mkdir -p ~/.vim/.cache/dein
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 sh installer.sh ~/.vim/.cache/dein
