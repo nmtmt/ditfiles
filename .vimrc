@@ -8,6 +8,7 @@ set autoindent
 set smartindent
 set backspace=2
 set fileencoding=utf-8 " default file encoding
+set fileformat=unix    " default file format
 
 set undofile           " enable undo folder
 

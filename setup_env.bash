@@ -16,10 +16,7 @@ else
     os=unknown
 fi
 
-mkdir -p ~/.vim/.cache/dein
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh installer.sh ~/.vim/.cache/dein
-rm installer.sh
 
 # link dotfiles
 if [ $os = "mac" ] || [ $os = "linux" ]; then
@@ -29,9 +26,14 @@ if [ $os = "mac" ] || [ $os = "linux" ]; then
     ln -sf ~/dotfiles/.unixenv   ~/.unixenv
     ln -sf ~/dotfiles/.macenv    ~/.macenv
     ln -sf ~/dotfiles/select_termenv ~/select_termenv
-elif [ $os = "MINGW" ]; then
+    mkdir -p ~/.vim/.cache/dein
+    sh installer.sh ~/.vim/.cache/dein
+elif [ $os = "windows" ]; then
     ln -sf ~/dotfiles/.vimrc     ~/_vimrc
     ln -sf ~/dotfiles/.gvimrc    ~/_gvimrc
+    mkdir -p ~/vimfiles/cache/dein
+    sh installer.sh ~/vimfiles/cache/dein
 fi
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
+rm installer.sh
 
