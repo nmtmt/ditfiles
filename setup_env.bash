@@ -35,6 +35,6 @@ ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
 rm installer.sh
 
 # setup pdf viewer for vimtex
-if [ $os = "mac" ]; then
+if [ $os = "mac" ] && [ ! -e /Applications/Skim.app ]; then
     brew cask install skim 
 fi
