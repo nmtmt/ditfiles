@@ -1,11 +1,14 @@
-set number
-set laststatus=2      " show filename
-set expandtab 
-set shiftwidth=4
-set softtabstop=4
+set number            " show line numbers
+set laststatus=2      " show filename 
+
 set tabstop=4
+set softtabstop=0
+set shiftwidth=0
+set expandtab
+
 set autoindent
 set smartindent
+
 set backspace=2
 set fileencoding=utf-8 " default file encoding
 set fileformat=unix    " default file format
@@ -50,8 +53,8 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.launch setfiletype xml
     autocmd BufRead,BufNewFile *.log    setlocal readonly
     autocmd BufRead,BufNewFile *.md     setfiletype arkdown
-    "sw=shiftwidth, sts=softtabstop, ts=tabstop, et=expandtab
-    autocmd FileType tex setlocal sw=2 sts=2 ts=2 et
+    " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
+    autocmd FileType tex setlocal ts=2 sts=0 sw=0 et
 endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -160,6 +163,8 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+let g:neocomplete#max_list = 5
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
