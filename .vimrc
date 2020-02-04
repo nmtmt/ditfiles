@@ -62,8 +62,8 @@ if has("autocmd")
 endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-cnoremap tree NERDTreeToggle
-cnoremap md PrevimOpen
+cnoremap tree<TAB> NERDTreeToggle
+cnoremap md<TAB> PrevimOpen
 
 "dein Scripts-----------------------------
 if &compatible
