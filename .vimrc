@@ -6,12 +6,14 @@ set softtabstop=0
 set shiftwidth=0
 set expandtab
 
-set autoindent
-set smartindent
+set autoindent  
+set smartindent " c like autoindent. only enable when autoindent is enabled
 
 set backspace=2
 set fileencoding=utf-8 " default file encoding
 set fileformat=unix    " default file format
+
+set spelllang=en,cjk
 
 set undofile           " enable undo folder
 
@@ -51,10 +53,12 @@ if has("autocmd")
     filetype plugin on
     filetype indent on
     autocmd BufRead,BufNewFile *.launch setfiletype xml
+    autocmd BufRead,BufNewFile *.md     setfiletype markdown
     autocmd BufRead,BufNewFile *.log    setlocal readonly
-    autocmd BufRead,BufNewFile *.md     setfiletype arkdown
+    autocmd FileType text NeoCompleteLock
     " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
-    autocmd FileType tex setlocal ts=2 sts=0 sw=0 et
+    autocmd FileType tex,md setlocal ts=2 sts=0 sw=0 et
+    autocmd FileType text,tex,md setlocal spell
 endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -74,7 +78,6 @@ if dein#load_state(dein_dir)
     " Required:
     call dein#add(dein_plugin_dir)
 
-    " Add or remove your plugins here:
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neosnippet-snippets')
     call dein#add('Shougo/neocomplete.vim')
@@ -84,6 +87,9 @@ if dein#load_state(dein_dir)
     call dein#add('tpope/vim-surround')
 
     call dein#add('scrooloose/nerdtree')
+
+    " enable paste mode when paste with clipboard
+    call dein#add('ConradIrwin/vim-bracketed-paste')
 
     " You can specify revision/branch/tag.
     call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
@@ -143,7 +149,7 @@ let g:vimtex_compiler_latexmk_engines = {
             \ ],
             \}
 if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
+    let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.tex = g:vimtex#re#neocomplete
 
@@ -214,7 +220,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 
 " For conceal markers.
 if has('conceal')
-  set conceallevel=2 concealcursor=niv
+    set conceallevel=2 concealcursor=niv
 endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 " ========== End of neosnippet Setting ===========
