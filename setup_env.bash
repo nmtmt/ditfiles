@@ -2,16 +2,12 @@
 
 if [ "$(uname)" == "Darwin" ]; then
     os=mac
-    if !(type curl > /dev/null 2>&1);then 
-        brew install curl 
-    fi
+    hash curl > /dev/null 2>&1 || brew install curl
 elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then
     os=windows
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     os=linux
-    if !(type curl > /dev/null 2>&1);then 
-        sudo apt install curl
-    fi
+    hash curl > /dev/null 2>&1 || sudo apt install curl
 else
     os=unknown
 fi
