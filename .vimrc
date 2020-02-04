@@ -49,9 +49,9 @@ if has("autocmd")
     filetype indent on
     autocmd BufRead,BufNewFile *.launch setfiletype xml
     autocmd BufRead,BufNewFile *.log    setlocal readonly
+    autocmd BufRead,BufNewFile *.md     setfiletype arkdown
     "sw=shiftwidth, sts=softtabstop, ts=tabstop, et=expandtab
-    autocmd FileType tex    setlocal sw=2 sts=2 ts=2 et
-    autocmd BufRead,BufNewFile *.md  set filetype=markdown
+    autocmd FileType tex setlocal sw=2 sts=2 ts=2 et
 endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -123,6 +123,9 @@ hi SpellBad cterm=underline
 " Set style for gVim
 hi SpellBad gui=undercurl
 
+" for using tex snippet of neosnippet
+let g:tex_flavor='latex'
+
 " for latexmk
 let g:vimtex_compiler_latexmk_engines = {
             \ 'background' : 0,
@@ -136,10 +139,77 @@ let g:vimtex_compiler_latexmk_engines = {
             \   '-interaction=nonstopmode',
             \ ],
             \}
-"
-" for bash on windows
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.tex = g:vimtex#re#neocomplete
+
+" for not to ring warning bell on bash on windows
 set visualbell t_vb=
 
 " for Markdown
 let g:vim_markdown_folding_disabled=1
 let g:previm_enable_realtime = 1
+
+" =========== Setting for neocomplete =============
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <TAB>: completion.
+inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Close popup by <Space> or <CR>.
+inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
+inoremap <expr><CR>    pumvisible() ? "\<C-y>" : "\<CR>"
+
+" Enable omni completion.
+autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
+" =========== End of Setting for neocomplete =============
+"
+" =========== neosnippet Setting =============
+" " Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+let g:neosnippet#enable_snipmate_compatibility = 1
+" ========== End of neosnippet Setting ===========

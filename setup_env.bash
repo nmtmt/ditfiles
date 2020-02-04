@@ -16,6 +16,7 @@ else
     os=unknown
 fi
 
+# get installer for dein(vim plugin manager)
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 
 # link dotfiles
@@ -37,3 +38,7 @@ fi
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
 rm installer.sh
 
+# setup pdf viewer for vimtex
+if [ $os = "mac" ]; then
+    brew cask install skim 
+fi
