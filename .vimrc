@@ -14,6 +14,7 @@ set fileencoding=utf-8 " default file encoding
 set fileformat=unix    " default file format
 
 set spelllang=en,cjk
+set wildmenu " コマンドモードの補完
 
 set undofile           " enable undo folder
 
@@ -161,16 +162,12 @@ let g:vim_markdown_folding_disabled=1
 let g:previm_enable_realtime = 1
 
 " =========== Setting for neocomplete =============
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:acp_enableAtStartup = 0 " Disable AutoComplPop.     
+let g:neocomplete#enable_at_startup = 1  " Use neocomplete.
+let g:neocomplete#enable_smart_case = 1  " Use smartcase.
+let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
 
-let g:neocomplete#max_list = 5
+let g:neocomplete#max_list = 4
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {

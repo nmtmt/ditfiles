@@ -4,7 +4,11 @@ export PS1="%F{green}${USER}@${HOST%%.*}%f:%F{blue}%0~%f%(!.#.$) "
 export LSCOLORS=exgxcxdxcxegedabagacad
 
 alias ls='ls -G'
-alias rm='trash-put'
+
+if which trash-put &> /dev/null; then
+    alias rm='trash-put'
+    trash-empty 50
+fi
 
 # Tex Live
 export MANPATH=$MANPATH:/usr/local/texlive/2019/texmf-dist/doc/man
