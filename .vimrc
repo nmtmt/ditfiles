@@ -165,9 +165,12 @@ let g:previm_enable_realtime = 1
 let g:acp_enableAtStartup = 0 " Disable AutoComplPop.     
 let g:neocomplete#enable_at_startup = 1  " Use neocomplete.
 let g:neocomplete#enable_smart_case = 1  " Use smartcase.
-let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
 
+let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
 let g:neocomplete#max_list = 4
+
+let g:neocomplete#auto_completion_start_length = 3
+let g:neocomplete#auto_complete_delay = 50
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
