@@ -7,7 +7,7 @@ set shiftwidth=0
 set expandtab
 
 set autoindent  
-set smartindent " c like autoindent. only enable when autoindent is enabled
+set smartindent " c like indent. enabled when autoindent is enabled
 
 set backspace=2
 set fileencoding=utf-8 " default file encoding
@@ -65,6 +65,10 @@ endif
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 cnoremap tree<TAB> NERDTreeToggle
 cnoremap md<TAB> PrevimOpen
+
+" enable filtering using ctrl-p or ctrl-n
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 "dein Scripts-----------------------------
 if &compatible
