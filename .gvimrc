@@ -9,5 +9,5 @@ nnoremap gj j
 nnoremap gk k
 
 if has("win64") || has("win32") || has("win32unix")
-    set guifont=cica:h14
+    set guifont=cica:h12
 endif
