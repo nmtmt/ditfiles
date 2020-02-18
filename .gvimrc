@@ -10,4 +10,6 @@ nnoremap gk k
 
 if has("win64") || has("win32") || has("win32unix")
     set guifont=cica:h12
+elseif has("mac")
+    set guifont=Osaka-Mono:h14
 endif
