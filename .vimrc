@@ -1,21 +1,20 @@
-set number            " show line numbers
-set laststatus=2      " show filename 
+set number         " show line numbers
+set laststatus=2   " show filename 
 
 set tabstop=4
-set softtabstop=0
-set shiftwidth=0
-set expandtab
+set softtabstop=-1 " same as ts
+set shiftwidth=0   " same as ts
+set expandtab      " use space in stead of tab
 
 set autoindent  
-set smartindent " c like indent. enabled when autoindent is enabled
+set smartindent " C-like indent. enabled when autoindent is on
 
 set backspace=2
 set fileencoding=utf-8 " default file encoding
 set fileformat=unix    " default file format
 
-set spelllang=en,cjk
-set wildmenu " コマンドモードの補完
-
+set spelllang=en,cjk   " disable spell check in Japanese
+set wildmenu           " commamd mode completion
 set undofile           " enable undo folder
 
 function! Mkdir(path)
@@ -58,8 +57,10 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.log    setlocal readonly
     autocmd FileType text NeoCompleteLock
     " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
-    autocmd FileType tex,md setlocal ts=2 sts=0 sw=0 et
+    autocmd FileType text,tex,md setlocal ts=2 sts=-1 sw=0 et
+    " fo=formatoptions, com=comments
     autocmd FileType text,tex,md setlocal spell
+    autocmd FileType text setlocal fo+=n fo-=c fo+=r com-=fb:- com+=b:-
 endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -103,7 +104,9 @@ if dein#load_state(dein_dir)
     "call dein#add('thinca/vim-quickrun')
     
     " for Markdown
-    call dein#add('tpope/vim-markdown')
+    " call dein#add('tpope/vim-markdown')
+    call dein#add('godlygeek/tabular')
+    call dein#add('plasticboy/vim-markdown')
     call dein#add('kannokanno/previm')
     call dein#add('tyru/open-browser.vim')
 
