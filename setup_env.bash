@@ -1,40 +1,34 @@
 #!/bin/bash
 
-if [ "$(uname)" == "Darwin" ]; then
-    os=mac
-    hash curl > /dev/null 2>&1 || brew install curl
-elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then
-    os=windows
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    os=linux
-    hash curl > /dev/null 2>&1 || sudo apt install curl
-else
-    os=unknown
-fi
+cat ./env/ppa      | xargs -L 1 sudo apt-add-repository 
+sudo apt update
+cat ./env/packages | xargs sudo apt install -y
 
-# get installer for dein(vim plugin manager)
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+# setup Cica
+wget https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip
+font_dir=~/.font/Cica
+cur_dir=$(pwd)
+echo $cur_dir
+mkdir -p $font_dir
+mv Cica_v5.0.1_with_emoji.zip $font_dir
+cd $font_dir
+unzip Cica_v5.0.1_with_emoji.zip 
+rm Cica_v5.0.1_with_emoji.zip 
+sudo cp -r ../Cica /usr/share/fonts
+cd $cur_dir
 
-# link dotfiles
-if [ $os = "mac" ] || [ $os = "linux" ]; then
-    ln -sf ~/dotfiles/.vimrc     ~/.vimrc
-    ln -sf ~/dotfiles/.gvimrc    ~/.gvimrc
-    ln -sf ~/dotfiles/.zshrc     ~/.zshrc
-    ln -sf ~/dotfiles/.unixenv   ~/.unixenv
-    ln -sf ~/dotfiles/.macenv    ~/.macenv
-    ln -sf ~/dotfiles/select_termenv ~/select_termenv
-    mkdir -p ~/.vim/.cache/dein
-    sh installer.sh ~/.vim/.cache/dein
-elif [ $os = "windows" ]; then
-    ln -sf ~/dotfiles/.vimrc     ~/_vimrc
-    ln -sf ~/dotfiles/.gvimrc    ~/_gvimrc
-    mkdir -p ~/vimfiles/cache/dein
-    sh installer.sh ~/vimfiles/cache/dein
-fi
-ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
-rm installer.sh
+# fix time difference in dual boot env
+timedatectl set-local-rtc true
 
-# setup pdf viewer for vimtex
-if [ $os = "mac" ] && [ ! -e /Applications/Skim.app ]; then
-    brew cask install skim 
-fi
+# regard caps as ctrl
+gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+
+# for backlight on Let's note
+sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=vendor"/g' /etc/default/grub
+sudo sed --in-place 's/GRUB_TIMEOUT=10/GRUB_TIMEOUT=300/g' /etc/default/grub
+
+unity-tweak-tool -a
+
+# update grub
+sudo update-initramfs -u
+sudo update-grub
