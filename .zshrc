@@ -10,6 +10,11 @@ if which trash-put &> /dev/null; then
     trash-empty 50
 fi
 
+function find4mac(){ find $@ -print0 }
+alias find='find4mac'
+function xargs4mac(){ xargs -0 $@ }
+alias xargs='xargs4mac'
+
 # Tex Live
 export MANPATH=$MANPATH:/usr/local/texlive/2019/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:/usr/local/texlive/2019/texmf-dist/doc/info

@@ -12,6 +12,7 @@ set smartindent " C-like indent. enabled when autoindent is on
 set backspace=2
 set fileencoding=utf-8 " default file encoding
 set fileformat=unix    " default file format
+scriptencoding utf-8   " this vim file's encoding. must be below the fileformat line
 
 set spelllang=en,cjk   " disable spell check in Japanese
 set wildmenu           " commamd mode completion
@@ -60,7 +61,8 @@ if has("autocmd")
     autocmd FileType text,tex,md setlocal ts=2 sts=-1 sw=0 et
     " fo=formatoptions, com=comments
     autocmd FileType text,tex,md setlocal spell
-    autocmd FileType text setlocal fo+=n fo-=c fo+=r com-=fb:- com+=b:-
+    " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
+    autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
 endif
 
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
