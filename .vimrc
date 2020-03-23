@@ -52,7 +52,8 @@ let &undodir=undodirectory
 
 if has("autocmd")
     filetype plugin on
-    filetype indent on
+    " filetype indent on
+    filetype indent off
     autocmd BufRead,BufNewFile *.launch setfiletype xml
     autocmd BufRead,BufNewFile *.md     setfiletype markdown
     autocmd BufRead,BufNewFile *.log    setlocal readonly
@@ -199,7 +200,7 @@ inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " <TAB>: completion.
-inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Close popup by <Space> or <CR>.
 inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
@@ -209,7 +210,7 @@ inoremap <expr><CR>    pumvisible() ? "\<C-y>" : "\<CR>"
 autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python        setlocal omnifunc=python3complete#Complete
 autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 " =========== End of Setting for neocomplete =============
 "
@@ -220,8 +221,11 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
+" imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 imap <expr><TAB>
-\ pumvisible() ? "\<C-n>" :
 \ neosnippet#expandable_or_jumpable() ?
 \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
