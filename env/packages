@@ -11,3 +11,6 @@ flatabulous-theme
 python-pip
 python3-pip
 trash-cli
+nkf
+convmv
+nmap

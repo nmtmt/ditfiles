@@ -8,7 +8,6 @@ cat ./env/packages | xargs sudo apt install -y
 wget https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip
 font_dir=~/.font/Cica
 cur_dir=$(pwd)
-echo $cur_dir
 mkdir -p $font_dir
 mv Cica_v5.0.1_with_emoji.zip $font_dir
 cd $font_dir
