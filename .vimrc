@@ -8,6 +8,7 @@ set expandtab      " use space in stead of tab
 
 set autoindent  
 set smartindent " C-like indent. enabled when autoindent is on
+set cindent
 
 set backspace=2
 set fileencoding=utf-8 " default file encoding
@@ -52,8 +53,7 @@ let &undodir=undodirectory
 
 if has("autocmd")
     filetype plugin on
-    " filetype indent on
-    filetype indent off
+    filetype indent on
     autocmd BufRead,BufNewFile *.launch setfiletype xml
     autocmd BufRead,BufNewFile *.md     setfiletype markdown
     autocmd BufRead,BufNewFile *.log    setlocal readonly

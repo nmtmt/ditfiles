@@ -14,3 +14,6 @@ trash-cli
 nkf
 convmv
 nmap
+pigz
+pixz
+pbzip2
