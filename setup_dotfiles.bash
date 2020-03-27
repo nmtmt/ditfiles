@@ -12,9 +12,6 @@ else
     os=unknown
 fi
 
-# get installer for dein(vim plugin manager)
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-
 # link dotfiles
 if [ $os = "mac" ] || [ $os = "linux" ]; then
     ln -sf ~/dotfiles/.vimrc     ~/.vimrc
@@ -25,13 +22,10 @@ if [ $os = "mac" ] || [ $os = "linux" ]; then
     ln -sf ~/dotfiles/.rsync_exclude ~/.rsync_exclude
     ln -sf ~/dotfiles/select_termenv ~/select_termenv
     mkdir -p ~/.vim/.cache/dein
-    sh installer.sh ~/.vim/.cache/dein
 elif [ $os = "windows" ]; then
     ln -sf ~/dotfiles/.vimrc     ~/_vimrc
     ln -sf ~/dotfiles/.gvimrc    ~/_gvimrc
     mkdir -p ~/vimfiles/cache/dein
-    sh installer.sh ~/vimfiles/cache/dein
 fi
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
-rm installer.sh
 
