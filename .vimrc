@@ -78,7 +78,7 @@ if match( &runtimepath, '/dein.vim' ) == -1
   if !isdirectory(dein_plugin_dir)
     execute '!git clone https://github.com/Shougo/dein.vim' dein_plugin_dir
   endif
-    let &runtimepath .= ','.expand(dein_plugin_dir)
+  let &runtimepath .= ','.expand(dein_plugin_dir)
 endif
 
 " Required:
