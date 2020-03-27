@@ -8,7 +8,7 @@ set expandtab      " use space in stead of tab
 
 set autoindent  
 set smartindent " C-like indent. enabled when autoindent is on
-set cindent
+" set cindent
 
 set backspace=2
 set fileencoding=utf-8 " default file encoding
