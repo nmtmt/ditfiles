@@ -113,6 +113,9 @@ if dein#load_state(dein_dir)
     call dein#add('kannokanno/previm')
     call dein#add('tyru/open-browser.vim')
 
+    " load my snippets
+    call dein#add('nmtmt/neosnippet-snippets')
+
     " Required:
     call dein#end()
     call dein#save_state()

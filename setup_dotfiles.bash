@@ -22,6 +22,7 @@ if [ $os = "mac" ] || [ $os = "linux" ]; then
     ln -sf ~/dotfiles/.zshrc     ~/.zshrc
     ln -sf ~/dotfiles/.unixenv   ~/.unixenv
     ln -sf ~/dotfiles/.macenv    ~/.macenv
+    ln -sf ~/dotfiles/.rsync_exclude ~/.rsync_exclude
     ln -sf ~/dotfiles/select_termenv ~/select_termenv
     mkdir -p ~/.vim/.cache/dein
     sh installer.sh ~/.vim/.cache/dein
@@ -34,7 +35,3 @@ fi
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
 rm installer.sh
 
-# setup pdf viewer for vimtex
-if [ $os = "mac" ] && [ ! -e /Applications/Skim.app ]; then
-    brew cask install skim 
-fi

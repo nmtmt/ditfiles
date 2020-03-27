@@ -1,5 +1,4 @@
 ppa:jonathonf/vim
-ppa:jonathonf/ffmpeg-4sudo apt-add-repository
-
+ppa:jonathonf/ffmpeg-4
 ppa:noobslab/icons
 ppa:noobslab/themes

@@ -1,19 +1,14 @@
 #!/bin/bash
 
-if [ "$(uname)" == "Darwin" ]; then
-    os=mac
-    hash curl > /dev/null 2>&1 || brew install curl
-elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then
-    os=windows
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    os=linux
-    hash curl > /dev/null 2>&1 || sudo apt install curl
-else
-    os=unknown
+if   [ "$(uname)" == "Darwin" ];then os=mac
+elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then os=windows
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then os=linux
+else os=unknown
 fi
 
 if [ $os = "mac" ]; then
-    cat ./env/mac/packages | xargs brew install 
+    cat ./env/mac/packages      | xargs brew install 
+    cat ./env/mac/cask_packages | xargs brew cask install 
     font_dir=~/Library/Fonts/Cica
 elif [ $os = "Linux" ] || [ $os = "Darwin" ]; then
     cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository 

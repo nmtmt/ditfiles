@@ -1,0 +1,10 @@
+*.localized
+*.DS_Store
+*:Zone.Identifier
+*~\$*
+*~
+*.swp
+*.*library
+.??*
+.tmp*
+名称未設定フォルダ
