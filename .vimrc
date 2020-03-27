@@ -31,17 +31,11 @@ if has("mac") || has("unix")
     let dein_dir       =expand('~/.vim/.cache/dein')
     let dein_plugin_dir=expand('~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-    " Required for dein
-    " set runtimepath+=~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim
-
 elseif has("win64") || has("win32") || has("win32unix")
     let tmpdirectory   =expand("~/vimfiles/tmp")
     let undodirectory  =expand("~/vimfiles/undo")
     let dein_dir       =expand('~/vimfiles/cache/dein')
     let dein_plugin_dir=expand('~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim')
-
-    " Required for dein
-    " set runtimepath+=~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim
 endif
 
 call Mkdir(tmpdirectory)
@@ -84,7 +78,7 @@ if match( &runtimepath, '/dein.vim' ) == -1
   if !isdirectory(dein_plugin_dir)
     execute '!git clone https://github.com/Shougo/dein.vim' dein_plugin_dir
   endif
-  execute 'set runtimepath^=' . fnamemodify(dein_plugin_dir, ':p')
+    let &runtimepath .= ','.expand(dein_plugin_dir)
 endif
 
 " Required:
