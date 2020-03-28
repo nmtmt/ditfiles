@@ -1,5 +1,7 @@
 set number         " show line numbers
 set laststatus=2   " show filename 
+set ruler          " show cursor info and window percentage
+set rulerformat=%-3(%P%) " only show percentage
 
 set tabstop=4
 set softtabstop=-1 " same as ts
@@ -60,7 +62,7 @@ if has("autocmd")
     autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
 endif
 
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+" cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 cnoremap tree<TAB> NERDTreeToggle
 cnoremap md<TAB> PrevimOpen
 
