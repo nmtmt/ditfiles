@@ -22,22 +22,22 @@ set wildmenu           " commamd mode completion
 set undofile           " enable undo folder
 
 function! Mkdir(path)
-    if !isdirectory(a:path)
-        call mkdir(a:path, 'p')
-    endif
+  if !isdirectory(a:path)
+    call mkdir(a:path, 'p')
+  endif
 endfunction
 
 if has("mac") || has("unix") 
-    let tmpdirectory   =expand("~/.vim/tmp")
-    let undodirectory  =expand("~/.vim/undo")
-    let dein_dir       =expand('~/.vim/.cache/dein')
-    let dein_plugin_dir=expand('~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim')
+  let tmpdirectory   =expand("~/.vim/tmp")
+  let undodirectory  =expand("~/.vim/undo")
+  let dein_dir       =expand('~/.vim/.cache/dein')
+  let dein_plugin_dir=expand('~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 elseif has("win64") || has("win32") || has("win32unix")
-    let tmpdirectory   =expand("~/vimfiles/tmp")
-    let undodirectory  =expand("~/vimfiles/undo")
-    let dein_dir       =expand('~/vimfiles/cache/dein')
-    let dein_plugin_dir=expand('~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim')
+  let tmpdirectory   =expand("~/vimfiles/tmp")
+  let undodirectory  =expand("~/vimfiles/undo")
+  let dein_dir       =expand('~/vimfiles/cache/dein')
+  let dein_plugin_dir=expand('~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim')
 endif
 
 call Mkdir(tmpdirectory)
@@ -48,18 +48,18 @@ let &backupdir=tmpdirectory
 let &undodir=undodirectory
 
 if has("autocmd")
-    filetype plugin on
-    filetype indent on
-    autocmd BufRead,BufNewFile *.launch setfiletype xml
-    autocmd BufRead,BufNewFile *.md     setfiletype markdown
-    autocmd BufRead,BufNewFile *.log    setlocal readonly
-    autocmd FileType text NeoCompleteLock
-    " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
-    autocmd FileType text,tex,md,html,xml setlocal ts=2 sts=-1 sw=0 et
-    " fo=formatoptions, com=comments
-    autocmd FileType text,tex,md setlocal spell
-    " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
-    autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
+  filetype plugin on
+  filetype indent on
+  autocmd BufRead,BufNewFile *.launch setfiletype xml
+  autocmd BufRead,BufNewFile *.md     setfiletype markdown
+  autocmd BufRead,BufNewFile *.log    setlocal readonly
+  autocmd FileType text NeoCompleteLock
+  " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
+  autocmd FileType text,tex,md,html,xml,vim setlocal ts=2 sts=-1 sw=0 et
+  " fo=formatoptions, com=comments
+  autocmd FileType text,tex,md setlocal spell
+  " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
+  autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
 endif
 
 " cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -72,7 +72,7 @@ cnoremap <C-n> <Down>
 
 "dein Scripts-----------------------------
 if &compatible
-    set nocompatible               " Be iMproved
+  set nocompatible               " Be iMproved
 endif
 
 " install dein if not installed
@@ -85,44 +85,44 @@ endif
 
 " Required:
 if dein#load_state(dein_dir)
-    call dein#begin(dein_dir)
+  call dein#begin(dein_dir)
 
-    " Let dein manage dein
-    " Required:
-    call dein#add(dein_plugin_dir)
+  " Let dein manage dein
+  " Required:
+  call dein#add(dein_plugin_dir)
 
-    call dein#add('Shougo/neosnippet.vim')
-    " call dein#add('Shougo/neosnippet-snippets')
-    call dein#add('Shougo/neocomplete.vim')
-    call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neosnippet.vim')
+  " call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/unite.vim')
 
-    call dein#add('flazz/vim-colorschemes')
-    call dein#add('tpope/vim-surround')
+  call dein#add('flazz/vim-colorschemes')
+  call dein#add('tpope/vim-surround')
 
-    call dein#add('scrooloose/nerdtree')
+  call dein#add('scrooloose/nerdtree')
 
-    " enable paste mode when paste with clipboard
-    call dein#add('ConradIrwin/vim-bracketed-paste')
+  " enable paste mode when paste with clipboard
+  call dein#add('ConradIrwin/vim-bracketed-paste')
 
-    " You can specify revision/branch/tag.
-    call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
 
-    call dein#add('lervag/vimtex')
-    "call dein#add('thinca/vim-quickrun')
-    
-    " for Markdown
-    " call dein#add('tpope/vim-markdown')
-    call dein#add('godlygeek/tabular')
-    call dein#add('plasticboy/vim-markdown')
-    call dein#add('kannokanno/previm')
-    call dein#add('tyru/open-browser.vim')
+  call dein#add('lervag/vimtex')
+  "call dein#add('thinca/vim-quickrun')
+  
+  " for Markdown
+  " call dein#add('tpope/vim-markdown')
+  call dein#add('godlygeek/tabular')
+  call dein#add('plasticboy/vim-markdown')
+  call dein#add('kannokanno/previm')
+  call dein#add('tyru/open-browser.vim')
 
-    " load my snippets
-    call dein#add('nmtmt/neosnippet-snippets')
+  " load my snippets
+  call dein#add('nmtmt/neosnippet-snippets')
 
-    " Required:
-    call dein#end()
-    call dein#save_state()
+  " Required:
+  call dein#end()
+  call dein#save_state()
 endif
 
 " Required:
@@ -167,7 +167,7 @@ let g:vimtex_compiler_latexmk_engines = {
             \ ],
             \}
 if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
+  let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.tex = g:vimtex#re#neocomplete
 
@@ -198,7 +198,7 @@ let g:neocomplete#sources#dictionary#dictionaries = {
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+  let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
@@ -240,7 +240,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 
 " For conceal markers.
 if has('conceal')
-    set conceallevel=2 concealcursor=niv
+  set conceallevel=2 concealcursor=niv
 endif
 " load snippets from runtime path automatically
 let g:neosnippet#enable_snipmate_compatibility = 1
