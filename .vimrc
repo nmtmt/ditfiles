@@ -55,7 +55,7 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.log    setlocal readonly
     autocmd FileType text NeoCompleteLock
     " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
-    autocmd FileType text,tex,md setlocal ts=2 sts=-1 sw=0 et
+    autocmd FileType text,tex,md,html,xml setlocal ts=2 sts=-1 sw=0 et
     " fo=formatoptions, com=comments
     autocmd FileType text,tex,md setlocal spell
     " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
@@ -92,7 +92,7 @@ if dein#load_state(dein_dir)
     call dein#add(dein_plugin_dir)
 
     call dein#add('Shougo/neosnippet.vim')
-    call dein#add('Shougo/neosnippet-snippets')
+    " call dein#add('Shougo/neosnippet-snippets')
     call dein#add('Shougo/neocomplete.vim')
     call dein#add('Shougo/unite.vim')
 
@@ -242,5 +242,6 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
     set conceallevel=2 concealcursor=niv
 endif
+" load snippets from runtime path automatically
 let g:neosnippet#enable_snipmate_compatibility = 1
 " ========== End of neosnippet Setting ===========
