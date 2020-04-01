@@ -15,6 +15,9 @@ function find4mac(){ find $@ -print0 }
 function xargs4mac(){ xargs -0 $@ }
 #alias xargs='xargs4mac'
 
+alias gcc=/usr/local/bin/gcc-9
+alias g++=/usr/local/bin/g++-9
+
 # Tex Live
 export MANPATH=$MANPATH:/usr/local/texlive/2019/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:/usr/local/texlive/2019/texmf-dist/doc/info

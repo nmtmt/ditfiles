@@ -1,3 +1,4 @@
+build-essential
 openssh-server
 openssh-client
 curl
