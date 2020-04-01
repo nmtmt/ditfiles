@@ -1,10 +1,9 @@
 #!/bin/bash
 
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname -s)" == "Darwin" ]; then 
     os=mac
     hash curl > /dev/null 2>&1 || brew install curl
-elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then
-    os=windows
+elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then os=windows
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     os=linux
     hash curl > /dev/null 2>&1 || sudo apt install curl

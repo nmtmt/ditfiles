@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if   [ "$(uname)" == "Darwin" ];then os=mac
-elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then os=windows
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then os=linux
+if   [ "$(uname -s)" = "Darwin" ];then os=mac
+elif [ "$(expr substr $(uname -s) 1 5)" = "MINGW" ]; then os=windows
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then os=linux
 else os=unknown
 fi
 
