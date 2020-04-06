@@ -11,7 +11,16 @@ nnoremap gk k
 if has("mac") " has(mac) have to be before has(unix)
   set guifont=Osaka-Mono:h14
   " set linespace=7
-elseif has("win64") || has("win32") || has("win32unix") || has("unix")
-  set guifont=cica:h12
-  " set linespace=5
+else
+  if has("win64") || has("win32") || has("win32unix")
+    set guifont=Cica:h12
+    " set linespace=5
+  elseif has("unix")
+    "set noimdisableactivate
+    "set iminsert=2
+    "inoremap <ESC> <ESC>:set iminsert=0<CR>
+    "autocmd InsertLeave * set iminsert=0 imsearch=0
+    set guifont=Cica\ Regular\ 14
+    " set linespace=5
+  endif
 endif

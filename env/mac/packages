@@ -11,3 +11,5 @@ pigz
 pixz
 pbzip2
 gcc
+lua
+perl
