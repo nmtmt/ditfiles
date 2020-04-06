@@ -21,6 +21,9 @@ set spelllang=en,cjk   " disable spell check in Japanese
 set wildmenu           " commamd mode completion
 set undofile           " enable undo folder
 
+" now show preview window on word completion
+set completeopt=menuone
+
 function! Mkdir(path)
   if !isdirectory(a:path)
     call mkdir(a:path, 'p')
@@ -62,14 +65,6 @@ if has("autocmd")
   autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
 endif
 
-" cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-cnoremap tree<TAB> NERDTreeToggle
-cnoremap md<TAB> PrevimOpen
-
-" enable filtering using ctrl-p or ctrl-n
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -92,7 +87,6 @@ if dein#load_state(dein_dir)
   call dein#add(dein_plugin_dir)
 
   call dein#add('Shougo/neosnippet.vim')
-  " call dein#add('Shougo/neosnippet-snippets')
   call dein#add('Shougo/neocomplete.vim')
   call dein#add('Shougo/unite.vim')
 
@@ -105,7 +99,7 @@ if dein#load_state(dein_dir)
   call dein#add('ConradIrwin/vim-bracketed-paste')
 
   " You can specify revision/branch/tag.
-  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+  " call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
 
   call dein#add('lervag/vimtex')
   "call dein#add('thinca/vim-quickrun')
@@ -133,7 +127,22 @@ if dein#check_install()
   call dein#install()
 endif
 
+if len(dein#check_clean()) " if there are plugins to be removed
+  call map(dein#check_clean(), "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+  source $MYVIMRC " reload .vimrc
+endif
+
 "End dein Scripts-------------------------
+
+" cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+cnoremap tree<TAB> NERDTreeToggle
+cnoremap md<TAB> PrevimOpen
+cnoremap recache call dein#recache_runtimepath() <bar> source $MYVIMRC
+
+" enable filtering using ctrl-p or ctrl-n
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 "match it plugin
 runtime macros/matchit.vim
@@ -184,10 +193,10 @@ let g:neocomplete#enable_at_startup = 1  " Use neocomplete.
 let g:neocomplete#enable_smart_case = 1  " Use smartcase.
 
 let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
-let g:neocomplete#max_list = 4
+let g:neocomplete#max_list = 5
 
-let g:neocomplete#auto_completion_start_length = 3
-let g:neocomplete#auto_complete_delay = 50
+let g:neocomplete#auto_completion_start_length = 2
+let g:neocomplete#auto_complete_delay = 0
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -212,6 +221,7 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " Close popup by <Space> or <CR>.
 inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
 inoremap <expr><CR>    pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr><TAB>   pumvisible() ? "\<C-y><TAB>" : "\<TAB>"
 
 " Enable omni completion.
 autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
@@ -233,14 +243,16 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " \ neosnippet#expandable_or_jumpable() ?
 " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 imap <expr><TAB>
-\ neosnippet#expandable_or_jumpable() ?
-\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+      \ neosnippet#jumpable() ?
+      \    "\<Plug>(neosnippet_jump)" : "\<TAB>"
+smap <expr><TAB> 
+      \ neosnippet#jumpable() ?
+      \ "\<Plug>(neosnippet_jump)" : "\<TAB>"
 
 " For conceal markers.
 if has('conceal')
-  set conceallevel=2 concealcursor=niv
+  " set conceallevel=2 concealcursor=niv
+  set conceallevel=0 concealcursor=
 endif
 " load snippets from runtime path automatically
 let g:neosnippet#enable_snipmate_compatibility = 1
