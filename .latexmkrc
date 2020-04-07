@@ -1,11 +1,12 @@
 #!/usr/bin/env perl
-$latex         = 'uplatex -synctex=1 -halt-on-error';
-$latex_silent  = 'uplatex -synctex=1 -halt-on-error -interaction=batchmode';
-$bibtex        = 'upbibtex';
+$pdf_mode      = 3; # generates pdf via dvipdfmx
+$latex         = 'uplatex -synctex=1 -halt-on-error %O %S';
+$latex_silent  = 'uplatex -synctex=1 -halt-on-error -interaction=batchmode %O %S';
+$bibtex        = 'upbibtex %O %B';
 $dvipdf        = 'dvipdfmx %O -o %D %S';
 $makeindex     = 'mendex %O -o %D %S';
 $max_repeat    = 5;
-$pdf_mode	   = 3; # generates pdf via dvipdfmx
+$clean_ext     = "dvi log synctex.gz"; # extra extention to be removed with -c option
 
 # Prevent latexmk from removing PDF after typeset.
 # This enables Skim to chase the update in PDF automatically.

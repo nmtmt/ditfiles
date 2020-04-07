@@ -63,6 +63,7 @@ if has("autocmd")
   autocmd FileType text,tex,md setlocal spell
   " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
+  autocmd FileType qf 3wincmd_ " set quickfix window height to 3
 endif
 
 "dein Scripts-----------------------------
@@ -163,9 +164,9 @@ hi SpellBad gui=undercurl
 let g:tex_flavor='latex'
 
 " for latexmk
-let g:vimtex_compiler_latexmk_engines = {
-            \ 'background' : 0,
-            \ 'build_dir' : '',
+let g:vimtex_compiler_latexmk = {
+            \ 'background' : 1,
+            \ 'build_dir' : './build',
             \ 'continuous' : 1,
             \ 'options' : [
             \   '-pdfdvi',
@@ -175,6 +176,7 @@ let g:vimtex_compiler_latexmk_engines = {
             \   '-interaction=nonstopmode',
             \ ],
             \}
+
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
