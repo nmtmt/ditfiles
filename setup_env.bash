@@ -15,7 +15,7 @@ elif [ $os = "linux" ] ; then
     cat ./env/ubuntu16/packages | xargs sudo apt install -y
 fi
 
-read -p "Install fonts? (y/N): " yn
+read -p "Do you install fonts? (y/N): " yn
 case "$yn" in
   [yY]*) 
       bash $HOME/dotfiles/scripts/install_fonts.bash

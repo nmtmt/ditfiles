@@ -13,3 +13,4 @@ pbzip2
 gcc
 lua
 perl
+zenity
