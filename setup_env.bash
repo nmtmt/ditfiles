@@ -9,26 +9,25 @@ fi
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
     cat ./env/mac/cask_packages | xargs brew cask install 
-    font_dir=~/Library/Fonts/Cica
 elif [ $os = "linux" ] ; then
     cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository 
     sudo apt update
     cat ./env/ubuntu16/packages | xargs sudo apt install -y
-    font_dir=~/.fonts/Cica
 fi
 
-# setup Cica
-wget https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip
-cur_dir=$(pwd)
-echo $font_dir
-if [ ! -e $font_dir ]; then
-    mkdir -p $font_dir
-fi
-mv Cica_v5.0.1_with_emoji.zip $font_dir
-cd $font_dir
-unzip Cica_v5.0.1_with_emoji.zip 
-rm Cica_v5.0.1_with_emoji.zip 
-cd $cur_dir
+read -p "Install fonts? (y/N): " yn
+case "$yn" in
+  [yY]*) 
+      bash $HOME/dotfiles/scripts/install_fonts.bash
+      if [ $? == 0 ];then
+          echo "Successfully installed fonts"
+      else
+          echo "error in installing fonts! stop scripts..."
+          exit 1
+      fi;;
+  [nN]*) echo "Skip installing fonts";;
+  *)     echo "Invalid input. Skip installing fonts";;
+esac
 
 if [ $os = "linux" ]; then
     # fix time difference in dual boot env

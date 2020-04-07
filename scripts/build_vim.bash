@@ -1,4 +1,5 @@
 #!/env/bash
+#TODO
 
 PREFIX=$HOME/.local
 VIM_HOME=$PREFIX/vim
@@ -7,7 +8,6 @@ VIM_VERSION="v8.2.0520"
 #git clone https://github.com/vim/vim.git $VIM_HOME
 cd $VIM_HOME
 #git checkout refs/tags/$VIM_VERSION
-
 
 ./configure\
     --prefix=$PREFIX\
