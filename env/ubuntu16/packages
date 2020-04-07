@@ -40,3 +40,5 @@ libcairo2-dev
 libx11-dev
 libxpm-dev
 libxt-dev
+exfat-fuse
+exfat-utils
