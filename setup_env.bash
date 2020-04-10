@@ -10,16 +10,18 @@ if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
     cat ./env/mac/cask_packages | xargs brew cask install 
     cat ./env/default_python_packages | xargs -L 1 sudo pip3 install 
+    venv_python=/usr/local/bin/python3
 elif [ $os = "linux" ] ; then
     cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository 
     sudo apt update
     cat ./env/ubuntu16/packages | xargs sudo apt install -y
     cat ./env/default_python_packages | xargs -L 1 sudo pip3 install 
+    venv_python=/usr/bin/python3
 fi
 
 # install virtualenvwrapper
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+    export VIRTUALENVWRAPPER_PYTHON=$venv_python
     export WORKON_HOME=$HOME/.venvs
     source /usr/local/bin/virtualenvwrapper.sh
     if [ $? != 0 ]; then
@@ -34,12 +36,13 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     grep "export WORKON_HOME=" $HOME/$initshell
     if [ $? != 0 ];then
         echo "if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then" >> $HOME/$initshell
-        echo "  export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3"  >> $HOME/$initshell
+        echo "  export VIRTUALENVWRAPPER_PYTHON=$venv_python"      >> $HOME/$initshell
         echo "  export WORKON_HOME=$HOME/.venvs"                   >> $HOME/$initshell
         echo "  source /usr/local/bin/virtualenvwrapper.sh"        >> $HOME/$initshell
         echo "fi" >> $HOME/$initshell
     fi
 fi
+exit 0
 
 read -p "Do you install fonts? (y/N): " yn
 case "$yn" in

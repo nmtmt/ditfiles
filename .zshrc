@@ -26,9 +26,9 @@ if [ $os = mac ];then
     export INFOPATH=$INFOPATH:/usr/local/texlive/2019/texmf-dist/doc/info
     export PATH=$PATH:/usr/local/texlive/2019/bin/x86_64-darwin
 
-    if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
-        export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3.7
-        export VIRTUALENVWRAPPER_HOME=$HOME/.virtualenvs
+    if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+        export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+        export WORKON_HOME=/Users/matsumoto/.venvs
         source /usr/local/bin/virtualenvwrapper.sh
     fi
 fi
