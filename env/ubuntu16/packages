@@ -42,3 +42,6 @@ libxpm-dev
 libxt-dev
 exfat-fuse
 exfat-utils
+liblzma-dev
+uuid
+uuid-dev

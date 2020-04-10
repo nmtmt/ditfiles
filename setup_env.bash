@@ -5,15 +5,18 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "MINGW" ]; then os=windows
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then os=linux
 else os=unknown
 fi
-
+    
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
     cat ./env/mac/cask_packages | xargs brew cask install 
+    cat ./env/default_python_packages | xargs -L 1 sudo pip3 install 
 elif [ $os = "linux" ] ; then
     cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository 
     sudo apt update
     cat ./env/ubuntu16/packages | xargs sudo apt install -y
+    cat ./env/default_python_packages | xargs -L 1 sudo pip3 install 
 fi
+exit 0
 
 read -p "Do you install fonts? (y/N): " yn
 case "$yn" in
