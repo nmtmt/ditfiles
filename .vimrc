@@ -103,7 +103,7 @@ if dein#load_state(dein_dir)
   " call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
 
   call dein#add('lervag/vimtex')
-  "call dein#add('thinca/vim-quickrun')
+  call dein#add('thinca/vim-quickrun')
   
   " for Markdown
   " call dein#add('tpope/vim-markdown')
@@ -188,6 +188,12 @@ set visualbell t_vb=
 " for Markdown
 let g:vim_markdown_folding_disabled=1
 let g:previm_enable_realtime = 1
+
+set splitright " open new window on right side
+let g:quickrun_config = {
+      \'*': { 'outputter/buffer/split': ':40vsplit'},
+      \'python': {'command': 'python3'}, 
+      \}
 
 " =========== Setting for neocomplete =============
 let g:acp_enableAtStartup = 0 " Disable AutoComplPop.     
