@@ -58,9 +58,9 @@ if has("autocmd")
   autocmd BufRead,BufNewFile *.log    setlocal readonly
   autocmd FileType text NeoCompleteLock
   " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
-  autocmd FileType text,tex,md,html,xml,vim setlocal ts=2 sts=-1 sw=0 et
+  autocmd FileType text,tex,markdown,html,xml,vim setlocal ts=2 sts=-1 sw=0 et
   " fo=formatoptions, com=comments
-  autocmd FileType text,tex,md setlocal spell
+  autocmd FileType text,tex,markdown setlocal spell
   " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType qf 3wincmd_ " set quickfix window height to 3
