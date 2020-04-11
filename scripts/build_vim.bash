@@ -52,7 +52,7 @@ if [ ! -e $HOME/.local/ncurses-$ncurses_ver ]; then
     fi
     cd ncurses-$ncurses_ver
     ./configure --prefix=$HOME/.local/ncurses-$ncurses_ver --with-shared --with-pkg-config-libdir=$HOME/.local/ncurses-$ncurses_ver/lib/pkgconfig --enable-pc-files
-    make && make install
+    make -j4 && make install
     if [ $? != 0 ];then
         echo "installing ncurses failed! abort..."
         exit 1
@@ -74,7 +74,6 @@ if [ ! -e ./vim-$vim_ver ]; then
 fi
 
 cd vim-$vim_ver
-<< com
 ./configure \
     --prefix=$PREFIX\
     --with-features=huge \
@@ -92,11 +91,9 @@ cd vim-$vim_ver
     --enable-fail-if-missing \
     #--enable-tclinterp=yes\
 
-com
-
 if [ $? != 0 ]; then
     echo "error configurinig. abort"
     exit 1
 else
-    make && make install
+    make -j4 && make install
 fi

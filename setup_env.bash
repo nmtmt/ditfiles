@@ -42,7 +42,6 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
         echo "fi" >> $HOME/$initshell
     fi
 fi
-exit 0
 
 read -p "Do you install fonts? (y/N): " yn
 case "$yn" in
