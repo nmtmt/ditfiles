@@ -17,12 +17,15 @@ if [ -f $HOME/.dircolors ]; then
     elif type gdircolors > /dev/null 2>&1; then
         eval $(gdircolors $HOME/.dircolors)
     fi
+else
+    echo "failed to load dircolors!"
 fi
 if [ -n $LS_COLORS ]; then
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fi
 
-export PS1="%F{green}${USER}@${HOST%%.*}%f:%F{blue}%0~%f%(!.#.$) "
+#export PS1="%F{gray}${USER}@${HOST%%.*}%f:%F{blue}%0~%f%(!.#.$) "
+export PS1="%F{035}${USER}@${HOST%%.*}%f:%F{249}%0~%f%(!.#.$) "
 
 if [ $os = mac ];then
     if type gls > /dev/null 2>&1; then
