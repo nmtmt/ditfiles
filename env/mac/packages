@@ -15,3 +15,4 @@ lua
 perl
 zenity
 wget
+coreutils

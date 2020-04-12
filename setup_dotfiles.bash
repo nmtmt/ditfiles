@@ -16,10 +16,8 @@ if [ $os = "mac" ] || [ $os = "linux" ]; then
     ln -sf ~/dotfiles/.vimrc     ~/.vimrc
     ln -sf ~/dotfiles/.gvimrc    ~/.gvimrc
     ln -sf ~/dotfiles/.zshrc     ~/.zshrc
-    ln -sf ~/dotfiles/.unixenv   ~/.unixenv
-    ln -sf ~/dotfiles/.macenv    ~/.macenv
+    ln -sf ~/dotfiles/.dircolors     ~/.dircolors
     ln -sf ~/dotfiles/.rsync_exclude ~/.rsync_exclude
-    ln -sf ~/dotfiles/select_termenv ~/select_termenv
     mkdir -p ~/.vim/.cache/dein
 elif [ $os = "windows" ]; then
     ln -sf ~/dotfiles/.vimrc     ~/_vimrc
