@@ -22,21 +22,23 @@ if [ -n $LS_COLORS ]; then
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fi
 
+export PS1="%F{green}${USER}@${HOST%%.*}%f:%F{blue}%0~%f%(!.#.$) "
+
 if [ $os = mac ];then
-    export PS1="%F{green}${USER}@${HOST%%.*}%f:%F{blue}%0~%f%(!.#.$) "
-    #export LSCOLORS=exgxcxdxcxegedabagacad # default setting
-    
     if type gls > /dev/null 2>&1; then
         alias ls="gls --color=auto"
     elif type ls > /dev/null 2>&1; then
         alias ls="ls -G"
     fi
-
+    #export LSCOLORS=exgxcxdxcxegedabagacad # default setting
+    
     alias gcc=gcc-9
     alias g++=g++-9
     
     #function ssh_with_color(){ ssh $@ -t "export MYCOLORENV=mac && /bin/bash -l" }
     #alias ssh=ssh_with_color
+elif [ $os = linux ]; then
+    alias ls="ls --color=auto"
 fi
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then

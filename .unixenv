@@ -1,3 +1,0 @@
-#!/bin/bash
-echo unix > $HOME/.terminalenv
-source .bashrc
