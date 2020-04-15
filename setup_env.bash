@@ -7,8 +7,8 @@ else os=unknown
 fi
 
 sudo -v 
-if [ $? == 0 ]; then sudo_access=1
-else sudo_access=0
+if [ $? == 0 ]; then sudo_access=true
+else sudo_access=false
 fi
     
 if [ $os = "mac" ]; then
@@ -16,7 +16,7 @@ if [ $os = "mac" ]; then
     cat ./env/mac/cask_packages | xargs brew cask install 
     cat ./env/default_python_packages | xargs -L 1 pip3 install 
 elif [ $os = "linux" ] ; then
-    if [ $sudo_access ]; then
+    if $sudo_access; then
         cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository 
         sudo apt update
         cat ./env/ubuntu16/packages | xargs sudo apt install -y
@@ -34,7 +34,7 @@ elif [ $os = "linux" ] ; then
     fi
 fi
 
-if [ $sudo_access ]; then
+if $sudo_access; then
     venv_shell=/usr/local/bin/virtualenvwrapper.sh 
     venv_python=/usr/local/bin/python3
 else
@@ -100,7 +100,7 @@ if [ $os = "linux" ]; then
     gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
     echo "Done"
 
-    if [ $sudo_access ]; then
+    if $sudo_access; then
         # for backlight on Let's note
         echo "Change boot setting..."
         sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=vendor acpi_osi="/g' /etc/default/grub
