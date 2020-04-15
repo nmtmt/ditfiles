@@ -26,7 +26,7 @@ elif [ $os = "linux" ] ; then
         read -p "Install packages from source?[y/N]" ys
         case $ys in 
             [yY]*)
-                bash ./scripts/build_packages.bash
+                bash ./scripts/build_pkgs.bash
                 ;;
             *)
                 echo " Quit installing packages";;
