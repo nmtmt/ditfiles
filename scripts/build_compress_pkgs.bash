@@ -72,7 +72,7 @@ check_success
 echo "Install pbzip2..."
 download_and_extract_package https://launchpad.net/pbzip2/$pbzip2_major_ver/$pbzip2_ver/+download/pbzip2-$pbzip2_ver.tar.gz pbzip2-$pbzip2_ver.tar.gz pbzip2-$pbzip2_ver
 cd pbzip2-$pbzip2_ver
-make -j4 PREFIX=$HOME/.local && make install PREFIX=$HOME/.local
+make -j4 PREFIX=$HOME/.local && make install PREFIX=$HOME/.local CPATH=$HOME/.local/include
 check_success
 
 echo "Install pixz..."
