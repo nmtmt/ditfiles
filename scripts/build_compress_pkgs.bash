@@ -11,106 +11,82 @@ if [ ! -e $src_dir ]; then
     mkdir -p $src_dir
 fi
 
-echo "Install xz..."
-cd $src_dir
-if [ ! -f xz-$xz_ver ]; then
-    if [ ! -f xz-$xz_ver.tar.gz ]; then
-        wget https://sourceforge.net/projects/lzmautils/files/xz-$xz_ver.tar.gz -O xz-$xz_ver.tar.gz
+# args: package_link, package_tarname, package_dirname
+download_and_extract_package(){
+    cd $src_dir
+    if [ ! -d $3 ]; then
+        echo "$3 not found. Check compressed file..."
+        if [ ! -f $2 ]; then
+            echo "$2 not found. Download compressed file..."
+            while [ 1 ];do
+                wget --retry-connrefused --waitretry 0 --tries 20 --timeout 3 $1 -O $2
+                if [ $? = 0 ];then break 
+                fi
+            done
+        fi
+        echo "extract compressed file... : $2"
+        tar zxf $2
+        echo "Done"
     fi
-    tar zxf xz-$xz_ver.tar.gz
-fi
+    if [ $? != 0 ]; then
+        echo "Failed in download and extract packages"
+        echo "Remove downloaded items..."
+        cd $src_dir && rm -rf $3 $2 && echo "Done!"
+        exit 1
+    fi
+}
+check_success(){
+    if [ $? != 0 ]; then
+        echo "Installation failed!"
+        exit 1
+    fi
+    echo "Install Completed!"
+}
+
+echo "Install xz..."
+download_and_extract_package https://sourceforge.net/projects/lzmautils/files/xz-$xz_ver.tar.gz xz-$xz_ver.tar.gz xz-$xz_ver
 cd xz-$xz_ver
 ./configure --prefix=$HOME/.local \
     --enable-shared \
     --enable-static
 make -j4 && make install
-if [ $? != 0 ]; then
-    echo "xz installation failed!"
-    exit 1
-fi
-echo "Done!"
+check_success
 
 echo "Install bzip2..."
-cd $src_dir
-if [ ! -f bzip2-$bzip2_ver ]; then
-    if [ ! -f bzip2-$bzip2_ver.tar.gz ]; then
-        wget https://sourceware.org/pub/bzip2/bzip2-$bzip2_ver.tar.gz -O bzip2-$bzip2_ver.tar.gz
-    fi
-    tar zxf bzip2-$bzip2_ver.tar.gz
-fi
+download_and_extract_package https://sourceware.org/pub/bzip2/bzip2-$bzip2_ver.tar.gz bzip2-$bzip2_ver.tar.gz bzip2-$bzip2_ver
 cd bzip2-$bzip2_ver
 make -j4 PREFIX=$HOME/.local && make install PREFIX=$HOME/.local
-if [ $? != 0 ]; then
-    echo "bzip2 installation failed!"
-    exit 1
-fi
-echo "Done!"
+check_success
+echo "Creat shared library..."
+make clean && make -f Makefile-libbz2_so && cp *.so* $HOME/.local/lib
+check_success
 
 echo "Install libarchive(dependency of pixz)..."
 cd $src_dir
-if [ ! -f libarchive-$libarchive_ver ]; then
-    if [ ! -f libarchive-$libarchive_ver.tar.gz ]; then
-        wget https://www.libarchive.org/downloads/libarchive-$libarchive_ver.tar.gz -O libarchive-$libarchive_ver.tar.gz
-    fi
-    tar zxf libarchive-$libarchive_ver.tar.gz
-fi
+download_and_extract_package https://www.libarchive.org/downloads/libarchive-$libarchive_ver.tar.gz libarchive-$libarchive_ver.tar.gz libarchive-$libarchive_ver
 cd libarchive-$libarchive_ver
 ./configure --prefix=$HOME/.local --enable-shared --enable-static
 make -j4 PREFIX=$HOME/.local && make install PREFIX=$HOME/.local
-if [ $? != 0 ]; then
-    echo "pbzip2 installation failed!"
-    exit 1
-fi
-echo "Done!"
+check_success
 
 echo "Install pbzip2..."
-cd $src_dir
-if [ ! -f pbzip2-$pbzip2_ver ]; then
-    if [ ! -f pbzip2-$pbzip2_ver.tar.gz ]; then
-        wget https://launchpad.net/pbzip2/$pbzip2_major_ver/$pbzip2_ver/+download/pbzip2-$pbzip2_ver.tar.gz -O pbzip2-$pbzip2_ver.tar.gz
-    fi
-    tar zxf pbzip2-$pbzip2_ver.tar.gz
-fi
+download_and_extract_package https://launchpad.net/pbzip2/$pbzip2_major_ver/$pbzip2_ver/+download/pbzip2-$pbzip2_ver.tar.gz pbzip2-$pbzip2_ver.tar.gz pbzip2-$pbzip2_ver
 cd pbzip2-$pbzip2_ver
 make -j4 PREFIX=$HOME/.local && make install PREFIX=$HOME/.local
-if [ $? != 0 ]; then
-    echo "pbzip2 installation failed!"
-    exit 1
-fi
-echo "Done!"
+check_success
 
 echo "Install pixz..."
-cd $src_dir
-if [ ! -f pixz-$pixz_ver ]; then
-    if [ ! -f pixz-$pixz_ver.tar.gz ]; then
-        wget https://github.com/vasi/pixz/releases/download/v$pixz_ver/pixz-$pixz_ver.tar.gz -O pixz-$pixz_ver.tar.gz
-    fi
-    tar zxf pixz-$pixz_ver.tar.gz
-fi
+download_and_extract_package https://github.com/vasi/pixz/releases/download/v$pixz_ver/pixz-$pixz_ver.tar.gz pixz-$pixz_ver.tar.gz pixz-$pixz_ver
 cd pixz-$pixz_ver
 ./configure --prefix=$HOME/.local \
     CFLAGS="-I$HOME/.local/include" \
     LDFLAGS="-L$HOME/.local/lib -Wl,--rpath=$HOME/.local/lib" \
     PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig
 make -j4 PREFIX=$HOME/.local && make install PREFIX=$HOME/.local
-if [ $? != 0 ]; then
-    echo "pixz installation failed!"
-    exit 1
-fi
-echo "Done!"
+check_success
 
 echo "Install pigz..."
-cd $src_dir
-if [ ! -f pigz-$pigz_ver ]; then
-    if [ ! -f pigz-$pigz_ver.tar.gz ]; then
-        wget https://zlib.net/pigz/pigz-$pigz_ver.tar.gz -O pigz-$pigz_ver.tar.gz
-    fi
-    tar zxf pigz-$pigz_ver.tar.gz
-fi
+download_and_extract_package https://zlib.net/pigz/pigz-$pigz_ver.tar.gz pigz-$pigz_ver.tar.gz pigz-$pigz_ver
 cd pigz-$pigz_ver
 make && cp pigz unpigz $HOME/.local/bin
-if [ $? != 0 ]; then
-    echo "pigz installation failed!"
-    exit 1
-fi
-echo "Done!"
+check_success

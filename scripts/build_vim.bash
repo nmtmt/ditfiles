@@ -16,15 +16,41 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then os=linux
 else os=unknown
 fi
 
+download_and_extract_package(){
+    cd $src_dir
+    if [ ! -d $3 ]; then
+        echo "$3 not found. Check compressed file..."
+        if [ ! -f $2 ]; then
+            echo "$2 not found. Download compressed file..."
+            while [ 1 ];do
+                wget --retry-connrefused --waitretry 0 --tries 20 --timeout 3 $1 -O $2
+                if [ $? = 0 ];then break 
+                fi
+            done
+        fi
+        echo "extract compressed file... : $2"
+        tar zxf $2
+        echo "Done"
+    fi
+    if [ $? != 0 ]; then
+        echo "Failed in download and extract packages"
+        echo "Remove downloaded items..."
+        cd $src_dir && rm -rf $3 $2 && echo "Done!"
+        exit 1
+    fi
+}
+check_success(){
+    if [ $? != 0 ]; then
+        echo "Installation failed!"
+        exit 1
+    fi
+    echo "Install Completed!"
+}
+
 if [ ! -e $HOME/.local/lua-$lua_ver ]; then
     echo "Installing lua..."
     cd $src_dir
-    if [ ! -e ./lua-$lua_ver ]; then
-        if [ ! -e ./lua-$lua_ver.tar.gz ]; then
-            wget https://www.lua.org/ftp/lua-$lua_ver.tar.gz -t 10
-        fi
-        tar zxvf lua-$lua_ver.tar.gz 
-    fi
+    download_and_extract_package https://www.lua.org/ftp/lua-$lua_ver.tar.gz lua-$lua_ver.tar.gz lua-$lua_ver
     cd lua-$lua_ver
     if [ $os = "mac" ];then
         sed -i .bak "s/INSTALL_TOP= \/usr\/local/INSTALL_TOP= \$\(HOME\)\/.local\/lua-$lua_ver/" Makefile
@@ -33,38 +59,27 @@ if [ ! -e $HOME/.local/lua-$lua_ver ]; then
         sed -i "s/INSTALL_TOP= \/usr\/local/INSTALL_TOP= \$\(HOME\)\/.local\/lua-$lua_ver/" Makefile
         make linux && make install
     fi
-    if [ $? != 0 ];then
-        echo "installing lua failed! abort..."
-        exit 1
-    else
-        echo "Successfully installed lua"
-    fi
+    check_success
 fi
 
 if [ ! -e $HOME/.local/ncurses-$ncurses_ver ]; then
     echo "Install ncurses..."
     cd $src_dir
-    if [ ! -e ./ncurses-$ncurses_ver ]; then
-        if [ ! -e ./ncurses-$ncurses_ver.tar.gz ]; then
-            wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$ncurses_ver.tar.gz -t 10
-        fi
-        tar xvfz ncurses-$ncurses_ver.tar.gz
-    fi
+    download_and_extract_package https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$ncurses_ver.tar.gz ncurses-$ncurses_ver.tar.gz ncurses-$ncurses_ver
     cd ncurses-$ncurses_ver
     ./configure --prefix=$HOME/.local/ncurses-$ncurses_ver --with-shared --with-pkg-config-libdir=$HOME/.local/ncurses-$ncurses_ver/lib/pkgconfig --enable-pc-files
     make -j4 && make install
-    if [ $? != 0 ];then
-        echo "installing ncurses failed! abort..."
-        exit 1
-    else
-        echo "Successfully installed ncurses"
-    fi
+    check_success
 fi
 
 cd $src_dir
 if [ ! -e ./vim-$vim_ver ]; then
     if [ ! -e ./vim-$vim_ver.tar.bz2 ]; then
-        wget --no-check-certificate --tries=10 --retry-connrefused --waitretry=1 --timeout=10 https://ftp.vim.org/pub/vim/unix/vim-$vim_ver.tar.bz2 -O vim-$vim_ver.tar.bz2
+        while true;do
+            wget --no-check-certificate --tries=10 --retry-connrefused --waitretry=1 --timeout=10 https://ftp.vim.org/pub/vim/unix/vim-$vim_ver.tar.bz2 -O vim-$vim_ver.tar.bz2
+            if [ $? = 0 ]; then break
+            fi
+        done
     fi
     mkdir vim-$vim_ver
     tar jxvf vim-$vim_ver.tar.bz2 -C vim-$vim_ver --strip-components=1
