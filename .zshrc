@@ -6,6 +6,8 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then os=linux
 else os=unknown
 fi
 
+export PATH=$HOME/.local/bin:$PATH
+
 if which trash-put &> /dev/null; then
     alias rm='trash-put'
     trash-empty 50
@@ -44,13 +46,15 @@ elif [ $os = linux ]; then
     alias ls="ls --color=auto"
 fi
 
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-    export WORKON_HOME=$HOME/.venvs
-    source /usr/local/bin/virtualenvwrapper.sh
-elif [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
+if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3
     export WORKON_HOME=$HOME/.venvs
     source $HOME/.local/bin/virtualenvwrapper.sh
+    if [ -d $HOME/.venvs/default ]; then workon default; fi
+elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+    export WORKON_HOME=$HOME/.venvs
+    source /usr/local/bin/virtualenvwrapper.sh
+    if [ -d $HOME/.venvs/default ]; then workon default; fi
 fi
 
