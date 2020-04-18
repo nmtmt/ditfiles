@@ -15,6 +15,6 @@ if [ ! -e ruby-$ruby_ver ]; then
     fi
 fi
 cd ruby-$ruby_ver
-./configure --prefix=$HOME/.local/ruby-$ruby_ver --enable-shared
-make
+./configure --prefix=$HOME/.local --enable-shared
+make -j4
 make install

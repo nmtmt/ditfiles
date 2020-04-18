@@ -6,8 +6,40 @@ libffi_ver="3.2.1"
 openssl_ver="1_1_0"
 python_ver="3.8.2"
 libuuid_ver="1.0.3"
+ncurses_ver="6.1"
 
 cur_dir=$(pwd)
+
+download_and_extract_package(){
+    cd $src_dir
+    if [ ! -d $3 ]; then
+        echo "$3 not found. Check compressed file..."
+        if [ ! -f $2 ]; then
+            echo "$2 not found. Download compressed file..."
+            while [ 1 ];do
+                wget --retry-connrefused --waitretry 0 --tries 20 --timeout 3 $1 -O $2
+                if [ $? = 0 ];then break 
+                fi
+            done
+        fi
+        echo "extract compressed file... : $2"
+        tar zxf $2
+        echo "Done"
+    fi
+    if [ $? != 0 ]; then
+        echo "Failed in download and extract packages"
+        echo "Remove downloaded items..."
+        cd $src_dir && rm -rf $3 $2 && echo "Done!"
+        exit 1
+    fi
+}
+check_success(){
+    if [ $? != 0 ]; then
+        echo "Installation failed!"
+        exit 1
+    fi
+    echo "Install Completed!"
+}
 
 sudo -v
 if [ $? = 0 ]; then
@@ -81,6 +113,16 @@ else
     exit 1
 fi
 
+if [ ! -e $HOME/.local/ncurses-$ncurses_ver ]; then
+    echo "Install ncurses..."
+    cd $src_dir
+    download_and_extract_package https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$ncurses_ver.tar.gz ncurses-$ncurses_ver.tar.gz ncurses-$ncurses_ver
+    cd ncurses-$ncurses_ver
+    ./configure --prefix=$HOME/.local/ncurses-$ncurses_ver --with-shared --with-pkg-config-libdir=$HOME/.local/ncurses-$ncurses_ver/lib/pkgconfig --enable-pc-files
+    make -j4 && make install
+    check_success
+fi
+
 cd $src_dir
 if [ ! -e $src_dir/Python-$python_ver.tgz ];then
     while true; do
@@ -96,7 +138,7 @@ fi
 
 cd Python-$python_ver
 #./configure --prefix=$HOME/.local LDFLAGS="-L$HOME/.local/lib -L$HOME/.local/openssl/lib -Wl,--rpath=$HOME/.local/lib -Wl,--rpath=$HOME/.local/openssl/lib" CFLAGS="-fPIC -I$HOME/.local/include -I$HOME/.local/openssl/include -I$HOME/.local/openssl/include/openssl" CPPFLAGS="-fPIC -I$HOME/.local/include -I$HOME/.local/openssl/include -I$HOME/.local/openssl/include/openssl" --enable-shared --enable-ipv6 --with-openssl=$HOME/.local/
-./configure --prefix=$HOME/.local LDFLAGS="-L$HOME/.local/lib -L$HOME/.local/openssl/lib -Wl,--rpath=$HOME/.local/lib -Wl,--rpath=$HOME/.local/openssl/lib" CFLAGS="-fPIC -I$HOME/.local/include -I$HOME/.local/openssl/include -I$HOME/.local/openssl/include/openssl" CPPFLAGS="-fPIC -I$HOME/.local/include -I$HOME/.local/openssl/include -I$HOME/.local/openssl/include/openssl" --enable-shared --enable-ipv6 --with-openssl=$HOME/.local/openssl
+./configure --prefix=$HOME/.local LDFLAGS="-L$HOME/.local/lib -L$HOME/.local/openssl/lib -Wl,--rpath=$HOME/.local/lib -Wl,--rpath=$HOME/.local/openssl/lib -L$HOME/.local/ncurses-$ncurses_ver/lib -Wl,--rpath=$HOME/.local/ncurses-$ncurses_ver/lib" CFLAGS="-fPIC -I$HOME/.local/include -I$HOME/.local/openssl/include -I$HOME/.local/openssl/include/openssl -I$HOME/.local/ncurses-$ncurses_ver/include -I$HOME/.local/ncurses-$ncurses_ver/include/ncurses" CPPFLAGS="-fPIC -I$HOME/.local/include -I$HOME/.local/openssl/include -I$HOME/.local/openssl/include/openssl -I$HOME/.local/ncurses-$ncurses_ver/include -I$HOME/.local/ncurses-$ncurses_ver/include/ncurses" --enable-shared --enable-ipv6 --with-openssl=$HOME/.local/openssl
 make -j4
 read -p "Is the result of make right?" ys
 case $ys in

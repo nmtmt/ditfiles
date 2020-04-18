@@ -4,7 +4,7 @@ PREFIX=$HOME/.local
 vim_ver="8.2"
 lua_ver="5.3.5"
 ncurses_ver="6.1"
-
+libsm_ver="1.2.3"
 src_dir=$HOME/.local/src
 if [ ! -e $src_dir ]; then
     mkdir -p $src_dir
@@ -47,6 +47,15 @@ check_success(){
     echo "Install Completed!"
 }
 
+echo "Installing libsm..."
+cd $src_dir
+download_and_extract_package ftp://ftp.x.org/pub/individual/lib/libSM-$libsm_ver.tar.gz libSM-$libsm_ver.tar.gz libSM-$libsm_ver
+cd libSM-$libsm_ver
+./configure --prefix=$HOME/.local --enable-shared --enable-static --with-libuuid \
+    LDFLAGS="-L$HOME/.local/lib" CFLAGS="-I$HOME/.local/include"
+make && make install
+check_success
+
 if [ ! -e $HOME/.local/lua-$lua_ver ]; then
     echo "Installing lua..."
     cd $src_dir
@@ -59,16 +68,6 @@ if [ ! -e $HOME/.local/lua-$lua_ver ]; then
         sed -i "s/INSTALL_TOP= \/usr\/local/INSTALL_TOP= \$\(HOME\)\/.local\/lua-$lua_ver/" Makefile
         make linux && make install
     fi
-    check_success
-fi
-
-if [ ! -e $HOME/.local/ncurses-$ncurses_ver ]; then
-    echo "Install ncurses..."
-    cd $src_dir
-    download_and_extract_package https://ftp.gnu.org/pub/gnu/ncurses/ncurses-$ncurses_ver.tar.gz ncurses-$ncurses_ver.tar.gz ncurses-$ncurses_ver
-    cd ncurses-$ncurses_ver
-    ./configure --prefix=$HOME/.local/ncurses-$ncurses_ver --with-shared --with-pkg-config-libdir=$HOME/.local/ncurses-$ncurses_ver/lib/pkgconfig --enable-pc-files
-    make -j4 && make install
     check_success
 fi
 
@@ -94,8 +93,8 @@ cd vim-$vim_ver
     --with-features=huge \
     --with-local-dir=$HOME/.local \
     --enable-multibyte \
-    --enable-gui=auto \
-    --enable-pythoninterp=yes \
+    --enable-gui=yes \
+    --enable-pythoninterp=auto \
     --enable-python3interp=yes \
     --enable-luainterp=yes \
     --enable-rubyinterp=yes\
@@ -104,7 +103,8 @@ cd vim-$vim_ver
     --enable-cscope \
     --enable-fontset \
     --enable-fail-if-missing \
-    #--enable-tclinterp=yes\
+    CFLAGS="-I$HOME/.local/include -I$HOME/.local/ncurses-$ncurses_ver/include" \
+    LDFLAGS="-L$HOME/.local/lib -L$HOME/.local/ncurses-$ncurses_ver/lib" 
 
 if [ $? != 0 ]; then
     echo "error configurinig. abort"

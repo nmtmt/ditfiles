@@ -22,10 +22,10 @@ echo "Installing ruby..."
 bash $script_dir/build_ruby.bash
 check_installed "build_ruby.bash"
 
-echo "Installing vim..."
-bash $script_dir/build_vim.bash
-check_installed  "build_vim.bash"
-
 echo "Install Python..."
 bash $script_dir/build_python.bash
 check_installed "build_python.bash"
+
+echo "Installing vim..."
+bash $script_dir/build_vim.bash
+check_installed  "build_vim.bash"
