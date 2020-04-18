@@ -49,10 +49,10 @@ check_success(){
 
 echo "Installing libsm..."
 cd $src_dir
-download_and_extract_package ftp://ftp.x.org/pub/individual/lib/libSM-$libsm_ver.tar.gz libSM-$libsm_ver.tar.gz libSM-$libsm_ver
+download_and_extract_package https://ftp.x.org/pub/individual/lib/libSM-$libsm_ver.tar.gz libSM-$libsm_ver.tar.gz libSM-$libsm_ver
 cd libSM-$libsm_ver
 ./configure --prefix=$HOME/.local --enable-shared --enable-static --with-libuuid \
-    LDFLAGS="-L$HOME/.local/lib" CFLAGS="-I$HOME/.local/include"
+    LDFLAGS="-L$HOME/.local/lib" CFLAGS="-I$HOME/.local/include" PKG_CONFIG_PATH="$HOME/.local/lib/pkgconfig"
 make && make install
 check_success
 
