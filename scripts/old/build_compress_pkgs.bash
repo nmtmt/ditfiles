@@ -62,10 +62,10 @@ check_success
 echo "Install bzip2..."
 download_and_extract_package https://sourceware.org/pub/bzip2/bzip2-$bzip2_ver.tar.gz bzip2-$bzip2_ver.tar.gz bzip2-$bzip2_ver
 cd bzip2-$bzip2_ver
-make -j4 PREFIX=$HOME/.local && make install PREFIX=$HOME/.local
+make -j4 PREFIX=$HOME/.local CFLAGS="-fPIC" && make install PREFIX=$HOME/.local
 check_success
 echo "Creat shared library..."
-make clean && make -f Makefile-libbz2_so
+make clean && make -f Makefile-libbz2_so CFLAGS="-fPIC"
 cp *.so* $HOME/.local/lib
 check_success
 

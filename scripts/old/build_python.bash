@@ -5,7 +5,6 @@ src_dir=$HOME/.local/src
 libffi_ver="3.2.1"
 openssl_ver="1_1_0"
 python_ver="3.8.2"
-libuuid_ver="1.0.3"
 ncurses_ver="6.1"
 
 cur_dir=$(pwd)
@@ -93,25 +92,6 @@ if [ ! -e $HOME/.local/openssl ]; then
     make install
 fi
 
-cd $src_dir
-if [ ! -e ./libuuid-$libuuid_ver ]; then
-    while true; do
-        wget --retry-connrefused -t 20 --timeout 5 http://sourceforge.net/projects/libuuid/files/libuuid-$libuuid_ver.tar.gz -O libuuid-$libuuid_ver.tar.gz
-        if [ $? = 0 ]; then break
-        fi
-    done
-    tar zxf libuuid-$libuuid_ver.tar.gz
-fi
-if [ ! -e $HOME/.local/libuuid-$libuuid_ver ]; then
-    cd libuuid-$libuuid_ver
-    ./configure --prefix=$HOME/.local/ --enable-shared --enable-static
-    make -j4
-    make install
-    ln -s $HOME/.local/include/uuid/* $HOME/.local/include/
-else
-    echo "Install failed. Abort"
-    exit 1
-fi
 
 if [ ! -e $HOME/.local/ncurses-$ncurses_ver ]; then
     echo "Install ncurses..."

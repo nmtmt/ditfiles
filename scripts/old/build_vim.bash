@@ -5,6 +5,7 @@ vim_ver="8.2"
 lua_ver="5.3.5"
 ncurses_ver="6.1"
 libsm_ver="1.2.3"
+python_major_ver="3.8"
 src_dir=$HOME/.local/src
 if [ ! -e $src_dir ]; then
     mkdir -p $src_dir
@@ -71,6 +72,7 @@ if [ ! -e $HOME/.local/lua-$lua_ver ]; then
     check_success
 fi
 
+echo "Installing lua..."
 cd $src_dir
 if [ ! -e ./vim-$vim_ver ]; then
     if [ ! -e ./vim-$vim_ver.tar.bz2 ]; then
@@ -103,7 +105,7 @@ cd vim-$vim_ver
     --enable-cscope \
     --enable-fontset \
     --enable-fail-if-missing \
-    CFLAGS="-I$HOME/.local/include -I$HOME/.local/ncurses-$ncurses_ver/include" \
+    CFLAGS="-I$HOME/.local/include -I$HOME/.local/ncurses-$ncurses_ver/include $HOME/.local/include/python$python_major_ver" \
     LDFLAGS="-L$HOME/.local/lib -L$HOME/.local/ncurses-$ncurses_ver/lib" 
 
 if [ $? != 0 ]; then
