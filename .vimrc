@@ -1,7 +1,7 @@
 set number         " show line numbers
 set laststatus=2   " show filename 
 set ruler          " show cursor info and window percentage
-set rulerformat=%-3(%P%) " only show percentage
+"set rulerformat=%-3(%P%) " only show percentage ...not work well
 
 set tabstop=4
 set softtabstop=-1 " same as ts
@@ -21,8 +21,11 @@ set spelllang=en,cjk   " disable spell check in Japanese
 set wildmenu           " commamd mode completion
 set undofile           " enable undo folder
 
-" now show preview window on word completion
-set completeopt=menuone
+" not show preview window on word completion
+" set completeopt=menuone
+" show preview window on workd completion
+set completeopt=menuone,preview
+set previewheight=2
 
 function! Mkdir(path)
   if !isdirectory(a:path)
@@ -64,6 +67,7 @@ if has("autocmd")
   " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType qf 3wincmd_ " set quickfix window height to 3
+  autocmd InsertLeave * if pumvisible() == 0|pclose|endif " close preview window on leavning insert mode
 endif
 
 "dein Scripts-----------------------------
@@ -190,6 +194,7 @@ let g:vim_markdown_folding_disabled=1
 let g:previm_enable_realtime = 1
 
 set splitright " open new window on right side
+set splitbelow " open new window below the current one
 let g:quickrun_config = {
       \'*': { 'outputter/buffer/split': ':40vsplit'},
       \'python': {'command': 'python3'}, 
@@ -205,6 +210,7 @@ let g:neocomplete#max_list = 5
 
 let g:neocomplete#auto_completion_start_length = 2
 let g:neocomplete#auto_complete_delay = 0
+let g:neocomplcache_enable_auto_close_preview = 0
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
