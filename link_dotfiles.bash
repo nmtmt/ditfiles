@@ -11,21 +11,28 @@ else
     os=unknown
 fi
 
+makedir(){
+    if [ ! -d $1 ]; then
+        mkdir -p $1
+    fi
+}
+
 # link dotfiles
 if [ $os = "mac" ] || [ $os = "linux" ]; then
-    ln -sf ~/dotfiles/.vimrc     ~/.vimrc
-    ln -sf ~/dotfiles/.gvimrc    ~/.gvimrc
-    ln -sf ~/dotfiles/.zshrc     ~/.zshrc
-    ln -sf ~/dotfiles/.zshenv    ~/.zshenv
-    ln -sf ~/dotfiles/.dircolors     ~/.dircolors
-    ln -sf ~/dotfiles/.tmux.conf     ~/.tmux.conf
-    ln -sf ~/dotfiles/.rsync_exclude ~/.rsync_exclude
-    ln -sf ~/dotfiles/.gitconfig     ~/.gitconfig
-    mkdir -p ~/.vim/.cache/dein
+    ln -sf $HOME/dotfiles/.vimrc         $HOME/.vimrc
+    ln -sf $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
+    ln -sf $HOME/dotfiles/.zshrc         $HOME/.zshrc
+    ln -sf $HOME/dotfiles/.zshenv        $HOME/.zshenv
+    ln -sf $HOME/dotfiles/.dircolors     $HOME/.dircolors
+    ln -sf $HOME/dotfiles/.tmux.conf     $HOME/.tmux.conf
+    ln -sf $HOME/dotfiles/.rsync_exclude $HOME/.rsync_exclude
+    ln -sf $HOME/dotfiles/.gitconfig     $HOME/.gitconfig
+    makedir $HOME/.ssh
+    ln -sf $HOME/dotfiles/.ssh/config  $HOME/.ssh/config
+    makedir $HOME/.vim/.cache/dein
 elif [ $os = "windows" ]; then
-    ln -sf ~/dotfiles/.vimrc     ~/_vimrc
-    ln -sf ~/dotfiles/.gvimrc    ~/_gvimrc
-    mkdir -p ~/vimfiles/cache/dein
+    ln -sf $HOME/dotfiles/.vimrc     $HOME/_vimrc
+    ln -sf $HOME/dotfiles/.gvimrc    $HOME/_gvimrc
+    makedir $HOME/vimfiles/cache/dein
 fi
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
-
