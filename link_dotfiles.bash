@@ -20,6 +20,7 @@ if [ $os = "mac" ] || [ $os = "linux" ]; then
     ln -sf ~/dotfiles/.dircolors     ~/.dircolors
     ln -sf ~/dotfiles/.tmux.conf     ~/.tmux.conf
     ln -sf ~/dotfiles/.rsync_exclude ~/.rsync_exclude
+    ln -sf ~/dotfiles/.gitconfig     ~/.gitconfig
     mkdir -p ~/.vim/.cache/dein
 elif [ $os = "windows" ]; then
     ln -sf ~/dotfiles/.vimrc     ~/_vimrc

@@ -1,0 +1,11 @@
+[user]
+    name  = Matsumoto Noboru
+    email = matsumoto.idr@gmail.com
+[color]
+    ui = true
+[core]
+    autocrlf   = false
+    ignorecase = false
+    quotepath  = false
+[credential]
+    helper = 'cache --timeout=86400'
