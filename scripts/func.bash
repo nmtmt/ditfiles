@@ -21,9 +21,16 @@ download_and_extract_pkg(){
         bash -c "tar xf $pkg_tarname -C $pkg_dirname --strip-components=1"
     fi
     if [ $? != 0 ]; then
-        echo "Failed in download and extract packages"
-        echo "Remove downloaded items..."
-        cd $src_dir && rm -rf $pkg_dirname $pkg_tarname && echo "Removed!"
+        echo "Failed in downloading or extract packages"
+        read -p "Do you remove downloaded item?[y/N]" ys
+        case $ys in
+            [yY]*)
+                echo "Removing downloaded itme..."
+                cd $src_dir && rm -rf $pkg_dirname $pkg_tarname && echo "Removed!"
+                ;;
+            *)
+                echo "Skip removing downloaded item";;
+        esac
         exit 1
     fi
     echo "Done extracting."
@@ -31,8 +38,17 @@ download_and_extract_pkg(){
 check_installed(){
     if [ $? != 0 ]; then
         echo "Installation failed!"
-        echo "Remove extracted dir..."
-        eval rm -rf $1 && echo "Done removing!"
+        read -p "Do you remove extracted dir?[y/N]" ys
+        case $ys in 
+            [yY]*)
+                echo "Remove extracted dir..."
+                eval rm -rf $1 && echo "Done removing!"
+                echo "Done removing"
+                ;;
+            *)
+                echo "pass removing extracted dir...";;
+        esac
+        echo "Abort"
         exit 1
     fi
     echo "Install Completed!"

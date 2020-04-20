@@ -5,7 +5,7 @@ pkg_tarname=gcc-$ver.tar.gz
 pkg_dirname=gcc-$ver
 commands(){
     ./contrib/download_prerequisites
-    if [ ! -e ./build ]; then
+    if [ -d ./build ]; then
         rm -rf ./build
     fi
     mkdir build && cd build
