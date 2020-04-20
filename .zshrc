@@ -8,7 +8,9 @@ elif [ -d /usr/local/cuda-$cuda_ver ]; then
 fi
 
 export PATH=$HOME/.local/bin:$CUDA_HOME/bin:$PATH
+export CPATH=$HOME/.local/include:$CPATH
 export LD_LIBRARY_PATH=$HOME/.local/lib:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
 
 if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3

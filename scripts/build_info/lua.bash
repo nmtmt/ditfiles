@@ -6,11 +6,19 @@ pkg_dirname=lua-$ver
 commands(){
     case ${OSTYPE} in 
         darwin*) 
-            sed -i .bak "s/INSTALL_TOP= \/usr\/local/INSTALL_TOP= $(HOME)\/.local\/lua-$ver/" Makefile
+            sed -i .bak -e "s/INSTALL_TOP= \/usr\/local/INSTALL_TOP= \$\(HOME\)\/.local\/lua-$ver/" Makefile
+            if [ $? != 0 ];then
+                echo "Failed to change install directory"
+                return 1
+            fi
             make macosx && make install 
             ;; 
         linux*) 
-            sed -i "s/INSTALL_TOP= \/usr\/local/INSTALL_TOP= $(HOME)\/.local\/lua-$ver/" Makefile
+            sed -i -e "s/INSTALL_TOP= \/usr\/local/INSTALL_TOP= \$\(HOME\)\/.local\/lua-$ver/" Makefile
+            if [ $? != 0 ];then
+                echo "Failed to change install directory"
+                return 1
+            fi
             make linux && make install
             ;; 
     esac
