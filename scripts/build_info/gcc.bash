@@ -4,7 +4,23 @@ url=http://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-$ver/gcc-$ver.tar.gz
 pkg_tarname=gcc-$ver.tar.gz
 pkg_dirname=gcc-$ver
 commands(){
-    ./contrib/download_prerequisites
+    case ${OSTYPE} in
+        darwin*)
+            sed -i .bak -e 's/ftp:\/\//https:\/\//' ./contrib/download_prerequisites
+            ;;
+        linux*)
+            sed -i -e 's/ftp:\/\//https:\/\//' ./contrib/download_prerequisites
+            ;;
+        *) echo "error!"; exit 1 ;;
+    esac
+
+    while true;
+    do
+        ./contrib/download_prerequisites --force
+        if [ $? = 0 ]; then
+            break
+        fi
+    done
     if [ -d ./build ]; then
         rm -rf ./build
     fi
