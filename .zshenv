@@ -16,6 +16,16 @@ if [ -n $LS_COLORS ]; then
     zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fi
 
+# setting for zsh_history
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=1000  # histry to be saved in memory
+export SAVEHIST=10000 # histry saved in file
+
+setopt hist_ignore_dups
+setopt nolistbeep
+setopt share_history  # with multiple terminal
+setopt append_history # when using multiple zsh
+
 if   [ "$(uname -s)" = "Darwin" ]; then os=mac
 elif [ "$(expr substr $(uname -s) 1 5)" = "MINGW" ]; then os=windows
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then os=linux
