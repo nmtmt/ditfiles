@@ -9,4 +9,5 @@ commands(){
     cp $HOME/.local/util-linux-$ver/lib/libuuid* $HOME/.local/lib/
     cp $HOME/.local/util-linux-$ver/lib/pkgconfig/* $HOME/.local/lib/pkgconfig/
     cp -r $HOME/.local/util-linux-$ver/include/uuid $HOME/.local/include/
+    ln -s $HOME/.local/include/uuid/* $HOME/.local/include/
 }
