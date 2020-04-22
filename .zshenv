@@ -23,7 +23,7 @@ export SAVEHIST=10000 # histry saved in file
 
 setopt hist_ignore_dups
 setopt nolistbeep
-setopt share_history  # with multiple terminal
+#setopt share_history  # with multiple terminal
 setopt append_history # when using multiple zsh
 
 if   [ "$(uname -s)" = "Darwin" ]; then os=mac

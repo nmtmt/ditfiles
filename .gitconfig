@@ -7,5 +7,9 @@
     autocrlf   = false
     ignorecase = false
     quotepath  = false
+[push]
+    default = current
+[branch]
+    autoSetupMerge = always
 [credential]
     helper = cache --timeout=86400
