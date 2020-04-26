@@ -13,11 +13,13 @@ set smartindent " C-like indent. enabled when autoindent is on
 " set cindent
 
 set backspace=2
-set fileencoding=utf-8 " default file encoding
-set fileformat=unix    " default file format
-scriptencoding utf-8   " this vim file's encoding. must be below the fileformat line
+set encoding=utf-8            " vim internal encoding
+set fileencodings=utf-8,cp932 " default encoding on file reading
+set fileencoding=utf-8        " default encoding on file writing
+set fileformat=unix           " default file format
+scriptencoding utf-8          " this vim file's encoding. must be below the fileformat line
 
-set spelllang=en,cjk   " disable spell check in Japanese
+set spelllang=en,cjk   " disable spell check words in Japanese
 set wildmenu           " commamd mode completion
 set undofile           " enable undo folder
 
