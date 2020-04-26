@@ -22,9 +22,9 @@ set wildmenu           " commamd mode completion
 set undofile           " enable undo folder
 
 " not show preview window on word completion
-" set completeopt=menuone
+set completeopt=menuone
 " show preview window on workd completion
-set completeopt=menuone,preview
+" set completeopt=menuone,preview
 set previewheight=2
 
 function! Mkdir(path)
@@ -143,7 +143,7 @@ endif
 " cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 cnoremap tree<TAB> NERDTreeToggle
 cnoremap md<TAB> PrevimOpen
-cnoremap recache call dein#recache_runtimepath() <bar> source $MYVIMRC
+cnoremap recache silent execute '!hash -r' <bar> call dein#recache_runtimepath() <bar> source $MYVIMRC
 
 " enable filtering using ctrl-p or ctrl-n
 cnoremap <C-p> <Up>
