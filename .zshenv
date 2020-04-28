@@ -27,6 +27,7 @@ setopt nolistbeep
 setopt append_history # when using multiple zsh
 
 if   [ "$(uname -s)" = "Darwin" ]; then os=mac
+elif [ "$(uname -s)" = "FreeBSD" ]; then os=unix
 elif [ "$(expr substr $(uname -s) 1 5)" = "MINGW" ]; then os=windows
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then os=linux
 else os=unknown
@@ -40,6 +41,9 @@ if [ $os = mac ];then
     fi
 elif [ $os = linux ]; then
     alias ls="ls --color=auto"
+elif [ $os = unix ]; then
+    alias ls="ls -G"
+    export MAILCHECK=0
 fi
 
 if which trash-put &> /dev/null; then

@@ -3,6 +3,8 @@
 if [ "$(uname -s)" == "Darwin" ]; then 
     os=mac
     hash curl > /dev/null 2>&1 || brew install curl
+elif [ "$(uname -s)" == "FreeBSD" ]; then
+    os=unix
 elif [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then os=windows
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     os=linux
@@ -18,7 +20,7 @@ makedir(){
 }
 
 # link dotfiles
-if [ $os = "mac" ] || [ $os = "linux" ]; then
+if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.vimrc         $HOME/.vimrc
     ln -sf $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
     ln -sf $HOME/dotfiles/.zshrc         $HOME/.zshrc
