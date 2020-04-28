@@ -11,7 +11,10 @@ commands(){
         linux*)
             sed -i -e 's/ftp:\/\//https:\/\//' ./contrib/download_prerequisites
             ;;
-        *) echo "error!"; exit 1 ;;
+        freebsd*)
+            sed -i -e 's/ftp:\/\//https:\/\//' ./contrib/download_prerequisites
+            ;;
+        *) echo "error unknown ostype!"; exit 1 ;;
     esac
 
     while true;

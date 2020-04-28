@@ -1,14 +1,19 @@
 #!/bin/bash
 
-if   [ "$(uname -s)" = "Darwin" ];then os=mac
+if   [ "$(uname -s)" = "Darwin" ] ;then os=mac
+elif [ "$(uname -s)" = "FreeBSD" ];then os=unix
 elif [ "$(expr substr $(uname -s) 1 5)" = "MINGW" ]; then os=windows
 elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then os=linux
 else os=unknown
 fi
 
-sudo -v 
-if [ $? == 0 ]; then sudo_access=true
-else sudo_access=false
+if $(which sudo > /dev/null 2>&1); then
+    sudo -v 
+    if [ $? == 0 ]; then sudo_access=true
+    else sudo_access=false
+    fi
+else
+    sudo_access=false
 fi
     
 if [ $os = "mac" ]; then
@@ -32,6 +37,16 @@ elif [ $os = "linux" ] ; then
                 echo " Quit installing packages";;
         esac
     fi
+elif [ $os = "unix" ]; then
+    echo "You don't have access to sudo!"
+    read -p "Install packages from source?[y/N]" ys
+    case $ys in 
+        [yY]*)
+            bash ./scripts/build_pkgs.bash
+            ;;
+        *)
+            echo " Quit installing packages";;
+    esac
 fi
 
 if $sudo_access; then
