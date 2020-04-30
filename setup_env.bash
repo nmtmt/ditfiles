@@ -49,36 +49,48 @@ elif [ $os = "unix" ]; then
     esac
 fi
 
-if $sudo_access; then
-    venv_shell=/usr/local/bin/virtualenvwrapper.sh 
-    venv_python=/usr/local/bin/python3
-else
-    venv_shell=$HOME/.local/bin/virtualenvwrapper.sh 
-    venv_python=$HOME/.local/bin/python3
+echo "Setting virtualenvwrapper..."
+read -p "Do you use system python for VIRTUALENVWRAPPER_PYTHON?" ys
+case $ys in
+    [yY])
+        venv_shell=/usr/local/bin/virtualenvwrapper.sh 
+        venv_python=/usr/local/bin/python3
+        ;;
+    *)
+        venv_shell=$HOME/.local/bin/virtualenvwrapper.sh 
+        venv_python=$HOME/.local/bin/python3
+esac 
+if $sudo_access;then 
+    sudo_cmd="sudo"
 fi
-
-# install virtualenvwrapper
+if [ ! -f $venv_shell ]; then
+    echo "Installing system pip packages..."
+    $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
+    hash -r
+fi
 if [ -f $venv_shell ]; then
     export VIRTUALENVWRAPPER_PYTHON=$venv_python
     export WORKON_HOME=$HOME/.venvs
     source $venv_shell
     if [ $? != 0 ]; then
-        echo "setup virtualenvwrapper failed! abort"
+        echo "Setup virtualenvwrapper failed! abort"
         exit 1
     fi
-
-    if [[ $SHELL = *"/bash" ]] ; then initshell=.bashrc
-    elif [[ $SHELL = *"/zsh" ]]; then initshell=.zshrc
+    if [ ! -f $WORKON_HOME/default ]; then
+        echo "Successfully installed virtualenvwrapper. Creating default venv..."
+        mkvirtualenv default --python=python3
+    else
+        workon default
     fi
-
-    grep "export WORKON_HOME=" $HOME/$initshell
-    if [ $? != 0 ];then
-        echo "if [ -f $venv_shell ]; then"                     >> $HOME/$initshell
-        echo "    export VIRTUALENVWRAPPER_PYTHON=$venv_python">> $HOME/$initshell
-        echo "    export WORKON_HOME=$HOME/.venvs"             >> $HOME/$initshell
-        echo "    source $venv_shell" >> $HOME/$initshell
-        echo "fi"                     >> $HOME/$initshell
+    if [ $? == 0 ]; then
+        echo "Installing default pip packages..."
+        pip install -r $HOME/dotfiles/env/venv_default_pip_pkgs
+        echo "Setting virtualenvwrapper Done!"
+    else
+        echo "Failed to make default venv!"
     fi
+else
+    echo "Cannot find $venv_shell. Abort installing virtualenvwrapper"
 fi
 
 read -p "Do you install fonts? (y/N): " yn
@@ -106,7 +118,7 @@ if [ $os = "linux" ]; then
         *) echo "skip setting time problem between windows and linux";;
     esac
 
-    echo "setting font and theme..."
+    echo "Please configure font and theme..."
     unity-tweak-tool -a
     echo "Done"
 
@@ -116,14 +128,21 @@ if [ $os = "linux" ]; then
     echo "Done"
 
     if $sudo_access; then
-        # for backlight on Let's note
-        echo "Change boot setting..."
-        sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=vendor acpi_osi="/g' /etc/default/grub
-        sudo sed --in-place 's/GRUB_TIMEOUT=10/GRUB_TIMEOUT=300/g' /etc/default/grub
+        read -p "Do you have a problem with backlight?[y/N]" ys
+        case $ys in
+            [yY])
+                # for backlight on Let's note
+                echo "Change boot setting..."
+                sudo sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=vendor acpi_osi="/g' /etc/default/grub
+                sudo sed --in-place 's/GRUB_TIMEOUT=10/GRUB_TIMEOUT=300/g' /etc/default/grub
 
-        # update grub
-        sudo update-initramfs -u
-        sudo update-grub
-        echo "Done updatting grub with new config"
+                # update grub
+                sudo update-initramfs -u
+                sudo update-grub
+                echo "Done updatting grub with new config"
+                ;;
+            *)
+                echo "Skip modifying grub setting";;
+        esac
     fi
 fi

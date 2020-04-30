@@ -7,3 +7,5 @@ tqdm
 pillow
 opencv-python
 ipython
+torch
+torchvision
