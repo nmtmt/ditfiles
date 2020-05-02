@@ -37,7 +37,7 @@ install ${compress_pkgs[@]}
 compilers=("gcc")
 install ${compilers[@]}
 
-util_pkgs=("util-linux" "openssl" "libffi" "ncurses" "libsm")
+util_pkgs=("util-linux" "openssl" "libffi" "ncurses" "libsm" "libevent" "tmux")
 install ${util_pkgs[@]}
 
 programming_langs=("ruby" "lua" "python")
