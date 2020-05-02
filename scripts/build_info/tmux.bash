@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-ver="2.8"
+ver="3.1"
 url=https://github.com/tmux/tmux/releases/download/$ver/tmux-$ver.tar.gz
 pkg_tarname=tmux-$ver.tar.gz
 pkg_dirname=tmux-$ver
