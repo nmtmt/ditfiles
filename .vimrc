@@ -93,12 +93,23 @@ if dein#load_state(dein_dir)
   " Required:
   call dein#add(dein_plugin_dir)
 
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neocomplete.vim')
+  if ((has('nvim')  || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
+    call dein#add('Shougo/deoplete.nvim')
+    if !has('nvim')
+      call dein#add('roxma/nvim-yarp')
+      call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
+  elseif has('lua')
+    call dein#add('Shougo/neocomplete.vim')
+  endif
+  "call dein#add('Shougo/neosnippet.vim')
+  " call dein#add('Shougo/neocomplete.vim')
+  "call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/unite.vim')
 
   call dein#add('flazz/vim-colorschemes')
   call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-obsession')
 
   call dein#add('scrooloose/nerdtree')
 
@@ -202,17 +213,16 @@ let g:quickrun_config = {
       \'python': {'command': 'python3'}, 
       \}
 
-" =========== Setting for neocomplete =============
 let g:acp_enableAtStartup = 0 " Disable AutoComplPop.     
+" =========== Setting for neocomplete =============
 let g:neocomplete#enable_at_startup = 1  " Use neocomplete.
 let g:neocomplete#enable_smart_case = 0  " Use smartcase.
 
 let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
 let g:neocomplete#max_list = 8
 
-let g:neocomplete#auto_completion_start_length = 2
+let g:neocomplete#auto_completion_start_length = 3
 let g:neocomplete#auto_complete_delay = 0
-let g:neocomplcache_enable_auto_close_preview = 0
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -231,6 +241,18 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
 
+" =========== End of Setting for neocomplete =============
+
+" =========== deoplete setting ============
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+      \'max_list':8,
+      \'min_pattern_length':2,
+      \'skip_chars':['(', ')', ','],
+      \})
+" =========== deoplete setting ============
+
+
 " <TAB>: completion.
 " inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -239,14 +261,6 @@ inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
 inoremap <expr><CR>    pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr><TAB>   pumvisible() ? "\<C-y><TAB>" : "\<TAB>"
 
-" Enable omni completion.
-autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python        setlocal omnifunc=python3complete#Complete
-autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
-" =========== End of Setting for neocomplete =============
-"
 " =========== neosnippet Setting =============
 " " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
