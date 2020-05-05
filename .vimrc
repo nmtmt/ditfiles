@@ -85,6 +85,10 @@ if match( &runtimepath, '/dein.vim' ) == -1
   let &runtimepath .= ','.expand(dein_plugin_dir)
 endif
 
+let use_deoplete=0
+if ((has('nvim')  || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
+  let use_deoplete=1
+endif
 " Required:
 if dein#load_state(dein_dir)
   call dein#begin(dein_dir)
@@ -93,18 +97,13 @@ if dein#load_state(dein_dir)
   " Required:
   call dein#add(dein_plugin_dir)
 
-  if ((has('nvim')  || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
-    call dein#add('Shougo/deoplete.nvim')
-    if !has('nvim')
-      call dein#add('roxma/nvim-yarp')
-      call dein#add('roxma/vim-hug-neovim-rpc')
-    endif
-  elseif has('lua')
-    call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim') " for deoplete on vim8
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
   endif
-  "call dein#add('Shougo/neosnippet.vim')
-  " call dein#add('Shougo/neocomplete.vim')
-  "call dein#add('Shougo/deoplete.nvim')
+
   call dein#add('Shougo/unite.vim')
 
   call dein#add('flazz/vim-colorschemes')
@@ -214,44 +213,46 @@ let g:quickrun_config = {
       \}
 
 let g:acp_enableAtStartup = 0 " Disable AutoComplPop.     
-" =========== Setting for neocomplete =============
-let g:neocomplete#enable_at_startup = 1  " Use neocomplete.
-let g:neocomplete#enable_smart_case = 0  " Use smartcase.
 
-let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
-let g:neocomplete#max_list = 8
+if use_deoplete
+  " =========== deoplete setting ============
+  let g:deoplete#enable_at_startup = 1
+  call deoplete#custom#option({
+        \'max_list':8,
+        \'min_pattern_length':2,
+        \'skip_chars':['(', ')', ','],
+        \})
+  " =========== deoplete setting ============
+else
+  " =========== Setting for neocomplete =============
+  let g:neocomplete#enable_at_startup = 1  " Use neocomplete.
+  let g:neocomplete#enable_smart_case = 0  " Use smartcase.
 
-let g:neocomplete#auto_completion_start_length = 3
-let g:neocomplete#auto_complete_delay = 0
+  let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
+  let g:neocomplete#max_list = 8
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+  let g:neocomplete#auto_completion_start_length = 3
+  let g:neocomplete#auto_complete_delay = 0
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+          \ }
+
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplete#undo_completion()
+  inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+  " =========== End of Setting for neocomplete =============
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" =========== End of Setting for neocomplete =============
-
-" =========== deoplete setting ============
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-      \'max_list':8,
-      \'min_pattern_length':2,
-      \'skip_chars':['(', ')', ','],
-      \})
-" =========== deoplete setting ============
-
 
 " <TAB>: completion.
 " inoremap <expr><TAB>   pumvisible() ? "\<C-n>" : "\<TAB>"

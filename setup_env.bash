@@ -28,7 +28,7 @@ elif [ $os = "linux" ] ; then
         cat ./env/default_python_packages | xargs -L 1 sudo pip3 install 
     else
         echo "You don't have access to sudo!"
-        read -p "Install packages from source?[y/N]" ys
+        read -p "Install packages from source?[y/N]:" ys
         case $ys in 
             [yY]*)
                 bash ./scripts/build_pkgs.bash
@@ -39,7 +39,7 @@ elif [ $os = "linux" ] ; then
     fi
 elif [ $os = "unix" ]; then
     echo "You don't have access to sudo!"
-    read -p "Install packages from source?[y/N]" ys
+    read -p "Install packages from source?[y/N]:" ys
     case $ys in 
         [yY]*)
             bash ./scripts/build_pkgs.bash
@@ -50,7 +50,7 @@ elif [ $os = "unix" ]; then
 fi
 
 echo "Setting virtualenvwrapper..."
-read -p "Do you use system python for VIRTUALENVWRAPPER_PYTHON?" ys
+read -p "Do you use system python for VIRTUALENVWRAPPER_PYTHON?[y/N]:" ys
 case $ys in
     [yY])
         venv_shell=/usr/local/bin/virtualenvwrapper.sh 
@@ -69,6 +69,7 @@ if [ ! -f $venv_shell ]; then
     hash -r
 fi
 if [ -f $venv_shell ]; then
+    deactivate > /dev/null 2>&1
     export VIRTUALENVWRAPPER_PYTHON=$venv_python
     export WORKON_HOME=$HOME/.venvs
     source $venv_shell
@@ -76,24 +77,24 @@ if [ -f $venv_shell ]; then
         echo "Setup virtualenvwrapper failed! abort"
         exit 1
     fi
-    if [ ! -f $WORKON_HOME/default ]; then
+    if [ ! -d $WORKON_HOME/default ]; then
         echo "Successfully installed virtualenvwrapper. Creating default venv..."
         mkvirtualenv default --python=python3
-    else
-        workon default
     fi
     if [ $? == 0 ]; then
+        workon default
         echo "Installing default pip packages..."
         pip install -r $HOME/dotfiles/env/venv_default_pip_pkgs
         echo "Setting virtualenvwrapper Done!"
     else
         echo "Failed to make default venv!"
     fi
+    deactivate > /dev/null 2>&1
 else
     echo "Cannot find $venv_shell. Abort installing virtualenvwrapper"
 fi
 
-read -p "Do you install fonts? (y/N): " yn
+read -p "Do you install fonts? [y/N]:" yn
 case "$yn" in
   [yY]*) 
       bash $HOME/dotfiles/scripts/install_fonts.bash
@@ -109,7 +110,7 @@ esac
 
 if [ $os = "linux" ]; then
     # fix time difference in dual boot env
-    read -p "is thie dualboot env?[y/N]" ys
+    read -p "is thie dualboot env?[y/N]:" ys
     case $ys in 
         [yY]*) 
             timedatectl set-local-rtc true 
@@ -128,7 +129,7 @@ if [ $os = "linux" ]; then
     echo "Done"
 
     if $sudo_access; then
-        read -p "Do you have a problem with backlight?[y/N]" ys
+        read -p "Do you have a problem with backlight?[y/N]:" ys
         case $ys in
             [yY])
                 # for backlight on Let's note
