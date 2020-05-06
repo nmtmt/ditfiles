@@ -60,6 +60,7 @@ if has("autocmd")
   filetype indent on
   autocmd BufRead,BufNewFile *.launch setfiletype xml
   autocmd BufRead,BufNewFile *.md     setfiletype markdown
+  autocmd BufRead,BufNewFile *.php    setfiletype html
   autocmd BufRead,BufNewFile *.log    setlocal readonly
   autocmd FileType text NeoCompleteLock
   " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
@@ -97,6 +98,7 @@ if dein#load_state(dein_dir)
   " Required:
   call dein#add(dein_plugin_dir)
 
+  call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neocomplete.vim')
   call dein#add('Shougo/deoplete.nvim')
   if !has('nvim') " for deoplete on vim8
