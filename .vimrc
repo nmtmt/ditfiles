@@ -58,15 +58,15 @@ let &undodir=undodirectory
 if has("autocmd")
   filetype plugin on
   filetype indent on
-  autocmd BufRead,BufNewFile *.launch setfiletype xml
-  autocmd BufRead,BufNewFile *.md     setfiletype markdown
-  autocmd BufRead,BufNewFile *.php    setfiletype html
-  autocmd BufRead,BufNewFile *.log    setlocal readonly
+  autocmd BufRead,BufNewFile *.launch   setfiletype xml
+  autocmd BufRead,BufNewFile *.md *.mkd setfiletype markdown
+  autocmd BufRead,BufNewFile *.php      setfiletype html
+  autocmd BufRead,BufNewFile *.log      setlocal readonly
   autocmd FileType text NeoCompleteLock
   " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
-  autocmd FileType text,tex,markdown,html,xml,vim setlocal ts=2 sts=-1 sw=0 et
+  autocmd FileType text,tex,markdown,html,xml,vim,json setlocal ts=2 sts=-1 sw=0 et
   " fo=formatoptions, com=comments
-  autocmd FileType text,tex,markdown setlocal spell
+  autocmd FileType text,tex,markdown,json setlocal spell
   " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType qf 3wincmd_ " set quickfix window height to 3
@@ -117,9 +117,6 @@ if dein#load_state(dein_dir)
   " enable paste mode when paste with clipboard
   call dein#add('ConradIrwin/vim-bracketed-paste')
 
-  " You can specify revision/branch/tag.
-  " call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
-
   call dein#add('lervag/vimtex')
   call dein#add('thinca/vim-quickrun')
   
@@ -129,6 +126,9 @@ if dein#load_state(dein_dir)
   call dein#add('plasticboy/vim-markdown')
   call dein#add('kannokanno/previm')
   call dein#add('tyru/open-browser.vim')
+
+  call dein#add('lukaszb/vim-web-indent') " for indentation of html, php, javascript
+  call dein#add('elzr/vim-json') " check json syntax
 
   " load my snippets
   call dein#add('nmtmt/neosnippet-snippets')
@@ -286,6 +286,7 @@ smap <expr><TAB>
 if has('conceal')
   " set conceallevel=2 concealcursor=niv
   set conceallevel=0 concealcursor=
+  let g:vim_json_syntax_conceal = 0 " disable concealing of vim-json plugin
 endif
 " load snippets from runtime path automatically
 let g:neosnippet#enable_snipmate_compatibility = 1
