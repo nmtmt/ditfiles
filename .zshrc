@@ -19,6 +19,10 @@ else
 fi
 export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
 
+if [ -f /Applications/MacVim.app/Contents/bin/gvim ]; then
+    alias gvim="/Applications/MacVim.app/Contents/bin/gvim"
+fi
+
 if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3
     export WORKON_HOME=$HOME/.venvs
