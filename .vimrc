@@ -127,7 +127,6 @@ if dein#load_state(dein_dir)
   call dein#add('kannokanno/previm')
   call dein#add('tyru/open-browser.vim')
 
-  call dein#add('lukaszb/vim-web-indent') " for indentation of html, php, javascript
   call dein#add('elzr/vim-json') " check json syntax
 
   " load my snippets
