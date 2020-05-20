@@ -14,7 +14,7 @@ $pvc_view_file_via_temporary = 0;
 
 # Use Skim as a previewer
 if ($^O eq 'darwin') {
-  $pdf_previewer = 'open -ga Skim';
+  $pdf_previewer = 'open -ga /Applications/Skim.app';
 } elsif ($^O eq 'linux') {
   $pdf_previewer = 'evince';
 }

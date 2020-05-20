@@ -193,6 +193,9 @@ let g:vimtex_compiler_latexmk = {
             \   '-interaction=nonstopmode',
             \ ],
             \}
+if has("mac")
+  let g:vimtex_view_method = 'skim'
+endif
 
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
@@ -260,7 +263,8 @@ endif
 
 " Close popup by <Space> or <CR>.
 inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
-inoremap <expr><CR>    pumvisible() ? "\<C-y>" : "\<CR>"
+"inoremap <expr><CR>    pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr><CR>    pumvisible() ? "\<C-y><CR>" : "\<CR>"
 inoremap <expr><TAB>   pumvisible() ? "\<C-y><TAB>" : "\<TAB>"
 
 " =========== neosnippet Setting =============
