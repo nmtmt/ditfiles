@@ -23,6 +23,11 @@ if [ -f /Applications/MacVim.app/Contents/bin/gvim ]; then
     alias gvim="/Applications/MacVim.app/Contents/bin/gvim"
 fi
 
+if which trash-put > /dev/null 2>&1; then
+    alias rm='trash-put'
+    trash-empty 50
+fi
+
 if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3
     export WORKON_HOME=$HOME/.venvs
