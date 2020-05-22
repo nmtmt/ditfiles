@@ -222,6 +222,8 @@ if use_deoplete
   " =========== deoplete setting ============
   let g:deoplete#enable_at_startup = 1
   call deoplete#custom#option({
+        \'auto_complete_delay':50,
+        \'auto_complete_popup':"auto",
         \'max_list':8,
         \'min_pattern_length':2,
         \'skip_chars':['(', ')', ','],
