@@ -94,6 +94,11 @@ else
     echo "Cannot find $venv_shell. Abort installing virtualenvwrapper"
 fi
 
+if which gem > /dev/null 2>&1; then
+    echo "Installing ruby packages..."
+    cat $HOME/dotfiles/env/gem_pkgs | xargs gem install
+fi
+
 read -p "Do you install fonts? [y/N]:" yn
 case "$yn" in
   [yY]*) 
@@ -119,9 +124,11 @@ if [ $os = "linux" ]; then
         *) echo "skip setting time problem between windows and linux";;
     esac
 
-    echo "Please configure font and theme..."
-    unity-tweak-tool -a
-    echo "Done"
+    if [ ! -z "$DISPLAY" ]; then
+        echo "Please configure font and theme..."
+        unity-tweak-tool -a
+        echo "Done"
+    fi
 
     # regard caps as ctrl
     echo "Setting caps as ctrl"

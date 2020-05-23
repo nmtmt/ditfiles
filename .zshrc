@@ -12,6 +12,7 @@ fi
 
 export PATH=$HOME/.local/bin:$CUDA_HOME/bin:$PATH
 export CPATH=$HOME/.local/include:$CPATH
+export EDITOR=vim
 if $has_cuda; then
     export LD_LIBRARY_PATH=$HOME/.local/lib:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 else
