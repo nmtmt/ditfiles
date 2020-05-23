@@ -3,7 +3,7 @@
 script_dir=$(cd $(dirname $0); pwd)
 
 # load functions for installing
-source func.bash
+source $script_dir/func.bash
 
 src_dir=$HOME/.local/src
 if [ ! -e $src_dir ]; then
