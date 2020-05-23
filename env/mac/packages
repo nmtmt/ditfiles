@@ -2,6 +2,7 @@ curl
 git
 vim
 tmux
+tmuxinator
 ffmpeg
 trash-cli
 nkf

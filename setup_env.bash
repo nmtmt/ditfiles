@@ -15,24 +15,24 @@ if $(which sudo > /dev/null 2>&1); then
 else
     sudo_access=false
 fi
+if $sudo_access; then
+    sudo_cmd="sudo"
+fi
     
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
     cat ./env/mac/cask_packages | xargs brew cask install 
-    cat ./env/default_python_packages | xargs -L 1 pip3 install 
 elif [ $os = "linux" ] ; then
     if $sudo_access; then
         cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository 
         sudo apt update
         cat ./env/ubuntu16/packages | xargs sudo apt install -y
-        cat ./env/default_python_packages | xargs -L 1 sudo pip3 install 
     else
         echo "You don't have access to sudo!"
         read -p "Install packages from source?[y/N]:" ys
         case $ys in 
             [yY]*)
-                bash ./scripts/build_pkgs.bash
-                ;;
+                bash ./scripts/build_pkgs.bash;;
             *)
                 echo " Quit installing packages";;
         esac
@@ -42,10 +42,20 @@ elif [ $os = "unix" ]; then
     read -p "Install packages from source?[y/N]:" ys
     case $ys in 
         [yY]*)
-            bash ./scripts/build_pkgs.bash
-            ;;
+            bash ./scripts/build_pkgs.bash;;
         *)
             echo " Quit installing packages";;
+    esac
+fi
+if [ ! $os = "mac" ]; then
+    gem=$(which gem)
+    case $gem in
+        /usr*)
+            echo "Installing ruby packages..."
+            cat $HOME/dotfiles/env/gem_pkgs | xargs sudo gem install;;
+        /home*)
+            echo "Installing ruby packages..."
+            cat $HOME/dotfiles/env/gem_pkgs | xargs gem install;;
     esac
 fi
 
@@ -60,9 +70,6 @@ case $ys in
         venv_shell=$HOME/.local/bin/virtualenvwrapper.sh 
         venv_python=$HOME/.local/bin/python3
 esac 
-if $sudo_access;then 
-    sudo_cmd="sudo"
-fi
 if [ ! -f $venv_shell ]; then
     echo "Installing system pip packages..."
     $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
@@ -92,11 +99,6 @@ if [ -f $venv_shell ]; then
     deactivate > /dev/null 2>&1
 else
     echo "Cannot find $venv_shell. Abort installing virtualenvwrapper"
-fi
-
-if which gem > /dev/null 2>&1; then
-    echo "Installing ruby packages..."
-    cat $HOME/dotfiles/env/gem_pkgs | xargs gem install
 fi
 
 read -p "Do you install fonts? [y/N]:" yn
