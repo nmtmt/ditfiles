@@ -29,6 +29,8 @@ set completeopt=menuone
 " set completeopt=menuone,preview
 set previewheight=2
 
+set nrformats="alpha" " disable octal, enable alphabet incremental
+
 function! Mkdir(path)
   if !isdirectory(a:path)
     call mkdir(a:path, 'p')
