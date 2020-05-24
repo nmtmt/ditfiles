@@ -1,6 +1,6 @@
-# /Users/matsumoto/.config/tmuxinator/aist.yml
+# /home/matsumoto/.config/tmuxinator/master.yml
 
-name: aist06
+name: master
 root: ~/l2ws_matsumoto/master/2_two-link-experiment
 
 # Optional tmux socket
@@ -45,27 +45,12 @@ root: ~/l2ws_matsumoto/master/2_two-link-experiment
 # attach: false
 
 windows:
-  - "01":
+  - ws:
       layout: main-vertical
       panes:
-        - ssh aist01
-  - "02":
-      layout: main-vertical
+        - 
+  - info:
+      layout: even-hirizontal
       panes:
-        - ssh aist02
-  - "03":
-      layout: main-vertical
-      panes:
-        - ssh aist03
-  - "04":
-      layout: main-vertical
-      panes:
-        - ssh aist04
-  - "07":
-      layout: main-vertical
-      panes:
-        - ssh aist07
-  - "08":
-      layout: main-vertical
-      panes:
-        - ssh aist08
+        - htop
+        - watch -n1 nvidia-smi
