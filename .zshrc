@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+bindkey -e
+
 cuda_ver="10.0"
 has_cuda=false
 if [ -d $HOME/.local/cuda-$cuda_ver ]; then
