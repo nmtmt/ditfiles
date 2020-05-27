@@ -24,7 +24,7 @@ set wildmenu           " commamd mode completion
 set undofile           " enable undo folder
 
 " not show preview window on word completion
-set completeopt=menuone
+set completeopt=menuone,noselect
 " show preview window on workd completion
 " set completeopt=menuone,preview
 set previewheight=2
