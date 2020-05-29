@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+export LANG="en_US.UTF-8"
+export PS1="%F{113}${USER}@${HOST%%.*}%f:%F{249}%0~%f%(!.#.$) "
+
 bindkey -e
 
 cuda_ver="10.0"

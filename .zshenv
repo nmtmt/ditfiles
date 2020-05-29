@@ -1,9 +1,6 @@
 #!/usr/bin/env zsh
 
-setopt no_global_rcs # dont load /etc/z* files
-
-export LANG="en_US.UTF-8"
-export PS1="%F{113}${USER}@${HOST%%.*}%f:%F{249}%0~%f%(!.#.$) "
+#setopt no_global_rcs # dont load /etc/z* files
 
 if [ -f $HOME/.dircolors ]; then
     if type dircolors > /dev/null 2>&1; then
