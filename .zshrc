@@ -4,6 +4,7 @@ export LANG="en_US.UTF-8"
 export PS1="%F{113}${USER}@${HOST%%.*}%f:%F{249}%0~%f%(!.#.$) "
 
 bindkey -e
+bindkey "^[[3~" delete-char # Fn + backspace as forward-delete
 
 cuda_ver="10.0"
 has_cuda=false
