@@ -45,6 +45,10 @@ root: ~/l2ws_matsumoto/master/2_two-link-experiment
 # attach: false
 
 windows:
+  - "local":
+      layout: main-vertical
+      panes:
+        - 
   - "01":
       layout: main-vertical
       panes:
