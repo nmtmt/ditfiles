@@ -64,6 +64,7 @@ if has("autocmd")
   autocmd BufRead,BufNewFile *.md *.mkd setfiletype markdown
   autocmd BufRead,BufNewFile *.php      setfiletype html
   autocmd BufRead,BufNewFile *.log      setlocal readonly
+  autocmd BufRead,BufNewFile .git*      setfiletype git
   autocmd FileType text NeoCompleteLock
   " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
   autocmd FileType text,tex,markdown,html,xml,vim,json setlocal ts=2 sts=-1 sw=0 et
