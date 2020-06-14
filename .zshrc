@@ -6,7 +6,7 @@ export PS1="%F{113}${USER}@${HOST%%.*}%f:%F{249}%0~%f%(!.#.$) "
 bindkey -e
 bindkey "^[[3~" delete-char # Fn + backspace as forward-delete
 
-cuda_ver="10.0"
+cuda_ver="10.2"
 has_cuda=false
 if [ -d $HOME/.local/cuda-$cuda_ver ]; then
     CUDA_HOME=$HOME/.local/cuda-$cuda_ver

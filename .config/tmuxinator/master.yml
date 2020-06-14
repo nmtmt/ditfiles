@@ -1,7 +1,7 @@
 # /home/matsumoto/.config/tmuxinator/master.yml
 
 name: master
-root: ~/l2ws_matsumoto/master/2_two-link-experiment
+root: ~/l2ws_matsumoto/master
 
 # Optional tmux socket
 # socket_name: foo
