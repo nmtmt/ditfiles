@@ -61,7 +61,7 @@ if has("autocmd")
   filetype plugin on
   filetype indent on
   autocmd BufRead,BufNewFile *.launch   setfiletype xml
-  autocmd BufRead,BufNewFile *.md *.mkd setfiletype markdown
+  autocmd BufRead,BufNewFile *.md,*.mkd setfiletype markdown
   autocmd BufRead,BufNewFile *.php      setfiletype html
   autocmd BufRead,BufNewFile *.log      setlocal readonly
   autocmd BufRead,BufNewFile .gitignore setfiletype gitignore
