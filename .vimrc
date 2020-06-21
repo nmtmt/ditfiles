@@ -23,9 +23,9 @@ set spelllang=en,cjk   " disable spell check words in Japanese
 set wildmenu           " commamd mode completion
 set undofile           " enable undo folder
 
-" not show preview window on word completion
+" not show preview window with word completion
 set completeopt=menuone,noselect
-" show preview window on workd completion
+" show preview window with word completion
 " set completeopt=menuone,preview
 set previewheight=2
 
