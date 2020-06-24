@@ -17,3 +17,4 @@ perl
 zenity
 wget
 coreutils
+colordiff
