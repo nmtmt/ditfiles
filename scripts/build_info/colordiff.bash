@@ -6,10 +6,10 @@ pkg_tarname=colordiff-$ver.tar.gz
 pkg_dirname=colordiff-$ver
 commands(){
     case $OSTYPE in
-        darwin*);
+        darwin*)
             sed -i .bak -e 's/$(INSTALL) -Dm/$(INSTALL) -m/g' Makefile
             ;;
-        *);
+        *)
             ;;
     esac
     make install DESTDIR=$HOME/.local INSTALL_DIR=/bin MAN_DIR=/man/man1
