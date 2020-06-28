@@ -53,4 +53,4 @@ windows:
       layout: even-hirizontal
       panes:
         - htop
-        - watch -n1 nvidia-smi
+        - if which nvidia-smi > /dev/null 2>&1; then watch -n0.5 nvidia-smi; else exit; fi
