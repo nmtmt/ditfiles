@@ -23,6 +23,7 @@ makedir(){
 if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.vimrc         $HOME/.vimrc
     ln -sf $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
+    ln -sf $HOME/dotfiles/vim/ftplugin   $HOME/.vim/ftplugin
     ln -sf $HOME/dotfiles/.zshrc         $HOME/.zshrc
     ln -sf $HOME/dotfiles/.zshenv        $HOME/.zshenv
     ln -sf $HOME/dotfiles/.dircolors     $HOME/.dircolors
@@ -38,8 +39,9 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.lsyncd_local.conf      $HOME/.lsyncd_local.conf
     ln -sf $HOME/dotfiles/.config/tmuxinator      $HOME/.config/tmuxinator
 elif [ $os = "windows" ]; then
-    ln -sf $HOME/dotfiles/.vimrc     $HOME/_vimrc
-    ln -sf $HOME/dotfiles/.gvimrc    $HOME/_gvimrc
+    ln -sf $HOME/dotfiles/.vimrc       $HOME/_vimrc
+    ln -sf $HOME/dotfiles/.gvimrc      $HOME/_gvimrc
     makedir $HOME/vimfiles/cache/dein
+    ln -sf $HOME/dotfiles/vim/ftplugin $HOME/vimfiles/ftplugin
 fi
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc

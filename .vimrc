@@ -133,6 +133,7 @@ if dein#load_state(dein_dir)
   call dein#add('elzr/vim-json') " check json syntax
 
   " load my snippets
+  call dein#add('nmtmt/winresizer') " for resizing window
   call dein#add('nmtmt/neosnippet-snippets')
 
   " Required:
@@ -299,3 +300,10 @@ endif
 " load snippets from runtime path automatically
 let g:neosnippet#enable_snipmate_compatibility = 1
 " ========== End of neosnippet Setting ===========
+
+" ========== winresizer ===========
+let g:winresizer_start_key = '<C-W>s'
+let g:winresizer_keycode_finish = 113 " q
+let g:winresizer_keycode_cancel = 99  " c
+let g:winresizer_keycode_mode   = 109 " m
+let g:winresizer_keycode_move   = 118 " v (not use)
