@@ -24,35 +24,33 @@ let g:quickrun_config['tex'] = {
 " http://auewe.hatenablog.com/entry/2013/12/25/033416 を参考にしたhttps://qiita.com/ssh0/items/4aea2d3849667717b36dより
 let g:quickrun_config.tmptex = {
 \   'exec': [
-\           'mv %s %a/tmptex.latex',
-\           'latexmk -pdfdvi -pvc -output-directory=%a %a/tmptex.latex',
+\           'mkdir -p %a',
+\           'mv %s %a/tmptex.tex',
+\           'latexmk %a/tmptex.tex -pdfdvi -pv -output-directory=%a',
 \           ],
-\   'args' : expand("%:p:h:gs?\\\\?/?"),
+\   'args' : expand("%:p:h:gs?\\\\?/?")."/tmp",
+\
 \   'outputter' : 'error',
+\   'outputter/error/success' : 'null',
 \   'outputter/error/error' : 'quickfix',
 \
+\   'hook/cd' : "%s:r"."/tmp",
 \   'hook/eval/enable' : 1,
-\   'hook/eval/cd' : "%s:r",
-\
-\   'hook/eval/template' : '\documentclass{ujsarticle}'
-\                         .'\usepackage[dvipdfmx]{graphicx, hyperref}'
-\                         .'\begin{document}'
+\   'hook/eval/template' : '\documentclass[uplatex]{jsarticle}'       ."\n"
+\                         .'\usepackage[dvipdfmx]{graphicx, hyperref}'."\n"
+\                         .'\begin{document}'                         ."\n"
 \                         .'%s'
 \                         .'\end{document}',
-\
 \   'hook/sweep/files' : [
-\                        '%a/tmptex.latex',
-\                        '%a/tmptex.out',
-\                        '%a/tmptex.fdb_latexmk',
-\                        '%a/tmptex.log',
 \                        '%a/tmptex.aux',
-\                        '%a/tmptex.dvi'
+\                        '%a/tmptex.bbl',
+\                        '%a/tmptex.blg',
+\                        '%a/tmptex.dvi',
+\                        '%a/tmptex.fdb_latexmk',
+\                        '%a/tmptex.fls',
+\                        '%a/tmptex.log',
+\                        '%a/tmptex.out'
 \                        ],
 \}
 
 vnoremap <silent><buffer> <F5> :QuickRun -mode v -type tmptex<CR>
-
-" QuickRun and view compile result quickly (but don't preview pdf file)
-nnoremap <silent><F5> :QuickRun<CR>
-
-autocmd BufWritePost,FileWritePost *.tex QuickRun tex
