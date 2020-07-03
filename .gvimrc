@@ -11,8 +11,6 @@ nnoremap gk k
 if has("mac") " has(mac) have to be before has(unix)
   set guifont=Osaka-Mono:h14
   " set linespace=7
-  let g:winresizer_gui_enable = 1
-  "let g:winresizer_gui_start_key = '<C-W>a'
 else
   if has("win64") || has("win32") || has("win32unix")
     set guifont=Cica:h12

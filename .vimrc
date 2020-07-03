@@ -302,8 +302,11 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 " ========== End of neosnippet Setting ===========
 
 " ========== winresizer ===========
-let g:winresizer_start_key = '<C-W>s'
+let g:winresizer_start_key     = '<C-W>s'
+let g:winresizer_gui_start_key = '<C-W>a'
+let g:winresizer_gui_enable     = 1 " enable if has("gui_running")
 let g:winresizer_keycode_finish = 113 " q
 let g:winresizer_keycode_cancel = 99  " c
 let g:winresizer_keycode_mode   = 109 " m
 let g:winresizer_keycode_move   = 118 " v (not use)
+" ========== end of winresizer ====
