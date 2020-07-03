@@ -38,6 +38,8 @@ let g:quickrun_config.tmptex = {
 \   'hook/eval/enable' : 1,
 \   'hook/eval/template' : '\documentclass[uplatex]{jsarticle}'       ."\n"
 \                         .'\usepackage[dvipdfmx]{graphicx, hyperref}'."\n"
+\                         .'\providecommand{\tightlist}{%'            ."\n"
+\                         .'  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}'."\n"
 \                         .'\begin{document}'                         ."\n"
 \                         .'%s'
 \                         .'\end{document}',
@@ -53,4 +55,5 @@ let g:quickrun_config.tmptex = {
 \                        ],
 \}
 
+nnoremap <silent><buffer> <F5> :QuickRun -mode n -type tmptex<CR>
 vnoremap <silent><buffer> <F5> :QuickRun -mode v -type tmptex<CR>
