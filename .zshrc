@@ -37,6 +37,9 @@ alias mux='tmuxinator'
 if which colordiff > /dev/null 2>&1; then
     alias diff='colordiff -u'
 fi
+if which gsed > /dev/null 2>&1; then
+    alias sed='gsed'
+fi
 
 if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3

@@ -18,3 +18,4 @@ zenity
 wget
 coreutils
 colordiff
+gnu-sed
