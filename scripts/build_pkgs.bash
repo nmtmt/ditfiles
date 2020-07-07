@@ -32,17 +32,26 @@ install(){
 }
 
 compress_pkgs=("zlib" "xz" "bzip2" "libarchive" "pbzip2" "pixz" "pigz")
-install ${compress_pkgs[@]}
 
 compilers=("gcc")
-install ${compilers[@]}
 
 util_pkgs=("util-linux" "openssl" "libffi" "ncurses" "libsm" "libevent" "tmux" "colordiff")
-install ${util_pkgs[@]}
 
 programming_langs=("ruby" "lua" "python")
-install ${programming_langs[@]}
 
 editor_pkgs=("vim")
-install ${editor_pkgs[@]}
+
+case $OSTYPE in
+    darwin*)
+        install "libffi"
+        install ${programming_langs[@]}
+        ;;
+    *)
+        install ${compress_pkgs[@]}
+        install ${compilers[@]}
+        install ${util_pkgs[@]}
+        install ${programming_langs[@]}
+        install ${editor_pkgs[@]}
+        ;;
+esac
 

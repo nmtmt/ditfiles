@@ -19,3 +19,4 @@ wget
 coreutils
 colordiff
 gnu-sed
+tcl-tk

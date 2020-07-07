@@ -6,6 +6,11 @@ pkg_dirname=bzip2-$ver
 commands(){
     make -j4 PREFIX=$HOME/.local CFLAGS="-fPIC" && make install PREFIX=$HOME/.local
     echo "Building shared library..."
+    case $OSTYPE in
+        darwin*)
+            sed -i .bak -e 's/soname/install_name/g' Makefile-libbz2_so
+            ;;
+    esac
     make clean && make -f Makefile-libbz2_so CFLAGS="-fPIC"
     cp *.so* $HOME/.local/lib/
 }

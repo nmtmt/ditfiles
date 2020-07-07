@@ -135,6 +135,8 @@ if dein#load_state(dein_dir)
   " load my snippets
   call dein#add('nmtmt/winresizer') " for resizing window
   call dein#add('nmtmt/neosnippet-snippets')
+  call dein#add('nmtmt/mdvimtex')
+  let &runtimepath .= ','. dein_dir . "/repos/github.com/nmtmt/mdvimtex"
 
   " Required:
   call dein#end()
@@ -310,4 +312,3 @@ let g:winresizer_keycode_cancel = 99  " c
 let g:winresizer_keycode_mode   = 109 " m
 let g:winresizer_keycode_move   = 118 " v (not use)
 " ========== end of winresizer ====
-"
