@@ -40,6 +40,8 @@ libcairo2-dev
 libx11-dev
 libxpm-dev
 libxt-dev
+sqlite3
+libsqlite3-dev
 exfat-fuse
 exfat-utils
 liblzma-dev
@@ -47,3 +49,9 @@ uuid
 uuid-dev
 openjdk-8-jre 
 colordiff
+libreadline6
+libreadline6-dev
+tk
+tk-dev
+tcl
+tcl-dev

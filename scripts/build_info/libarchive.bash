@@ -4,6 +4,6 @@ url=https://www.libarchive.org/downloads/libarchive-$ver.tar.gz
 pkg_tarname=libarchive-$ver.tar.gz
 pkg_dirname=libarchive-$ver
 commands(){
-    ./configure --prefix=$HOME/.local --enable-shared --enable-static
-    make -j4 PREFIX=$HOME/.local && make install PREFIX=$HOME/.local
+    ./configure --prefix=$HOME/.local --enable-shared --enable-static CFLAGS="-I$HOME/.local/include" LDFLAGS="-L$HOME/.local/lib"
+    make -j4 PREFIX=$HOME/.local INCLUDES=-I$HOME/.local/include && make install PREFIX=$HOME/.local
 }

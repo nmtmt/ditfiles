@@ -65,16 +65,20 @@ case $ys in
     [yY])
         venv_shell=/usr/local/bin/virtualenvwrapper.sh 
         venv_python=/usr/local/bin/python3
+        $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
+        hash -r
         ;;
     *)
         venv_shell=$HOME/.local/bin/virtualenvwrapper.sh 
         venv_python=$HOME/.local/bin/python3
+        if [ ! -f $venv_python ]; then
+            echo "Installing system pip packages..."
+            $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
+        else
+            pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
+        fi
+        hash -r
 esac 
-if [ ! -f $venv_shell ]; then
-    echo "Installing system pip packages..."
-    $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
-    hash -r
-fi
 if [ -f $venv_shell ]; then
     deactivate > /dev/null 2>&1
     export VIRTUALENVWRAPPER_PYTHON=$venv_python

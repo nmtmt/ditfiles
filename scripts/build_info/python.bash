@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-ver="3.8.2"
+ver="3.8.3"
 url=https://www.python.org/ftp/python/$ver/Python-$ver.tgz
 pkg_tarname=Python-$ver.tgz
 pkg_dirname=Python-$ver
