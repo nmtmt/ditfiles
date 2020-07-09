@@ -1,6 +1,7 @@
 build-essential
 openssh-server
 openssh-client
+gettext
 curl
 git
 vim
@@ -29,12 +30,12 @@ tcl8.5-dev
 libncurses5
 libncurses5-dev
 libxmu-dev
-libgtk2.0-dev
 libxpm-dev
 libgnome2-dev
 libgnomeui-dev
 libgtk2.0-dev
 libatk1.0-dev
+xorg-dev
 libbonoboui2-dev
 libcairo2-dev
 libx11-dev
@@ -55,3 +56,6 @@ tk
 tk-dev
 tcl
 tcl-dev
+luajit
+lua5.2
+lublua5.2-dev
