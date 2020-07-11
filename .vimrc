@@ -312,3 +312,5 @@ let g:winresizer_keycode_cancel = 99  " c
 let g:winresizer_keycode_mode   = 109 " m
 let g:winresizer_keycode_move   = 118 " v (not use)
 " ========== end of winresizer ====
+"
+nmap \ll <Plug>(mdvimtex_compile)

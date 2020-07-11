@@ -6,7 +6,7 @@ pkg_dirname=libffi-$ver
 commands(){
     case $OSTYPE in
         darwin*)
-            ./configure --prefix=$HOME/.local --libdir=$HOME/.local/lib --disable-multi-os-directory LDFLAGS="-L/usr/local/opt/ice/lib";;
+            ./configure --prefix=$HOME/.local --libdir=$HOME/.local/lib --disable-multi-os-directory LDFLAGS="-L/usr/local/opt/ice/lib -Wl,-install_name,@rpath/libffi.dylib";;
         *)
             ./configure --prefix=$HOME/.local --libdir=$HOME/.local/lib --disable-multi-os-directory;;
     esac
