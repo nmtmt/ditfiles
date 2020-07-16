@@ -21,6 +21,7 @@ scriptencoding utf-8          " this vim file's encoding. must be below the file
 
 set spelllang=en,cjk   " disable spell check words in Japanese
 set wildmenu           " commamd mode completion
+set wildmode=longest:full " setting for command line mode completion
 set undofile           " enable undo folder
 
 " not show preview window with word completion
