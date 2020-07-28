@@ -176,7 +176,6 @@ runtime macros/matchit.vim
 colorscheme gruvbox
 set background=dark
 set t_Co=256
-let g:lighline = { 'colorscheme': 'gruvbox' }
 
 " spell check highlight
 hi clear SpellBad
