@@ -15,5 +15,6 @@
     helper = cache --timeout=86400
 [merge]
 	ff = false
+	tool = vimdiff
 [pull]
 	ff = only
