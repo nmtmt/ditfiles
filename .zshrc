@@ -47,7 +47,7 @@ if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
     source $HOME/.local/bin/virtualenvwrapper.sh
     if [ -d $HOME/.venvs/default ]; then workon default; fi
 elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+    export VIRTUALENVWRAPPER_PYTHON=$(which python3)
     export WORKON_HOME=$HOME/.venvs
     source /usr/local/bin/virtualenvwrapper.sh
     if [ -d $HOME/.venvs/default ]; then workon default; fi

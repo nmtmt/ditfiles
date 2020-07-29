@@ -6,9 +6,12 @@ elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then os=linux
 else os=unknown
 fi
 
-wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-tar xzvf install-tl-unx.tar.gz
-cd install-tl*
+if [ ! -e install-tl-unx.tar.gz ]; then
+    wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+    tar xzvf install-tl-unx.tar.gz
+fi
+dir=$(find . -maxdepth 1 -type d -name 'install-tl*')
+cd $dir
 sudo ./install-tl -no-gui -repository http://mirror.ctan.org/systems/texlive/tlnet/
 if [ $? != 0 ]; then
     echo "install failed! if you want to install tex from middle, please try 'sudo ./install-tl -no-gui -profile installation.profile'"

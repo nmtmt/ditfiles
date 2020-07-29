@@ -18,15 +18,28 @@ fi
 if $sudo_access; then
     sudo_cmd="sudo"
 fi
-    
+
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
     cat ./env/mac/cask_packages | xargs brew cask install 
 elif [ $os = "linux" ] ; then
     if $sudo_access; then
-        cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository 
-        sudo apt update
-        cat ./env/ubuntu16/packages | xargs sudo apt install -y
+	if [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = "Ubuntu" ]; then
+	    release=$(cat /etc/lsb-release | grep RELEASE | cut -d '=' -f 2)
+	    case $release in
+		16*)
+		    cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository
+		    sudo apt update
+		    cat ./env/ubuntu16/packages | xargs sudo apt install -y
+		    ;;
+		18*)
+		    cat ./env/ubuntu18/ppa      | xargs -L 1 sudo apt-add-repository
+		    sudo apt update
+		    cat ./env/ubuntu18/packages | xargs sudo apt install -y
+		    ;;
+            esac
+        fi
+
     else
         echo "You don't have access to sudo!"
         read -p "Install packages from source?[y/N]:" ys
