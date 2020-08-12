@@ -41,6 +41,14 @@ if which gsed > /dev/null 2>&1; then
     alias sed='gsed'
 fi
 
+if [[ $OSTYPE = linux* ]] &&  [ -d /mnt/c/Program\ Files ]; then
+    d=$(find /mnt/c/Program\ Files -maxdepth 1 -type d -name 'vim*-kaoriya-win64')
+    if [ $? = 0 ]; then
+        str=$(echo $d | sed 's/\ /\\\ /g')
+        alias gvim="$str/gvim.exe"
+    fi
+fi
+
 if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3
     export WORKON_HOME=$HOME/.venvs
