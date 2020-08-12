@@ -2,6 +2,9 @@
 
 export LANG="en_US.UTF-8"
 export PS1="%F{113}${USER}@${HOST%%.*}%f:%F{249}%0~%f%(!.#.$) "
+if [ -f $HOME/.termcap ]; then
+    export TERMPATH=$HOME/.termcap
+fi
 
 bindkey -e
 bindkey "^[[3~" delete-char # Fn + backspace as forward-delete
