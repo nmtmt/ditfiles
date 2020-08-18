@@ -23,7 +23,7 @@ makedir(){
 if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.vimrc         $HOME/.vimrc
     ln -sf $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
-    ln -sf $HOME/dotfiles/vim/ftplugin   $HOME/.vim/ftplugin
+    ln -sfT $HOME/dotfiles/vim/ftplugin   $HOME/.vim/ftplugin
     ln -sf $HOME/dotfiles/.zshrc         $HOME/.zshrc
     ln -sf $HOME/dotfiles/.zshenv        $HOME/.zshenv
     ln -sf $HOME/dotfiles/.dircolors     $HOME/.dircolors
