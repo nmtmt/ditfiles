@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./link_dotfiles
+
 if   [ "$(uname -s)" = "Darwin" ] ;then os=mac
 elif [ "$(uname -s)" = "FreeBSD" ];then os=unix
 elif [ "$(expr substr $(uname -s) 1 5)" = "MINGW" ]; then os=windows

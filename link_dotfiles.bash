@@ -30,17 +30,19 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.tmux.conf     $HOME/.tmux.conf
     ln -sf $HOME/dotfiles/.rsync_exclude $HOME/.rsync_exclude
     ln -sf $HOME/dotfiles/.gitconfig     $HOME/.gitconfig
+
     makedir $HOME/.ssh
     ln -sf $HOME/dotfiles/.ssh/config  $HOME/.ssh/config
+
     makedir $HOME/.vim/.cache/dein
     makedir $HOME/.local/bin
-    ln -sf $HOME/dotfiles/scripts/start_rsync.sh  $HOME/.local/bin/start_rsync.sh
-    ln -sf $HOME/dotfiles/scripts/start_lsyncd.sh $HOME/.local/bin/start_lsyncd.sh
     ln -sf $HOME/dotfiles/.lsyncd_local.conf      $HOME/.lsyncd_local.conf
     ln -sf $HOME/dotfiles/.config/tmuxinator      $HOME/.config/tmuxinator
+
 elif [ $os = "windows" ]; then
     ln -sf $HOME/dotfiles/.vimrc       $HOME/_vimrc
     ln -sf $HOME/dotfiles/.gvimrc      $HOME/_gvimrc
+
     makedir $HOME/vimfiles/cache/dein
     ln -sf $HOME/dotfiles/vim/ftplugin $HOME/vimfiles/ftplugin
 fi
