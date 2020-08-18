@@ -43,6 +43,9 @@ fi
 if which gsed > /dev/null 2>&1; then
     alias sed='gsed'
 fi
+if which gln > /dev/null 2>&1; then
+    alias ln='gln'
+fi
 
 if [[ $OSTYPE = linux* ]] &&  [ -d /mnt/c/Program\ Files ]; then
     d=$(find /mnt/c/Program\ Files -maxdepth 1 -type d -name 'vim*-kaoriya-win64')

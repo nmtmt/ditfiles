@@ -21,9 +21,14 @@ makedir(){
 
 # link dotfiles
 if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
+    if [ $os = "mac" ] && which gls > /dev/null 2>&1; then
+        ln(){
+            gln $*
+        }
+    fi
     ln -sf $HOME/dotfiles/.vimrc         $HOME/.vimrc
     ln -sf $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
-    ln -sfT $HOME/dotfiles/vim/ftplugin   $HOME/.vim/ftplugin
+    ln -sfT $HOME/dotfiles/vim/ftplugin  $HOME/.vim/ftplugin
     ln -sf $HOME/dotfiles/.zshrc         $HOME/.zshrc
     ln -sf $HOME/dotfiles/.zshenv        $HOME/.zshenv
     ln -sf $HOME/dotfiles/.dircolors     $HOME/.dircolors
