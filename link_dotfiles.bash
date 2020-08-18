@@ -32,18 +32,18 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.gitconfig     $HOME/.gitconfig
 
     makedir $HOME/.ssh
-    ln -sf $HOME/dotfiles/.ssh/config  $HOME/.ssh/config
+    ln -sf $HOME/dotfiles/.ssh/config $HOME/.ssh/config
 
     makedir $HOME/.vim/.cache/dein
     makedir $HOME/.local/bin
-    ln -sf $HOME/dotfiles/.lsyncd_local.conf      $HOME/.lsyncd_local.conf
-    ln -sf $HOME/dotfiles/.config/tmuxinator      $HOME/.config/tmuxinator
+    ln -sf  $HOME/dotfiles/.lsyncd_local.conf $HOME/.lsyncd_local.conf
+    ln -sfT $HOME/dotfiles/.config/tmuxinator $HOME/.config/tmuxinator
 
 elif [ $os = "windows" ]; then
-    ln -sf $HOME/dotfiles/.vimrc       $HOME/_vimrc
-    ln -sf $HOME/dotfiles/.gvimrc      $HOME/_gvimrc
+    ln -sf $HOME/dotfiles/.vimrc  $HOME/_vimrc
+    ln -sf $HOME/dotfiles/.gvimrc $HOME/_gvimrc
 
     makedir $HOME/vimfiles/cache/dein
-    ln -sf $HOME/dotfiles/vim/ftplugin $HOME/vimfiles/ftplugin
+    ln -sfT $HOME/dotfiles/vim/ftplugin $HOME/vimfiles/ftplugin
 fi
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
