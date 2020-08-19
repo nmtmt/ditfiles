@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./link_dotfiles
+source ./link_dotfiles.bash
 
 if   [ "$(uname -s)" = "Darwin" ] ;then os=mac
 elif [ "$(uname -s)" = "FreeBSD" ];then os=unix
@@ -41,6 +41,11 @@ elif [ $os = "linux" ] ; then
                     sudo apt update
                     cat ./env/ubuntu18/packages | xargs sudo apt install -y
                     ;;
+                20*)
+                    cat ./env/ubuntu20/ppa      | xargs -L 1 sudo apt-add-repository
+                    sudo apt update
+                    cat ./env/ubuntu20/packages | xargs sudo apt install -y
+                    ;;
             esac
         fi
     else
@@ -60,7 +65,7 @@ elif [ $os = "unix" ]; then
         [yY]*)
             bash ./scripts/build_pkgs.bash;;
         *)
-            echo " Quit installing packages";;
+            echo "Quit installing packages";;
     esac
 fi
 if [ ! $os = "mac" ]; then
@@ -95,6 +100,7 @@ case $ys in
         fi
         hash -r
 esac 
+
 if [ -f $venv_shell ]; then
     deactivate > /dev/null 2>&1
     export VIRTUALENVWRAPPER_PYTHON=$venv_python
@@ -115,16 +121,36 @@ if [ -f $venv_shell ]; then
         echo "Setting virtualenvwrapper Done!"
     else
         echo "Failed to make default venv!"
+        exit
     fi
     deactivate > /dev/null 2>&1
 else
     echo "Cannot find $venv_shell. Abort installing virtualenvwrapper"
+    exit 1
+fi
+
+if [[ ! $SHELL = "*/zsh" ]]; then
+    echo 'Current default shell is '$SHELL
+    read -p 'Change default shell to zsh?:[y/N]' yn
+    case yn in
+        [yY]*)
+            echo 'Changing default shell...'
+            chsh $USER -s `which zsh`
+            if [ ! $? = 0 ];then
+                echo 'Failed to change default shell to zsh!'
+                exit 1
+            fi
+            ;;
+            *)
+                echo 'Stop changing default shell';;
+    esac
+    echo 'Finished changing shell'
 fi
 
 read -p "Do you install fonts? [y/N]:" yn
 case "$yn" in
   [yY]*) 
-      bash $HOME/dotfiles/scripts/install_fonts.bash
+      source $HOME/dotfiles/scripts/install_fonts.bash
       if [ $? == 0 ];then
           echo "Successfully installed fonts"
       else
@@ -135,7 +161,7 @@ case "$yn" in
   *)     echo "Invalid input. Skip installing fonts";;
 esac
 
-if [ $os = "linux" ]; then
+if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = "Ubuntu" ] ; then
     # fix time difference in dual boot env
     read -p "is thie dualboot env?[y/N]:" ys
     case $ys in 
@@ -148,7 +174,11 @@ if [ $os = "linux" ]; then
 
     if [ ! -z "$DISPLAY" ]; then
         echo "Please configure font and theme..."
-        unity-tweak-tool -a
+        if which unity-tweak-tool > /dev/null 2>&1; then
+            unity-tweak-tool -a
+        elif which gnome-tweaks > /dev/null 2>&1; then
+            gnoem-tweaks
+        fi
         echo "Done"
     fi
 

@@ -12,14 +12,18 @@ elif [ $os = "linux" ] ; then
     fonts_dist=~/.fonts
 fi
 
+if [ ! -f $fonts_dist ]; then
+    echo 'make font directory:'$fonts_dist
+    mkdir -p $fonts_dist
+fi
+
 read -p "Do you have fonts collections?[y\N]:"  ys
 case "$ys" in
     [yY]*)
         echo "Choose the directory including fonts"
         fonts_src=$(zenity --file-selection --directory)
         echo "copying fonts from $fonts_src to $fonts_dist"
-        cp -r $fonts_src/* $fonts_dist/
-        echo "Done copying fonts!"
+        cp -rv $fonts_src/* $fonts_dist
         ;;
     [nN]*)
         echo "Donwload Cica font and install it..."
