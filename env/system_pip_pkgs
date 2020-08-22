@@ -7,3 +7,5 @@ ipython
 trash-cli
 virtualenvwrapper
 neovim
+selenium
+bs4
