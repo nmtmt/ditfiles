@@ -1,7 +1,7 @@
 set columns=150 
 set lines=50
 
-colorscheme tomorrow
+colorscheme Tomorrow
 
 nnoremap j gj
 nnoremap k gk
@@ -26,11 +26,8 @@ else
     set guifont=Cica:h12
     " set linespace=5
   elseif has("unix")
-    "set noimdisableactivate
-    "set iminsert=2
-    "inoremap <ESC> <ESC>:set iminsert=0<CR>
-    "autocmd InsertLeave * set iminsert=0 imsearch=0
-    set guifont=Cica\ Regular\ 14
+    " set guifont=Cica\ Regular\ 12
+    set guifont=Osaka-Mono\ 12
     " set linespace=5
   endif
 endif
