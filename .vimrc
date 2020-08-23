@@ -61,6 +61,12 @@ let &undodir=undodirectory
 if has("autocmd")
   filetype plugin on
   filetype indent on
+
+  " Save and load fold settings automatically.
+  autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+  autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+  set viewoptions-=options " Don't save options.
+
   autocmd BufRead,BufNewFile *.launch   setfiletype xml
   autocmd BufRead,BufNewFile *.md,*.mkd setfiletype markdown
   autocmd BufRead,BufNewFile *.php      setfiletype html
