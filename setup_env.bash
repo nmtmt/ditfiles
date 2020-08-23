@@ -26,27 +26,22 @@ fi
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
     cat ./env/mac/cask_packages | xargs brew cask install 
+
 elif [ $os = "linux" ] ; then
     if $sudo_access; then
         if [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = "Ubuntu" ]; then
             release=$(cat /etc/lsb-release | grep RELEASE | cut -d '=' -f 2)
             case $release in
                 16*)
-                    cat ./env/ubuntu16/ppa      | xargs -L 1 sudo apt-add-repository
-                    sudo apt update
-                    cat ./env/ubuntu16/packages | xargs sudo apt install -y
-                    ;;
+                    release=16;;
                 18*)
-                    cat ./env/ubuntu18/ppa      | xargs -L 1 sudo apt-add-repository
-                    sudo apt update
-                    cat ./env/ubuntu18/packages | xargs sudo apt install -y
-                    ;;
+                    release=18;;
                 20*)
-                    cat ./env/ubuntu20/ppa      | xargs -L 1 sudo apt-add-repository
-                    sudo apt update
-                    cat ./env/ubuntu20/packages | xargs sudo apt install -y
-                    ;;
+                    release=20
             esac
+            cat ./env/ubuntu$release/ppa      | xargs -L 1 sudo apt-add-repository
+            sudo apt update
+            cat ./env/ubuntu$release/packages | xargs sudo apt install -y
         fi
     else
         echo "You don't have access to sudo!"
@@ -58,6 +53,7 @@ elif [ $os = "linux" ] ; then
                 echo " Quit installing packages";;
         esac
     fi
+
 elif [ $os = "unix" ]; then
     echo "You don't have access to sudo!"
     read -p "Install packages from source?[y/N]:" ys
@@ -68,6 +64,7 @@ elif [ $os = "unix" ]; then
             echo "Quit installing packages";;
     esac
 fi
+
 if [ ! $os = "mac" ]; then
     gem=$(which gem)
     case $gem in
@@ -80,26 +77,34 @@ if [ ! $os = "mac" ]; then
     esac
 fi
 
+make_venv_with_local_python(){
+    venv_shell=$HOME/.local/bin/virtualenvwrapper.sh 
+    venv_python=$HOME/.local/bin/python3
+    pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
+}
+
+make_venv_with_system_python(){
+    venv_shell=/usr/local/bin/virtualenvwrapper.sh 
+    venv_python=/usr/local/bin/python3
+    $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
+}
+
+
 echo "Setting virtualenvwrapper..."
-read -p "Do you use system python for VIRTUALENVWRAPPER_PYTHON?[y/N]:" ys
-case $ys in
-    [yY])
-        venv_shell=/usr/local/bin/virtualenvwrapper.sh 
-        venv_python=/usr/local/bin/python3
-        $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
-        hash -r
-        ;;
-    *)
-        venv_shell=$HOME/.local/bin/virtualenvwrapper.sh 
-        venv_python=$HOME/.local/bin/python3
-        if [ ! -f $venv_python ]; then
-            echo "Installing system pip packages..."
-            $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
-        else
-            pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
-        fi
-        hash -r
-esac 
+
+if [ ! -f $HOME/.local/bin/python3 ]; then
+    make_venv_with_system_python
+
+else
+    read -p "Local python3 found!. Do you use local python3 for virtuenenv? [y/N]:" ys
+    case $ys in
+        [yY])
+            make_venv_with_local_python;;
+        *)
+            make_venv_with_system_python;;
+    esac 
+fi
+hash -r
 
 if [ -f $venv_shell ]; then
     deactivate > /dev/null 2>&1
@@ -129,7 +134,7 @@ else
     exit 1
 fi
 
-if [[ ! $SHELL = "*/zsh" ]]; then
+if [[ ! $SHELL = */zsh ]]; then
     echo 'Current default shell is '$SHELL
     read -p 'Change default shell to zsh?:[y/N]' yn
     case yn in

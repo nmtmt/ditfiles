@@ -10,3 +10,5 @@ ipython
 torch
 torchvision
 neovim
+selenium
+bs4
