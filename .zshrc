@@ -54,6 +54,8 @@ if [[ $OSTYPE = linux* ]] &&  [ -d /mnt/c/Program\ Files ]; then
         alias gvim="$str/gvim.exe"
     fi
 elif [[ $OSTYPE = linux* ]]; then
+    # gvim not work well with fcitx(not show unconverted kana when using gvim)
+    # Also enable convert im method to direct input with Esc
     alias gvim='vim -g'
 fi
 
