@@ -53,6 +53,8 @@ if [[ $OSTYPE = linux* ]] &&  [ -d /mnt/c/Program\ Files ]; then
         str=$(echo $d | sed 's/\ /\\\ /g')
         alias gvim="$str/gvim.exe"
     fi
+elif [[ $OSTYPE = linux* ]]; then
+    alias gvim='vim -g'
 fi
 
 if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then

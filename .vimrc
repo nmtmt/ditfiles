@@ -139,6 +139,8 @@ if dein#load_state(dein_dir)
 
   call dein#add('elzr/vim-json') " check json syntax
 
+  call dein#add('pepo-le/fcitx-mem') " keep im input method
+
   " load my snippets
   call dein#add('nmtmt/winresizer') " for resizing window
   call dein#add('nmtmt/neosnippet-snippets')
