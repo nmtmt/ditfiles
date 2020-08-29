@@ -85,8 +85,15 @@ make_venv_with_local_python(){
 
 make_venv_with_system_python(){
     venv_shell=/usr/local/bin/virtualenvwrapper.sh 
-    venv_python=/usr/local/bin/python3
-    $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
+    if [ -f /usr/local/bin/python3 ]; then
+        venv_python=/usr/local/bin/python3
+    elif [ -f /usr/bin/python3 ]; then
+        venv_python=/usr/bin/python3
+    else
+        echo 'System Python3 not found!'
+        exit 1
+    fi
+    PATH=/usr/local/bin:/usr/bin $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
 }
 
 
@@ -189,7 +196,13 @@ if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = 
 
     # regard caps as ctrl
     echo "Setting caps as ctrl"
-    gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+    if [ $release = 16 ]; then
+        echo 'Executing gsettings command...'
+        gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+    else
+        echo 'Modifying /etc/default/keyboard...'
+        $sudo_cmd sed --in-place 's/XKBOPTIONS=""/XKBOPTIONS="ctrl:nocaps"/g' /etc/default/keyboard
+    fi
     echo "Done"
 
     if $sudo_access; then
