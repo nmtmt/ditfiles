@@ -28,6 +28,7 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     fi
     ln -sf $HOME/dotfiles/.vimrc         $HOME/.vimrc
     ln -sf $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
+    makedir $HOME/.vim
     ln -sfT $HOME/dotfiles/vim/ftplugin  $HOME/.vim/ftplugin
     ln -sf $HOME/dotfiles/.zshrc         $HOME/.zshrc
     ln -sf $HOME/dotfiles/.zshenv        $HOME/.zshenv
@@ -42,7 +43,12 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     makedir $HOME/.vim/.cache/dein
     makedir $HOME/.local/bin
     ln -sf  $HOME/dotfiles/.lsyncd_local.conf $HOME/.lsyncd_local.conf
+
+    makedir $HOME/.config
     ln -sfT $HOME/dotfiles/.config/tmuxinator $HOME/.config/tmuxinator
+    if [ $os = "linux" ] || [ $os = "unix" ]; then
+        ln -sfT $HOME/dotfiles/.config/autostart  $HOME/.config/autostart
+    fi
 
 elif [ $os = "windows" ]; then
     ln -sf $HOME/dotfiles/.vimrc  $HOME/_vimrc

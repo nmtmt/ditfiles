@@ -17,7 +17,7 @@ if [ ! -f $fonts_dist ]; then
     mkdir -p $fonts_dist
 fi
 
-read -p "Do you have fonts collections?[y\N]:"  ys
+read -p "Do you have fonts collections?[y/N]:"  ys
 case "$ys" in
     [yY]*)
         echo "Choose the directory including fonts"
