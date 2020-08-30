@@ -25,14 +25,14 @@ copy_and_extract(){
         tar xvf $file
     done
     find . -type f -name '*.zip' | while read file; do
-        unzip $file
+        unzip -f $file
     done
     
     cd $cur_dir
 }
 
-install_themes(){
-    copy_and_extract 'themes' $HOME/.themes
+install_application_themes(){
+    copy_and_extract 'application themes' $HOME/.themes
 }
 install_icons(){
     copy_and_extract 'icons' $HOME/.icons
@@ -43,7 +43,7 @@ install_plank_themes(){
 
 case $OSTYPE in
     linux*)
-        install_themes
+        install_application_themes
         install_icons
         install_plank_themes
         ;;
