@@ -209,20 +209,20 @@ if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = 
 
         if which plank > /dev/null 2>&1; then
             echo Please configure plank theme
-            plank --preferences
+            plank --preferences &
+            read -p "Input enter when finishe!" ys
             echo Done!
         fi
     fi
 
     # regard caps as ctrl
     echo Setting caps as ctrl
-    if [ $release = 16 ]; then
-        echo Executing gsettings command...
-        gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
-    else
-        echo Modifying /etc/default/keyboard...
-        $sudo_cmd sed --in-place 's/XKBOPTIONS=""/XKBOPTIONS="ctrl:nocaps"/g' /etc/default/keyboard
-    fi
+    #echo Executing gsettings command...
+    #gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
+    echo Modifying /etc/default/keyboard...
+    $sudo_cmd sed --in-place 's/XKBMODEL="pc105"/XKBMODEL="pc106"/g' /etc/default/keyboard
+    $sudo_cmd sed --in-place 's/XKBLAYOUT="en"/XKBLAYOUT="jp,jp"/g' /etc/default/keyboard
+    $sudo_cmd sed --in-place 's/XKBOPTIONS=""/XKBOPTIONS="ctrl:nocaps"/g' /etc/default/keyboard
     echo Done
 
     if $sudo_access; then
