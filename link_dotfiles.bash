@@ -36,6 +36,7 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.tmux.conf     $HOME/.tmux.conf
     ln -sf $HOME/dotfiles/.rsync_exclude $HOME/.rsync_exclude
     ln -sf $HOME/dotfiles/.gitconfig     $HOME/.gitconfig
+    ln -sf $HOME/dotfiles/.Xmodmap       $HOME/.Xmodmap
 
     makedir $HOME/.ssh
     ln -sf $HOME/dotfiles/.ssh/config $HOME/.ssh/config

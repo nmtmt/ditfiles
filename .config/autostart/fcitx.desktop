@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=fcitx
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=fcitx
+Name=fcitx
+Comment[en_US]=
+Comment=
