@@ -84,6 +84,7 @@ fi
 make_venv_with_local_python(){
     venv_shell=$HOME/.local/bin/virtualenvwrapper.sh 
     venv_python=$HOME/.local/bin/python3
+    pip3 install --upgrade pip
     pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
 }
 
@@ -97,6 +98,7 @@ make_venv_with_system_python(){
         echo System Python3 not found!
         exit 1
     fi
+    PATH=/usr/local/bin:/usr/bin $sudo_cmd pip3 install --upgrade pip
     PATH=/usr/local/bin:/usr/bin $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
 }
 
@@ -213,7 +215,7 @@ if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = 
         if which plank > /dev/null 2>&1; then
             echo Please configure plank theme
             plank --preferences &
-            read -p "Input enter when finishe!" ys
+            read -p "Input enter when finished!" ys
             echo Done!
         fi
     fi

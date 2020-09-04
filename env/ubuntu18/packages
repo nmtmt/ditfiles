@@ -64,3 +64,5 @@ papirus-icon-theme
 zsh
 plank
 gnome-tweak-tool
+fcitx-mozc
+libc++1
