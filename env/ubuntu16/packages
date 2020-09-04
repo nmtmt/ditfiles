@@ -3,6 +3,7 @@ openssh-server
 openssh-client
 gettext
 curl
+htop
 git
 vim
 tmux

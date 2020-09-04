@@ -42,6 +42,9 @@ elif [ $os = "linux" ] ; then
             cat ./env/ubuntu$release/ppa      | xargs -L 1 sudo apt-add-repository
             sudo apt update
             cat ./env/ubuntu$release/packages | xargs sudo apt install -y
+            if [ $? = 0 ] && [ -f ./env/ubuntu$release/purge_packages ];then
+                cat ./env/ubuntu$release/purge_packages | xargs -L 1 sudo apt purge -y
+            fi
         fi
     else
         echo "You don't have access to sudo!"
