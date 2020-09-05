@@ -9,6 +9,6 @@ opencv-python
 ipython
 torch
 torchvision
-neovim
+pynvim
 selenium
 bs4

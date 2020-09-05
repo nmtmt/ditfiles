@@ -44,3 +44,7 @@ elif [ $os = unix ]; then
     alias ls="ls -G"
     export MAILCHECK=0
 fi
+
+if [ ! -z $XDG_CURRENT_DESKTOP ];then
+    source $HOME/.xprofile
+fi

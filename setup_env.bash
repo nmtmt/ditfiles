@@ -220,15 +220,17 @@ if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = 
         fi
     fi
 
+    # chwnage to configure keyboard with .Xmodmap in zshenv
+
     # regard caps as ctrl
-    echo Setting caps as ctrl
+    #echo Setting caps as ctrl
     #echo Executing gsettings command...
     #gsettings set org.gnome.desktop.input-sources xkb-options "['ctrl:nocaps']"
-    echo Modifying /etc/default/keyboard...
-    $sudo_cmd sed --in-place 's/XKBMODEL="pc105"/XKBMODEL="pc106"/g' /etc/default/keyboard
-    $sudo_cmd sed --in-place 's/XKBLAYOUT="en"/XKBLAYOUT="jp,jp"/g' /etc/default/keyboard
-    $sudo_cmd sed --in-place 's/XKBOPTIONS=""/XKBOPTIONS="ctrl:nocaps"/g' /etc/default/keyboard
-    echo Done
+    #echo Modifying /etc/default/keyboard...
+    #$sudo_cmd sed --in-place 's/XKBMODEL="pc105"/XKBMODEL="pc106"/g' /etc/default/keyboard
+    #$sudo_cmd sed --in-place 's/XKBLAYOUT="en"/XKBLAYOUT="jp,jp"/g' /etc/default/keyboard
+    #$sudo_cmd sed --in-place 's/XKBOPTIONS=""/XKBOPTIONS="ctrl:nocaps"/g' /etc/default/keyboard
+    #echo Done
 
     if $sudo_access; then
         read -p "Do you have a problem with backlight?[y/N]:" ys

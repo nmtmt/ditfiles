@@ -1,0 +1,2 @@
+setxkbmap -model pc106 -layout jp
+xmodmap $HOME/.Xmodmap

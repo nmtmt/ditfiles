@@ -37,6 +37,7 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.rsync_exclude $HOME/.rsync_exclude
     ln -sf $HOME/dotfiles/.gitconfig     $HOME/.gitconfig
     ln -sf $HOME/dotfiles/.Xmodmap       $HOME/.Xmodmap
+    ln -sf $HOME/dotfiles/.xprofile      $HOME/.xprofile
 
     makedir $HOME/.ssh
     ln -sf $HOME/dotfiles/.ssh/config $HOME/.ssh/config
