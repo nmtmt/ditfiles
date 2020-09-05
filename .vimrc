@@ -12,6 +12,9 @@ set autoindent
 set smartindent " C-like indent. enabled when autoindent is on
 " set cindent
 
+" set noesckeys      " Disable mapping starts with esc
+set ttimeoutlen=10 " Reduce timelag when input Esc in inset mode
+
 set backspace=2
 set encoding=utf-8            " vim internal encoding
 set fileencodings=utf-8,cp932 " default encoding on file reading
@@ -139,7 +142,7 @@ if dein#load_state(dein_dir)
 
   call dein#add('elzr/vim-json') " check json syntax
 
-  call dein#add('pepo-le/fcitx-mem') " keep im input method
+  call dein#add('pepo-le/fcitx-mem-re') " keep im input method
 
   " load my snippets
   call dein#add('nmtmt/winresizer') " for resizing window
