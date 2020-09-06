@@ -142,12 +142,11 @@ if dein#load_state(dein_dir)
 
   call dein#add('elzr/vim-json') " check json syntax
 
-  call dein#add('pepo-le/fcitx-mem-re') " keep im input method
-
   " load my snippets
   call dein#add('nmtmt/winresizer') " for resizing window
   call dein#add('nmtmt/neosnippet-snippets')
   call dein#add('nmtmt/mdvimtex')
+  call dein#add('nmtmt/fcitx-im-keeper')
   let &runtimepath .= ','. dein_dir . "/repos/github.com/nmtmt/mdvimtex"
 
   " Required:

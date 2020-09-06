@@ -1,3 +1,2 @@
+keycode  66 = Caps_Lock Caps_Lock Caps_Lock Caps_Lock
 keycode  97 = underscore underscore underscore underscore
-keycode 130 = Henkan_Mode NoSymbol Henkan_Mode
-keycode 131 = Muhenkan NoSymbol Muhenkan
