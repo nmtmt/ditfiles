@@ -66,3 +66,7 @@ plank
 gnome-tweak-tool
 fcitx-mozc
 libc++1
+default-jre
+default-jre-headless
+openjdk-11-jre
+openjdk-11-jre-headless

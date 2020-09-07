@@ -100,9 +100,10 @@ if match( &runtimepath, '/dein.vim' ) == -1
 endif
 
 let use_deoplete=0
-if ((has('nvim')  || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
+if ((has('nvim') || has('timers')) && has('python3')) && (system('pip3 show pynvim') !=# '' || system('pip3 show neovim') !=# '')
   let use_deoplete=1
 endif
+
 " Required:
 if dein#load_state(dein_dir)
   call dein#begin(dein_dir)
@@ -270,8 +271,8 @@ else
   let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
   " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
+  inoremap <expr> <C-g>     neocomplete#undo_completion()
+  inoremap <expr> <C-l>     neocomplete#complete_common_string()
 
   " =========== End of Setting for neocomplete =============
 endif
@@ -296,10 +297,10 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " \ pumvisible() ? "\<C-n>" :
 " \ neosnippet#expandable_or_jumpable() ?
 " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><TAB>
+imap <expr> <TAB>
       \ neosnippet#jumpable() ?
       \    "\<Plug>(neosnippet_jump)" : "\<TAB>"
-smap <expr><TAB> 
+smap <expr> <TAB>
       \ neosnippet#jumpable() ?
       \ "\<Plug>(neosnippet_jump)" : "\<TAB>"
 

@@ -19,8 +19,8 @@ commands(){
         --with-local-dir=$HOME/.local \
         --enable-multibyte \
         --enable-gui=yes \
-        --enable-pythoninterp=auto \
-        --enable-python3interp=yes \
+        --enable-pythoninterp=no \
+        --enable-python3interp=dynamic \
         --enable-luainterp=yes \
         --enable-rubyinterp=yes\
         --enable-perlinterp=auto \
