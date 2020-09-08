@@ -23,6 +23,16 @@ if $sudo_access; then
     sudo_cmd="sudo"
 fi
 
+build_source(){
+    read -p "Install packages from source?[y/N]:" ys
+    case $ys in
+        [yY]*)
+            bash ./scripts/build_pkgs.bash;;
+        *)
+            echo Quit building packages
+    esac
+}
+
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
     cat ./env/mac/cask_packages | xargs brew cask install 
@@ -46,27 +56,15 @@ elif [ $os = "linux" ] ; then
                 cat ./env/ubuntu$release/purge_packages | xargs -L 1 sudo apt purge -y
             fi
         fi
+        build_source
     else
         echo "You don't have access to sudo!"
-        read -p "Install packages from source?[y/N]:" ys
-        case $ys in 
-            [yY]*)
-                bash ./scripts/build_pkgs.bash;;
-            *)
-                echo Quit installing packages
-                ;;
-        esac
+        build_source
     fi
 
 elif [ $os = "unix" ]; then
     echo "You don't have access to sudo!"
-    read -p "Install packages from source?[y/N]:" ys
-    case $ys in 
-        [yY]*)
-            bash ./scripts/build_pkgs.bash;;
-        *)
-            echo Quit installing packages;;
-    esac
+    build_source
 fi
 
 if [ ! $os = "mac" ]; then
@@ -188,8 +186,7 @@ if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = 
     read -p "Do you install themes?" ys
     case $ys in 
         [yY]*)
-            source $HOME/dotfiles/scripts/install_themes.bash
-            ;;
+            source $HOME/dotfiles/scripts/install_themes.bash;;
         *)
             echo Skip installing themes...
     esac
@@ -200,7 +197,7 @@ if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = 
             timedatectl set-local-rtc true 
             echo Done fixing time setting
             ;;
-        *) echo Skip setting time problem between windows and linux;;
+        *) echo Skip setting time problem between windows and linux
     esac
 
     if [ ! -z "$DISPLAY" ]; then

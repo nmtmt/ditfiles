@@ -63,10 +63,20 @@ if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3
     export WORKON_HOME=$HOME/.venvs
     source $HOME/.local/bin/virtualenvwrapper.sh
-    if [ -d $HOME/.venvs/default ]; then workon default; fi
+    if [ -f $(pwd)/setup.zsh ];then
+        # useful when open ros catkin_workspace
+        source $(pwd)/setup.zsh
+    else
+        if [ -d $HOME/.venvs/default ]; then workon default; fi
+    fi
 elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     export VIRTUALENVWRAPPER_PYTHON=$(which python3)
     export WORKON_HOME=$HOME/.venvs
     source /usr/local/bin/virtualenvwrapper.sh
-    if [ -d $HOME/.venvs/default ]; then workon default; fi
+    if [ -f $(pwd)/setup.zsh ];then
+        # useful when open ros catkin_workspace
+        source $(pwd)/setup.zsh
+    else
+        if [ -d $HOME/.venvs/default ]; then workon default; fi
+    fi
 fi
