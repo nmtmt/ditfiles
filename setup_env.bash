@@ -55,6 +55,10 @@ elif [ $os = "linux" ] ; then
             if [ $? = 0 ] && [ -f ./env/ubuntu$release/purge_packages ];then
                 cat ./env/ubuntu$release/purge_packages | xargs -L 1 sudo apt purge -y
             fi
+            if [ $? = 0 ] && [ -f ./env/ubuntu$release/reinstall_packages ];then
+                cat ./env/ubuntu$release/reinstall_packages | xargs sudo apt purge -y
+                cat ./env/ubuntu$release/reinstall_packages | xargs sudo apt install -y
+            fi
         fi
         build_source
     else
