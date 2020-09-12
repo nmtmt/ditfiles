@@ -43,7 +43,12 @@ elif [ $os = "linux" ] ; then
             release=$(cat /etc/lsb-release | grep RELEASE | cut -d '=' -f 2)
             case $release in
                 16*)
-                    release=16;;
+                    case $XDG_SESSION_DESKTOP in
+                        gnome)
+                            release=16-gnome;;
+                        *)
+                            release=16-unity;;
+                    esac
                 18*)
                     release=18;;
                 20*)

@@ -8,5 +8,4 @@ commands(){
     cd build
     cmake -DCMAKE_INSTALL_PREFIX=$HOME/.local/ -DCMAKE_BUILD_TYPE=Release ..
     make -j8 && make install
-    cd ../
 }
