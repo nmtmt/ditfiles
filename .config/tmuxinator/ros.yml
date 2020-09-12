@@ -47,11 +47,16 @@ pre_window: source $HOME/l2ws_matsumoto/ur5-ws/setup.zsh
 # attach: false
 
 windows:
-  - ws:
+  - ros:
+      layout: even-vertical
+      panes:
+        - roslaunch ur5_gazebo ur5_cubes.launch
+        - cd script
+  - editor:
       layout: main-vertical
       panes:
-        - vim
-  - info:
+        - cd script; vim ./script
+  - monitor:
       layout: even-horizontal
       panes:
-        -
+        - htop

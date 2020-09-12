@@ -18,5 +18,6 @@ rosdep update
 source $HOME/.zshrc
 mkvirtualenv ros --python=python2
 if [ $? = 0 ];then
+    pip install --upgrade pip
     pip install pyyaml rospkg empy defusedxml numpy scipy matplotlib pycryptodomex gnupg
 fi

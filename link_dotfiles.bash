@@ -51,6 +51,9 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     if [ $os = "linux" ] || [ $os = "unix" ]; then
         ln -sfT $HOME/dotfiles/.config/autostart  $HOME/.config/autostart
     fi
+    makedir $HOME/.config/nvim
+    ln -sf $HOME/.vimrc  $HOME/.config/nvim/init.vim
+    ln -sf $HOME/.gvimrc $HOME/.config/nvim/ginit.vim
 
 elif [ $os = "windows" ]; then
     ln -sf $HOME/dotfiles/.vimrc  $HOME/_vimrc

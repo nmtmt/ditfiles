@@ -37,9 +37,9 @@ compilers=("gcc")
 
 util_pkgs=("util-linux" "openssl" "libffi" "ncurses" "libsm" "libevent" "tmux" "colordiff")
 
-programming_langs=("ruby" "lua" "python")
+programming_langs=("ruby" "lua" "python2" "python3")
 
-editor_pkgs=("vim")
+editor_pkgs=("vim" "neovim-qt")
 
 case $OSTYPE in
     darwin*)

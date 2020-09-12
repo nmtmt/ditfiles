@@ -21,3 +21,4 @@ wget
 colordiff
 gnu-sed
 tcl-tk
+neovim

@@ -47,6 +47,10 @@ if which gln > /dev/null 2>&1; then
     alias ln='gln'
 fi
 
+if which nvim > /dev/null 2>&1 && [ -f $HOME/.config/nvim/init.vim ];then
+    alias vim='nvim'
+fi
+
 if [[ $OSTYPE = linux* ]] &&  [ -d /mnt/c/Program\ Files ]; then
     d=$(find /mnt/c/Program\ Files -maxdepth 1 -type d -name 'vim*-kaoriya-win64')
     if [ $? = 0 ]; then
@@ -56,7 +60,8 @@ if [[ $OSTYPE = linux* ]] &&  [ -d /mnt/c/Program\ Files ]; then
 elif [[ $OSTYPE = linux* ]]; then
     # gvim not work well with fcitx(not show unconverted kana when using gvim)
     # Also enable convert im method to direct input with Esc
-    alias gvim='vim -g'
+    # alias gvim='vim -g'
+    alias gvim='nvim-qt'
 fi
 
 if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then

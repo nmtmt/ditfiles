@@ -44,12 +44,14 @@ endfunction
 if has("mac") || has("unix") 
   let tmpdirectory   =expand("~/.vim/tmp")
   let undodirectory  =expand("~/.vim/undo")
+  let viewdirectory  =expand("~/.vim/view")
   let dein_dir       =expand('~/.vim/.cache/dein')
   let dein_plugin_dir=expand('~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 elseif has("win64") || has("win32") || has("win32unix")
   let tmpdirectory   =expand("~/vimfiles/tmp")
   let undodirectory  =expand("~/vimfiles/undo")
+  let viewdirectory  =expand("~/vimfiles/view")
   let dein_dir       =expand('~/vimfiles/cache/dein')
   let dein_plugin_dir=expand('~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim')
 endif
@@ -60,6 +62,7 @@ call Mkdir(undodirectory)
 let &directory=tmpdirectory
 let &backupdir=tmpdirectory
 let &undodir=undodirectory
+let &viewdir=viewdirectory
 
 if has("autocmd")
   filetype plugin on
@@ -67,7 +70,7 @@ if has("autocmd")
 
   " Save and load fold settings automatically.
   autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
-  autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+  autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent! loadview | endif
   set viewoptions-=options " Don't save options.
 
   autocmd BufRead,BufNewFile *.launch   setfiletype xml
@@ -214,11 +217,6 @@ if has("mac")
   let g:vimtex_view_method = 'skim'
 endif
 
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.tex = g:vimtex#re#neocomplete
-
 " for not to ring warning bell on bash on windows
 set visualbell t_vb=
 
@@ -263,6 +261,11 @@ else
       \ 'vimshell' : $HOME.'/.vimshell_hist',
       \ 'scheme' : $HOME.'/.gosh_completions'
           \ }
+
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  let g:neocomplete#sources#omni#input_patterns.tex = g:vimtex#re#neocomplete
 
   " Define keyword.
   if !exists('g:neocomplete#keyword_patterns')

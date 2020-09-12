@@ -35,7 +35,11 @@ else
     " set linespace=5
   elseif has("unix")
     " set guifont=Cica\ Regular\ 12
-    set guifont=Osaka-Mono\ 12
+    if has("nvim") " for neovim-qt
+      Guifont! Osaka-Mono:h12
+    else
+      set guifont=Osaka-Mono\ 12
+    endif
     " set linespace=5
   endif
 endif
