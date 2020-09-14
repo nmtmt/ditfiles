@@ -43,13 +43,17 @@ elif [ $os = "linux" ] ; then
             release=$(cat /etc/lsb-release | grep RELEASE | cut -d '=' -f 2)
             case $release in
                 16*)
-                    read -p 'Do you install gnome instead of unity?' ys
-                    case $ys in
-                        [yY]*)
-                            release=16-gnome;;
-                        *)
-                            release=16-unity;;
-                    esac
+                    if [ $XDG_SESSION_DESKTOP = "gnome" ];then
+                        release=16-gnome
+                    else
+                        read -p 'Do you install gnome instead of unity?' ys
+                        case $ys in
+                            [yY]*)
+                                release=16-gnome;;
+                            *)
+                                release=16-unity;;
+                        esac
+                    fi
                     ;;
                 18*)
                     release=18;;
@@ -65,6 +69,9 @@ elif [ $os = "linux" ] ; then
             if [ $? = 0 ] && [ -f ./env/ubuntu$release/reinstall_packages ];then
                 cat ./env/ubuntu$release/reinstall_packages | xargs sudo apt purge -y
                 cat ./env/ubuntu$release/reinstall_packages | xargs sudo apt install -y
+            fi
+            if [ $? = 0 ] && [ -f ./env/ubuntu$release/script.bash ]; then
+                bash ./env/ubuntu$release/script.bash
             fi
         fi
         build_source

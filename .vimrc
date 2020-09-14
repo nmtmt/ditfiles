@@ -116,8 +116,11 @@ if dein#load_state(dein_dir)
   call dein#add(dein_plugin_dir)
 
   call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neocomplete.vim')
-  call dein#add('Shougo/deoplete.nvim')
+  if use_deoplete
+    call dein#add('Shougo/deoplete.nvim')
+  else
+    call dein#add('Shougo/neocomplete.vim')
+  endif
   if !has('nvim') " for deoplete on vim8
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
@@ -178,10 +181,6 @@ endif
 cnoremap tree<TAB> NERDTreeToggle
 cnoremap md<TAB> PrevimOpen
 cnoremap recache silent execute '!hash -r' <bar> call dein#recache_runtimepath() <bar> source $MYVIMRC
-
-" enable filtering using ctrl-p or ctrl-n
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
 
 "match it plugin
 runtime macros/matchit.vim
