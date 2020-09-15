@@ -73,3 +73,6 @@ qtbase5-dev
 qttools5-dev-tools
 qt5-default
 libqt5svg5-dev
+pulseaudio-module-bluetooth
+ofono
+cargo

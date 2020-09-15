@@ -8,6 +8,8 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+set mouse=a
+
 set guioptions-=m " remove menu bar
 set guioptions-=T " remove tool bar
 

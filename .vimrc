@@ -178,8 +178,8 @@ endif
 "End dein Scripts-------------------------
 
 " cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-cnoremap tree<TAB> NERDTreeToggle
-cnoremap md<TAB> PrevimOpen
+cnoremap __tree NERDTreeToggle
+cnoremap __md PrevimOpen
 cnoremap recache silent execute '!hash -r' <bar> call dein#recache_runtimepath() <bar> source $MYVIMRC
 
 "match it plugin
@@ -195,6 +195,11 @@ hi clear SpellBad
 hi SpellBad cterm=underline
 " Set style for gVim
 hi SpellBad gui=undercurl
+
+" disable highlight with search command
+set nohlsearch
+" enable highlight when entering search string
+set incsearch
 
 " for using tex snippet of neosnippet
 let g:tex_flavor='latex'
