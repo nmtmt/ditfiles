@@ -80,3 +80,7 @@ solaar
 solaar-gnome3
 audacity
 gparted
+libnautilus-extension-dev
+libsecret-1-dev
+libpoppler-glib-dev
+libgspell-1-dev

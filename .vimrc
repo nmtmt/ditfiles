@@ -1,5 +1,5 @@
 set number         " show line numbers
-set laststatus=2   " show filename 
+set laststatus=2   " show filename
 set ruler          " show cursor info and window percentage
 "set rulerformat=%-3(%P%) " only show percentage ...not work well
 
@@ -8,7 +8,7 @@ set softtabstop=-1 " same as ts
 set shiftwidth=0   " same as ts
 set expandtab      " use space in stead of tab
 
-set autoindent  
+set autoindent
 set smartindent " C-like indent. enabled when autoindent is on
 " set cindent
 
@@ -41,7 +41,7 @@ function! Mkdir(path)
   endif
 endfunction
 
-if has("mac") || has("unix") 
+if has("mac") || has("unix")
   let tmpdirectory   =expand("~/.vim/tmp")
   let undodirectory  =expand("~/.vim/undo")
   let viewdirectory  =expand("~/.vim/view")
@@ -138,7 +138,7 @@ if dein#load_state(dein_dir)
 
   call dein#add('lervag/vimtex')
   call dein#add('thinca/vim-quickrun')
-  
+
   " for Markdown
   " call dein#add('tpope/vim-markdown')
   call dein#add('godlygeek/tabular')
@@ -147,6 +147,7 @@ if dein#load_state(dein_dir)
   call dein#add('tyru/open-browser.vim')
 
   call dein#add('elzr/vim-json') " check json syntax
+  call dein#add('ntpeters/vim-better-whitespace')
 
   " load my snippets
   call dein#add('nmtmt/winresizer') " for resizing window

@@ -1,7 +1,7 @@
 # /home/matsumoto/.config/tmuxinator/master.yml
 
 name: ros
-root: ~/l2ws_matsumoto/ur5-ws
+root: ~/l2ws_matsumoto/master/3_3D-gazebo-experiment/ur5-ws
 
 # Optional tmux socket
 # socket_name: foo
@@ -29,7 +29,7 @@ root: ~/l2ws_matsumoto/ur5-ws
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
-pre_window: source $HOME/l2ws_matsumoto/ur5-ws/setup.zsh
+pre_window: source $HOME/l2ws_matsumoto/master/3_3D-gazebo-experiment/ur5-ws/setup.zsh
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -50,12 +50,12 @@ windows:
   - ros:
       layout: even-vertical
       panes:
-        - roslaunch ur5_gazebo ur5_cubes.launch
+        -
         - cd script
   - editor:
       layout: main-vertical
       panes:
-        - cd script; vim ./script
+        - cd script
   - monitor:
       layout: even-horizontal
       panes:
