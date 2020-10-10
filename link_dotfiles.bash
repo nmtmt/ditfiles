@@ -39,9 +39,6 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.Xmodmap       $HOME/.Xmodmap
     ln -sf $HOME/dotfiles/.xprofile      $HOME/.xprofile
 
-    makedir $HOME/.ssh
-    ln -sf $HOME/dotfiles/.ssh/config $HOME/.ssh/config
-
     makedir $HOME/.vim/.cache/dein
     makedir $HOME/.local/bin
     ln -sf  $HOME/dotfiles/.lsyncd_local.conf $HOME/.lsyncd_local.conf
