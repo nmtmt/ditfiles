@@ -51,7 +51,7 @@ exfat-utils
 liblzma-dev
 uuid
 uuid-dev
-openjdk-8-jre 
+openjdk-8-jre
 colordiff
 libreadline6
 libreadline6-dev
@@ -77,3 +77,6 @@ cargo
 solaar
 audacity
 gparted
+network-manager-l2tp
+network-manager-l2tp-gnome
+vlc
