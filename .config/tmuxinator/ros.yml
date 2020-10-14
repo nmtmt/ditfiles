@@ -1,6 +1,11 @@
 # /home/matsumoto/.config/tmuxinator/master.yml
 
-name: ros
+<%- if @args.empty? %>
+<% num = 0 %>
+<%- else %>
+<% num = @args[0].to_i %>
+<%- end %>
+name: ros<%= num %>
 root: ~/l2ws_matsumoto/master/3_3D-gazebo-experiment/ur5-ws
 
 # Optional tmux socket
@@ -19,7 +24,6 @@ root: ~/l2ws_matsumoto/master/3_3D-gazebo-experiment/ur5-ws
 
 # Run on project start, after the first time
 # on_project_restart: command
-# on_project_restart: source $HOME/l2ws_matsumoto/ur5-ws/setup.zsh
 
 # Run on project exit ( detaching from tmux session )
 # on_project_exit: command
@@ -29,7 +33,11 @@ root: ~/l2ws_matsumoto/master/3_3D-gazebo-experiment/ur5-ws
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
-pre_window: source $HOME/l2ws_matsumoto/master/3_3D-gazebo-experiment/ur5-ws/setup.zsh
+<%- if ENV["SHELL"].end_with?("zsh") %>
+pre_window: export ROS_MASTER_URI=http://localhost:<%= 11311 + num %>; export GAZEBO_MASTER_URI=http://localhost:<%= 11345 + num %>; source $HOME/l2ws_matsumoto/master/3_3D-gazebo-experiment/ur5-ws/setup.zsh
+<%- elsif ENV["SHELL"].end_with?("bash") %>
+pre_window: export ROS_MASTER_URI=http://localhost:<%= 11311 + num %>; export GAZEBO_MASTER_URI=http://localhost:<%= 11345 + num %>; source $HOME/l2ws_matsumoto/master/3_3D-gazebo-experiment/ur5-ws/setup.bash
+<%- end %>
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -53,10 +61,5 @@ windows:
         -
         - cd script
   - editor:
-      layout: main-vertical
       panes:
         - cd script
-  - monitor:
-      layout: even-horizontal
-      panes:
-        - htop
