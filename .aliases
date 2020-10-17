@@ -18,13 +18,17 @@ set_alias ln    'gln'          gln
 
 set_alias rm    'trash-put'    trash-put
 
+alias sudo='sudo ' # will derives aliases
+
 alias ll='ls -Alh'
 alias la='ls -A'
 alias las='ls -Ash'
 
 alias grep='grep --color=auto'
 
-if [[ $OSTYPE = Darwin* ]];then
+alias vi='vi -u NONE' # do not load vimrc
+
+if [[ $OSTYPE = darwin* ]];then
     if type gls > /dev/null 2>&1; then
         alias ls="gls --color=auto"
     elif type ls > /dev/null 2>&1; then

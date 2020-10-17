@@ -1,9 +1,20 @@
 #!/usr/bin/env zsh
 
-export LANG="en_US.UTF-8"
 export PS1="%F{113}${USER}@${HOST%%.*}%f:%F{249}%0~%f%(!.#.$) "
 if [ -f $HOME/.termcap ]; then
     export TERMPATH=$HOME/.termcap
+fi
+
+if [ -f $HOME/.dircolors ]; then
+    if type dircolors > /dev/null 2>&1; then
+        eval $(dircolors $HOME/.dircolors)
+    elif type gdircolors > /dev/null 2>&1; then
+        eval $(gdircolors $HOME/.dircolors)
+    fi
+fi
+
+if [ -n $LS_COLORS ]; then
+    zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 fi
 
 bindkey -e
