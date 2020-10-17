@@ -4,4 +4,4 @@ export XMODIFIERS=@im=fcitx
 export GTK_IM_MODULE=fcitx
 setxkbmap -model pc106 -layout jp
 xmodmap $HOME/.Xmodmap
-xset r rate 190 50
+xset r rate 200 50

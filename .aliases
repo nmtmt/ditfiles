@@ -1,0 +1,59 @@
+# vim:filetype=zsh
+# this file will be loaded in zshrc and bashrc
+
+function set_alias(){
+    name=$1
+    aliased_cmd=$2
+    required_cmd=$3
+    if which $required_cmd > /dev/null 2>&1;then
+        alias $name="$aliased_cmd"
+    fi
+}
+
+set_alias mux   'tmuxinator'   tmuxinator
+
+set_alias diff  'colordiff -u' colordiff
+set_alias sed   'gsed'         gsed
+set_alias ln    'gln'          gln
+
+set_alias rm    'trash-put'    trash-put
+
+alias ll='ls -Alh'
+alias la='ls -A'
+alias las='ls -Ash'
+
+alias grep='grep --color=auto'
+
+if [[ $OSTYPE = Darwin* ]];then
+    if type gls > /dev/null 2>&1; then
+        alias ls="gls --color=auto"
+    elif type ls > /dev/null 2>&1; then
+        alias ls="ls -G"
+    fi
+
+elif [[ $OSTYPE = linux* ]]; then
+    alias ls="ls --color=auto"
+
+elif [[ $OSTYPE = freebsd* ]]; then
+    alias ls="ls -G"
+    export MAILCHECK=0
+fi
+
+if [ -f $HOME/.config/nvim/init.vim ];then
+    alias vim='nvim'
+fi
+
+if [[ $OSTYPE = linux* ]] && [ -d /mnt/c/Program\ Files ]; then
+    d=$(find /mnt/c/Program\ Files -maxdepth 1 -type d -name 'vim*-kaoriya-win64')
+    if [ $? = 0 ]; then
+        str=$(echo $d | sed 's/\ /\\\ /g')
+        alias gvim="$str/gvim.exe"
+    fi
+elif [[ $OSTYPE = linux* ]]; then
+    # gvim not work well with fcitx(not show unconverted kana when using gvim)
+    # Also enable convert im method to direct input with Esc
+    set_alias gvim 'nvim-qt' nvim-qt
+fi
+if [ -f /Applications/MacVim.app/Contents/bin/gvim ]; then
+    alias gvim="/Applications/MacVim.app/Contents/bin/gvim"
+fi

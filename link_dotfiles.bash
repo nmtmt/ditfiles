@@ -30,8 +30,12 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
     makedir $HOME/.vim
     ln -sfT $HOME/dotfiles/vim/ftplugin  $HOME/.vim/ftplugin
+
     ln -sf $HOME/dotfiles/.zshrc         $HOME/.zshrc
     ln -sf $HOME/dotfiles/.zshenv        $HOME/.zshenv
+    ln -sf $HOME/dotfiles/.bashrc        $HOME/.bashrc
+    ln -sf $HOME/dotfiles/.aliases       $HOME/.aliases
+
     ln -sf $HOME/dotfiles/.dircolors     $HOME/.dircolors
     ln -sf $HOME/dotfiles/.tmux.conf     $HOME/.tmux.conf
     ln -sf $HOME/dotfiles/.rsync_exclude $HOME/.rsync_exclude
