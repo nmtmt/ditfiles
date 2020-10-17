@@ -26,39 +26,45 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
             gln $*
         }
     fi
-    ln -sf $HOME/dotfiles/.vimrc         $HOME/.vimrc
-    ln -sf $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
+    if [ $os = "unix" ];then
+        opt=h
+    else
+        opt=T
+    fi
+
+    ln -sf$opt $HOME/dotfiles/.vimrc         $HOME/.vimrc
+    ln -sf$opt $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
     makedir $HOME/.vim
-    ln -sfT $HOME/dotfiles/vim/ftplugin  $HOME/.vim/ftplugin
+    ln -sf$opt $HOME/dotfiles/vim/ftplugin  $HOME/.vim/ftplugin
 
-    ln -sf $HOME/dotfiles/.zshrc         $HOME/.zshrc
-    ln -sf $HOME/dotfiles/.zshenv        $HOME/.zshenv
-    ln -sf $HOME/dotfiles/.bashrc        $HOME/.bashrc
-    ln -sf $HOME/dotfiles/.aliases       $HOME/.aliases
+    ln -sf$opt $HOME/dotfiles/.zshrc         $HOME/.zshrc
+    ln -sf$opt $HOME/dotfiles/.zshenv        $HOME/.zshenv
+    ln -sf$opt $HOME/dotfiles/.bashrc        $HOME/.bashrc
+    ln -sf$opt $HOME/dotfiles/.aliases       $HOME/.aliases
 
-    ln -sf $HOME/dotfiles/.dircolors     $HOME/.dircolors
-    ln -sf $HOME/dotfiles/.tmux.conf     $HOME/.tmux.conf
-    ln -sf $HOME/dotfiles/.rsync_exclude $HOME/.rsync_exclude
-    ln -sf $HOME/dotfiles/.gitconfig     $HOME/.gitconfig
-    ln -sf $HOME/dotfiles/.Xmodmap       $HOME/.Xmodmap
-    ln -sf $HOME/dotfiles/.xprofile      $HOME/.xprofile
+    ln -sf$opt $HOME/dotfiles/.dircolors     $HOME/.dircolors
+    ln -sf$opt $HOME/dotfiles/.tmux.conf     $HOME/.tmux.conf
+    ln -sf$opt $HOME/dotfiles/.rsync_exclude $HOME/.rsync_exclude
+    ln -sf$opt $HOME/dotfiles/.gitconfig     $HOME/.gitconfig
+    ln -sf$opt $HOME/dotfiles/.Xmodmap       $HOME/.Xmodmap
+    ln -sf$opt $HOME/dotfiles/.xprofile      $HOME/.xprofile
 
     makedir $HOME/.vim/.cache/dein
     makedir $HOME/.local/bin
-    ln -sf  $HOME/dotfiles/.lsyncd_local.conf $HOME/.lsyncd_local.conf
+    ln -sf$opt  $HOME/dotfiles/.lsyncd_local.conf $HOME/.lsyncd_local.conf
 
     makedir $HOME/.config
-    ln -sfT $HOME/dotfiles/.config/tmuxinator $HOME/.config/tmuxinator
+    ln -sf$opt $HOME/dotfiles/.config/tmuxinator $HOME/.config/tmuxinator
     if [ $os = "linux" ] || [ $os = "unix" ]; then
-        ln -sfT $HOME/dotfiles/.config/autostart  $HOME/.config/autostart
+        ln -sf$opt $HOME/dotfiles/.config/autostart  $HOME/.config/autostart
     fi
     makedir $HOME/.config/nvim
-    ln -sf $HOME/.vimrc  $HOME/.config/nvim/init.vim
-    ln -sf $HOME/.gvimrc $HOME/.config/nvim/ginit.vim
+    ln -sf$opt $HOME/.vimrc  $HOME/.config/nvim/init.vim
+    ln -sf$opt $HOME/.gvimrc $HOME/.config/nvim/ginit.vim
 
 elif [ $os = "windows" ]; then
-    ln -sf $HOME/dotfiles/.vimrc  $HOME/_vimrc
-    ln -sf $HOME/dotfiles/.gvimrc $HOME/_gvimrc
+    ln -sfT $HOME/dotfiles/.vimrc  $HOME/_vimrc
+    ln -sfT $HOME/dotfiles/.gvimrc $HOME/_gvimrc
 
     makedir $HOME/vimfiles/cache/dein
     ln -sfT $HOME/dotfiles/vim/ftplugin $HOME/vimfiles/ftplugin
