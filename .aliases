@@ -43,7 +43,7 @@ elif [[ $OSTYPE = freebsd* ]]; then
     export MAILCHECK=0
 fi
 
-if [ -f $HOME/.config/nvim/init.vim ];then
+if which nvim > /dev/null 2>&1 && [ -f $HOME/.config/nvim/init.vim ];then
     alias vim='nvim'
 fi
 

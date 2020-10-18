@@ -48,28 +48,22 @@ windows:
   - "local":
       layout: main-vertical
       panes:
-        - 
+        -
   - "01":
-      layout: main-vertical
       panes:
-        - ssh aist01
+        - ssh aist01 -t 'zsh -ic "mux master; zsh -i"'
   - "02":
-      layout: main-vertical
       panes:
-        - ssh aist02
+        - ssh aist02 -t 'zsh -ic "mux master; zsh -i"'
   - "03":
-      layout: main-vertical
       panes:
-        - ssh aist03
+        - ssh aist03 -t 'zsh -ic "mux master; zsh -i"'
   - "04":
-      layout: main-vertical
       panes:
-        - ssh aist04
+        - ssh aist04 -t 'zsh -ic "mux master; zsh -i"'
   - "07":
-      layout: main-vertical
       panes:
-        - ssh aist07
+        - ssh aist07 -t 'zsh -ic "mux master; zsh -i"'
   - "08":
-      layout: main-vertical
       panes:
-        - ssh aist08
+        - ssh aist08 -t 'zsh -ic "mux master; zsh -i"'
