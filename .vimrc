@@ -79,9 +79,9 @@ if has("autocmd")
   autocmd BufRead,BufNewFile *.log      setlocal readonly
   autocmd BufRead,BufNewFile .gitignore setfiletype gitignore
   " ts=tabstop, sts=softtabstop, sw=shiftwidth, et=expandtab
-  autocmd FileType text,tex,markdown,html,xml,vim,json setlocal ts=2 sts=-1 sw=0 et
+  autocmd FileType text,tex,markdown,html,xml,vim,json,jsonc setlocal ts=2 sts=-1 sw=0 et
   " fo=formatoptions, com=comments
-  autocmd FileType text,tex,markdown,json setlocal spell
+  autocmd FileType text,tex,markdown,json,jsonc setlocal spell
   " autocmd FileType text setlocal fo+=nr fo-=c com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType text setlocal fo+=nr com-=fb:-,fb:* com+=b:-,b:*
   autocmd FileType qf 3wincmd_ " set quickfix window height to 3
@@ -147,6 +147,7 @@ if dein#load_state(dein_dir)
   call dein#add('tyru/open-browser.vim')
 
   call dein#add('elzr/vim-json') " check json syntax
+  call dein#add('kevinoid/vim-jsonc') " check jsonc syntax
   call dein#add('ntpeters/vim-better-whitespace')
 
   " load my snippets
@@ -337,3 +338,6 @@ let g:mdvimtex_config = {
         \'\ll <Plug>(mdvimtex_compile)'
         \]
       \}
+
+let g:better_whitespace_ctermcolor="darkgray"
+let g:better_whitespace_guicolor="darkgray"
