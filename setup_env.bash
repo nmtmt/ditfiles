@@ -32,6 +32,11 @@ build_source(){
             echo Quit building packages
     esac
 }
+install_appimage(){
+    echo Install appimages...
+    bash ./scripts/install_appimage.bash
+    echo Done installing appimages!
+}
 
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
@@ -39,6 +44,7 @@ if [ $os = "mac" ]; then
 
 elif [ $os = "linux" ] ; then
     if $sudo_access; then
+        sudo update-alternatives --config editor
         if [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = "Ubuntu" ]; then
             release=$(cat /etc/lsb-release | grep RELEASE | cut -d '=' -f 2)
             case $release in
@@ -75,14 +81,17 @@ elif [ $os = "linux" ] ; then
             fi
         fi
         build_source
+        install_appimage
     else
         echo "You don't have access to sudo!"
         build_source
+        install_appimage
     fi
 
 elif [ $os = "unix" ]; then
     echo "You don't have access to sudo!"
     build_source
+    install_appimage
 fi
 
 if [ ! $os = "mac" ]; then
