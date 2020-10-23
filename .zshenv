@@ -17,3 +17,8 @@ export LANG="en_US.UTF-8"
 if [ ! -z $XDG_CURRENT_DESKTOP ];then
     source $HOME/.xprofile
 fi
+
+# for using host display in WSL2
+if [ $(uname -s) = Linux ] && [[ $(uname -r) = *microsoft* ]];then
+    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+fi

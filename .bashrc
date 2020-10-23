@@ -98,3 +98,12 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+if [ ! -z $XDG_CURRENT_DESKTOP ];then
+    source $HOME/.xprofile
+fi
+
+# for using host display in WSL2
+if [ $(uname -s) = Linux ] && [[ $(uname -r) = *microsoft* ]];then
+    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+fi
