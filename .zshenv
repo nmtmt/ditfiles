@@ -12,6 +12,10 @@ setopt nolistbeep
 setopt append_history # when using multiple zsh
 #setopt share_history  # with multiple terminal
 
+# enable advanced tab completion
+autoload -U compinit
+compinit
+
 export LANG="en_US.UTF-8"
 
 if [ ! -z $XDG_CURRENT_DESKTOP ];then
