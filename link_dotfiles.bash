@@ -41,6 +41,7 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf$opt $HOME/dotfiles/.zshenv        $HOME/.zshenv
     ln -sf$opt $HOME/dotfiles/.bashrc        $HOME/.bashrc
     ln -sf$opt $HOME/dotfiles/.aliases       $HOME/.aliases
+    ln -sf$opt $HOME/dotfiles/.func          $HOME/.func
 
     ln -sf$opt $HOME/dotfiles/.dircolors     $HOME/.dircolors
     ln -sf$opt $HOME/dotfiles/.tmux.conf     $HOME/.tmux.conf

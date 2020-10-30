@@ -1,0 +1,38 @@
+_ffmpeggif(){
+    input_path=$1
+    dirname=$(dirname $input_path)
+    filename=$(basename $input_path)
+    name=${filename%.*}
+    output_path=$dirname/$name.gif
+
+    echo -e "\e[36mConvert $input_path to $output_path...\e[m"
+
+    ffmpeg -i $input_path -filter_complex "[0:v] fps=20,scale=640:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" $output_path
+}
+
+ffmpeggif(){
+    input_paths=($@)
+
+    if [ -z $1 ];then
+        echo Invalid input. You must specify files or directories including movies to be converted
+        return
+    fi
+
+    for input_path in $input_paths; do
+
+        if [ -d $input_path ];then
+            movies=($(find $input_path -type f -name "*.mp4" -o -name "*.mpeg4" -o -name "*.MP4" -o -name "*.mov"))
+        elif [ -f $input_path ];then
+            if [[ $input_path = *.gif ]];then
+                continue
+            else
+                movies=$input_path
+            fi
+        fi
+
+        for movie in $movies;do
+            _ffmpeggif $movie
+        done
+    done
+}
+# vim: filetype=zsh

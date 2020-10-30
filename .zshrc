@@ -44,6 +44,9 @@ fi
 if [ -f $HOME/.aliases ]; then
     source $HOME/.aliases
 fi
+if [ -f $HOME/.func ]; then
+    source $HOME/.func
+fi
 
 if which trash-empty > /dev/null 2>&1; then
     trash-empty 50

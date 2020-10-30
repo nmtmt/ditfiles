@@ -87,6 +87,9 @@ fi
 if [ -f $HOME/.aliases ]; then
     source $HOME/.aliases
 fi
+if [ -f $HOME/.func ]; then
+    source $HOME/.func
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
