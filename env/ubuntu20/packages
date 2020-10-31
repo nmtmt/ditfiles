@@ -67,3 +67,5 @@ ofono
 audacity
 gparted
 vlc
+docker
+docker-compose

@@ -45,6 +45,7 @@ fi
 
 if which nvim > /dev/null 2>&1 && [ -f $HOME/.config/nvim/init.vim ];then
     alias vim='nvim'
+    alias vimdiff='nvim -d '
 fi
 
 if [[ $OSTYPE = linux* ]] && [ -d /mnt/c/Program\ Files ]; then

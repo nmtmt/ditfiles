@@ -79,3 +79,5 @@ solaar-gnome3
 audacity
 gparted
 vlc
+docker
+docker-compose

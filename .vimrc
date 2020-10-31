@@ -41,19 +41,36 @@ function! Mkdir(path)
   endif
 endfunction
 
-if has("mac") || has("unix")
-  let tmpdirectory   =expand("~/.vim/tmp")
-  let undodirectory  =expand("~/.vim/undo")
-  let viewdirectory  =expand("~/.vim/view")
-  let dein_dir       =expand('~/.vim/.cache/dein')
-  let dein_plugin_dir=expand('~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim')
+if has('nvim')
+  if has("mac") || has("unix")
+    let tmpdirectory   =expand("~/.nvim/tmp")
+    let undodirectory  =expand("~/.nvim/undo")
+    let viewdirectory  =expand("~/.nvim/view")
+    let dein_dir       =expand('~/.nvim/.cache/dein')
+    let dein_plugin_dir=expand('~/.nvim/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-elseif has("win64") || has("win32") || has("win32unix")
-  let tmpdirectory   =expand("~/vimfiles/tmp")
-  let undodirectory  =expand("~/vimfiles/undo")
-  let viewdirectory  =expand("~/vimfiles/view")
-  let dein_dir       =expand('~/vimfiles/cache/dein')
-  let dein_plugin_dir=expand('~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim')
+  elseif has("win64") || has("win32") || has("win32unix")
+    let tmpdirectory   =expand("~/nvimfiles/tmp")
+    let undodirectory  =expand("~/nvimfiles/undo")
+    let viewdirectory  =expand("~/nvimfiles/view")
+    let dein_dir       =expand('~/nvimfiles/cache/dein')
+    let dein_plugin_dir=expand('~/nvimfiles/cache/dein/repos/github.com/Shougo/dein.vim')
+  endif
+else
+  if has("mac") || has("unix")
+    let tmpdirectory   =expand("~/.vim/tmp")
+    let undodirectory  =expand("~/.vim/undo")
+    let viewdirectory  =expand("~/.vim/view")
+    let dein_dir       =expand('~/.vim/.cache/dein')
+    let dein_plugin_dir=expand('~/.vim/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  elseif has("win64") || has("win32") || has("win32unix")
+    let tmpdirectory   =expand("~/vimfiles/tmp")
+    let undodirectory  =expand("~/vimfiles/undo")
+    let viewdirectory  =expand("~/vimfiles/view")
+    let dein_dir       =expand('~/vimfiles/cache/dein')
+    let dein_plugin_dir=expand('~/vimfiles/cache/dein/repos/github.com/Shougo/dein.vim')
+  endif
 endif
 
 call Mkdir(tmpdirectory)

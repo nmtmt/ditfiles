@@ -87,3 +87,5 @@ libgspell-1-dev
 network-manager-l2tp
 network-manager-l2tp-gnome
 vlc
+docker
+docker-compose
