@@ -18,6 +18,10 @@ compinit
 
 export LANG="en_US.UTF-8"
 
+if [ -z $SHELL ];then
+    export SHELL=`which zsh`
+fi
+
 if [ ! -z $XDG_CURRENT_DESKTOP ];then
     source $HOME/.xprofile
 fi
