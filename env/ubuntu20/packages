@@ -1,6 +1,8 @@
 build-essential
 openssh-server
 openssh-client
+net-tools
+samba
 gettext
 curl
 htop
