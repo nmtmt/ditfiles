@@ -24,13 +24,15 @@ cuda_ver="10.2"
 has_cuda=false
 if [ -d $HOME/.local/cuda-$cuda_ver ]; then
     CUDA_HOME=$HOME/.local/cuda-$cuda_ver
+    export PATH=$CUDA_HOME/bin:$PATH
     has_cuda=true
 elif [ -d /usr/local/cuda-$cuda_ver ]; then
     CUDA_HOME=/usr/local/cuda-$cuda_ver
+    export PATH=$CUDA_HOME/bin:$PATH
     has_cuda=true
 fi
 
-export PATH=$HOME/.local/bin:$CUDA_HOME/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export CPATH=$HOME/.local/include:$CPATH
 export EDITOR=vim
 export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
@@ -60,7 +62,7 @@ if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
         workon default
     fi
 elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=$(which python3)
+    export VIRTUALENVWRAPPER_PYTHON=$(PATH=/usr/local/bin:/usr/bin:/bin which python3)
     export WORKON_HOME=$HOME/.venvs
     source /usr/local/bin/virtualenvwrapper.sh
     if [ -d $HOME/.venvs/default ];then

@@ -9,6 +9,7 @@ htop
 git
 vim
 tmux
+cmake
 ffmpeg
 gnome-tweak-tool
 trash-cli
@@ -71,3 +72,4 @@ gparted
 vlc
 docker
 docker-compose
+libevent1-dev

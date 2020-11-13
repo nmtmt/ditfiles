@@ -9,6 +9,7 @@ htop
 git
 vim
 tmux
+cmake
 ffmpeg
 python-pip
 python-dev
@@ -83,3 +84,4 @@ gparted
 vlc
 docker
 docker-compose
+libevent1-dev

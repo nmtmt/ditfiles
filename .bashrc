@@ -85,6 +85,24 @@ if [ -f $HOME/.dircolors ]; then
     fi
 fi
 
+cuda_ver="10.2"
+has_cuda=false
+if [ -d $HOME/.local/cuda-$cuda_ver ]; then
+    CUDA_HOME=$HOME/.local/cuda-$cuda_ver
+    has_cuda=true
+elif [ -d /usr/local/cuda-$cuda_ver ]; then
+    CUDA_HOME=/usr/local/cuda-$cuda_ver
+    has_cuda=true
+fi
+
+if $has_cuda; then
+    export LD_LIBRARY_PATH=$HOME/.local/lib:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+    export PATH=$CUDA_HOME/bin:$PATH
+else
+    export LD_LIBRARY_PATH=$HOME/.local:$LD_LIBRARY_PATH
+fi
+export PATH=$HOME/.local/bin:$PATH
+
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -113,4 +131,20 @@ fi
 # for using host display in WSL2
 if [ $(uname -s) = Linux ] && [[ $(uname -r) = *microsoft* ]];then
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+fi
+
+if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
+    export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3
+    export WORKON_HOME=$HOME/.venvs
+    source $HOME/.local/bin/virtualenvwrapper.sh
+    if [ -d $HOME/.venvs/default ];then
+        workon default
+    fi
+elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    export VIRTUALENVWRAPPER_PYTHON=$(PATH=/usr/local/bin:/usr/bin:/bin which python3)
+    export WORKON_HOME=$HOME/.venvs
+    source /usr/local/bin/virtualenvwrapper.sh
+    if [ -d $HOME/.venvs/default ];then
+        workon default
+    fi
 fi
