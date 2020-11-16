@@ -99,7 +99,7 @@ if $has_cuda; then
     export LD_LIBRARY_PATH=$HOME/.local/lib:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
     export PATH=$CUDA_HOME/bin:$PATH
 else
-    export LD_LIBRARY_PATH=$HOME/.local:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 fi
 export PATH=$HOME/.local/bin:$PATH
 
@@ -148,3 +148,4 @@ elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
         workon default
     fi
 fi
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH

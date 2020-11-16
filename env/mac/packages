@@ -1,6 +1,8 @@
 coreutils
 curl
 git
+htop
+watch
 python3
 vim
 tmux

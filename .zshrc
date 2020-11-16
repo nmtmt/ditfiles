@@ -40,7 +40,7 @@ export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
 if $has_cuda; then
     export LD_LIBRARY_PATH=$HOME/.local/lib:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 else
-    export LD_LIBRARY_PATH=$HOME/.local:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 fi
 
 if [ -f $HOME/.aliases ]; then
@@ -49,6 +49,11 @@ fi
 if [ -f $HOME/.func ]; then
     source $HOME/.func
 fi
+
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/opt/openssl@1.1/lib:$LD_LIBRARY_PATH"
+export CPATH="/usr/local/opt/openssl@1.1/include:$CPATH"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig:$PATH"
 
 if which trash-empty > /dev/null 2>&1; then
     trash-empty 50

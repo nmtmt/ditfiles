@@ -10,7 +10,7 @@ else os=unknown
 fi
 
 if $(which sudo > /dev/null 2>&1); then
-    sudo -v 
+    sudo -v
     if [ $? == 0 ]; then
         sudo_access=true
     else
@@ -31,6 +31,9 @@ build_source(){
         *)
             echo Quit building packages
     esac
+    if [ ! $? -eq 0 ];then
+        exit 1
+    fi
 }
 install_appimage(){
     echo Install appimages...
@@ -41,6 +44,8 @@ install_appimage(){
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install 
     cat ./env/mac/cask_packages | xargs brew cask install 
+    install_appimage
+    build_source
 
 elif [ $os = "linux" ] ; then
     if $sudo_access; then
@@ -80,18 +85,18 @@ elif [ $os = "linux" ] ; then
                 bash ./env/ubuntu$release/script.bash
             fi
         fi
-        build_source
         install_appimage
+        build_source
     else
         echo "You don't have access to sudo!"
-        build_source
         install_appimage
+        build_source
     fi
 
 elif [ $os = "unix" ]; then
     echo "You don't have access to sudo!"
-    build_source
     install_appimage
+    build_source
 fi
 
 if [ ! $os = "mac" ]; then
@@ -107,14 +112,14 @@ if [ ! $os = "mac" ]; then
 fi
 
 make_venv_with_local_python(){
-    venv_shell=$HOME/.local/bin/virtualenvwrapper.sh 
+    venv_shell=$HOME/.local/bin/virtualenvwrapper.sh
     venv_python=$HOME/.local/bin/python3
     pip3 install --upgrade pip
     pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
 }
 
 make_venv_with_system_python(){
-    venv_shell=/usr/local/bin/virtualenvwrapper.sh 
+    venv_shell=/usr/local/bin/virtualenvwrapper.sh
     if [ -f /usr/local/bin/python3 ]; then
         venv_python=/usr/local/bin/python3
     elif [ -f /usr/bin/python3 ]; then
@@ -126,7 +131,6 @@ make_venv_with_system_python(){
     PATH=/usr/local/bin:/usr/bin $sudo_cmd pip3 install --upgrade pip
     PATH=/usr/local/bin:/usr/bin $sudo_cmd pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
 }
-
 
 echo Setting virtualenvwrapper...
 
@@ -140,7 +144,7 @@ else
             make_venv_with_local_python;;
         *)
             make_venv_with_system_python;;
-    esac 
+    esac
 fi
 hash -r
 

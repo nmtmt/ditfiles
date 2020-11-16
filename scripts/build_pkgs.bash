@@ -39,7 +39,8 @@ util_pkgs=("util-linux" "openssl" "libffi" "ncurses" "libsm" "libevent" "tmux" "
 
 programming_langs=("ruby" "lua" "python2" "python3")
 
-editor_pkgs=("vim" "neovim-qt")
+#editor_pkgs=("vim" "neovim-qt")
+editor_pkgs=("neovim-qt")
 
 case $OSTYPE in
     darwin*)
