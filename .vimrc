@@ -172,7 +172,6 @@ if dein#load_state(dein_dir)
   call dein#add('nmtmt/neosnippet-snippets')
   call dein#add('nmtmt/mdvimtex')
   call dein#add('nmtmt/fcitx-im-keeper')
-  let &runtimepath .= ','. dein_dir . "/repos/github.com/nmtmt/mdvimtex"
 
   " Required:
   call dein#end()
