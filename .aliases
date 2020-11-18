@@ -19,7 +19,7 @@ set_alias ln    'gln'          gln
 set_alias rm    'trash-put'    trash-put
 set_alias open  'xdg-open'     xdg-open
 
-alias sudo='sudo ' # will derives aliases
+alias sudo='sudo ' # will derives aliases when execute sudo command
 
 alias ll='ls -Alh'
 alias la='ls -A'
@@ -35,6 +35,8 @@ if [[ $OSTYPE = darwin* ]];then
     elif type ls > /dev/null 2>&1; then
         alias ls="ls -G"
     fi
+    alias disablesleep='sudo pmset -a disablesleep 1'
+    alias enablesleep='sudo pmset -a disablesleep 0'
 
 elif [[ $OSTYPE = linux* ]]; then
     alias ls="ls --color=auto"
