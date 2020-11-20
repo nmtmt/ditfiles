@@ -50,10 +50,10 @@ if [ -f $HOME/.func ]; then
     source $HOME/.func
 fi
 
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/local/opt/openssl@1.1/lib:$LD_LIBRARY_PATH"
-export CPATH="/usr/local/opt/openssl@1.1/include:$CPATH"
-export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig:$PATH"
+export PATH=/usr/local/opt/openssl@1.1/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/opt/openssl@1.1/lib:$LD_LIBRARY_PATH
+export CPATH=/usr/local/opt/openssl@1.1/include:$CPATH
+export PKG_CONFIG_PATH=/usr/local/opt/openssl@1.1/lib/pkgconfig:$PATH
 
 if which trash-empty > /dev/null 2>&1; then
     trash-empty 50
