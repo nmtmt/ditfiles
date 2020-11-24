@@ -27,8 +27,6 @@ alias las='ls -Ash'
 
 alias grep='grep --color=auto'
 
-alias vi='vi -u NONE' # do not load vimrc
-
 if [[ $OSTYPE = darwin* ]];then
     if type gls > /dev/null 2>&1; then
         alias ls="gls --color=auto"
@@ -46,9 +44,12 @@ elif [[ $OSTYPE = freebsd* ]]; then
     export MAILCHECK=0
 fi
 
-if which nvim > /dev/null 2>&1 && [ -f $HOME/.config/nvim/init.vim ];then
-    alias vim='nvim'
-    alias vimdiff='nvim -d '
+if [ ! `uname -s` = FreeBSD ];then
+    alias vi='vi -u NONE' # do not load vimrc
+    if which nvim > /dev/null 2>&1 && [ -f $HOME/.config/nvim/init.vim ];then
+        alias vim='nvim'
+        alias vimdiff='nvim -d '
+    fi
 fi
 
 if [[ $OSTYPE = linux* ]] && [ -d /mnt/c/Program\ Files ]; then
