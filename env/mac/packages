@@ -8,6 +8,8 @@ vim
 tmux
 tmuxinator
 ffmpeg
+libsm
+libevent
 trash-cli
 nkf
 convmv

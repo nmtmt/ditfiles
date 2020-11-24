@@ -40,12 +40,21 @@ install_appimage(){
     bash ./scripts/install_appimage.bash
     echo Done installing appimages!
 }
+create_terminfo(){
+    # Create terminfo file for tmux
+    if [ ! -d ~/Downloads ];then
+        mkdir ~/Donwloads
+    fi
+    wget https://github.com/tmux/tmux/files/1725937/tmux-256color.terminfo.txt -O ~/Downloads/tmux-256color.terminfo.txt
+    tic tmux-256color.terminfo.txt
+}
 
 if [ $os = "mac" ]; then
-    cat ./env/mac/packages      | xargs brew install 
-    cat ./env/mac/cask_packages | xargs brew cask install 
+    cat ./env/mac/packages      | xargs brew install
+    cat ./env/mac/cask_packages | xargs brew cask install
     install_appimage
     build_source
+    create_terminfo
 
 elif [ $os = "linux" ] ; then
     if $sudo_access; then
@@ -97,6 +106,7 @@ elif [ $os = "unix" ]; then
     echo "You don't have access to sudo!"
     install_appimage
     build_source
+    create_terminfo
 fi
 
 if [ ! $os = "mac" ]; then
@@ -215,7 +225,7 @@ esac
 if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = "Ubuntu" ] ; then
     # fix time difference in dual boot env
     read -p "Do you install themes?" ys
-    case $ys in 
+    case $ys in
         [yY]*)
             source $HOME/dotfiles/scripts/install_themes.bash;;
         *)
@@ -223,9 +233,9 @@ if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = 
     esac
 
     read -p "is this dualboot env?[y/N]:" ys
-    case $ys in 
-        [yY]*) 
-            timedatectl set-local-rtc true 
+    case $ys in
+        [yY]*)
+            timedatectl set-local-rtc true
             echo Done fixing time setting
             ;;
         *) echo Skip setting time problem between windows and linux
