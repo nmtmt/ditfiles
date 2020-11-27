@@ -35,4 +35,31 @@ ffmpeggif(){
         done
     done
 }
+
+wait_finish(){
+    key_phrases=($@)
+    if [ -z $1 ];then
+        echo "Invalid input. You must specify key phrases of jobs!"
+        return
+    fi
+
+    while true; do
+        finished=1
+        for key_phrase in $key_phrases; do
+
+            ret=$(ps -o user,pid,command -u $USER | grep $key_phrase | grep -v grep)
+
+            if [ ! -z $ret ];then
+                echo \"$ret\" is running...
+                finished=0
+            fi
+            sleep 1
+        done
+        if [ $finished -eq 1 ];then
+            break
+        fi
+        sleep 10
+    done
+}
+
 # vim: filetype=zsh
