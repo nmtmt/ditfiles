@@ -58,7 +58,7 @@ wait_finish(){
         if [ $finished -eq 1 ];then
             break
         fi
-        sleep 10
+        sleep 60
     done
 }
 
