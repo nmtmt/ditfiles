@@ -33,4 +33,4 @@ function install_appimage(){
 }
 
 install_appimage https://github.com/neovim/neovim/releases/download/stable/nvim.appimage nvim.appimage nvim
-install_appimage https://download.kde.org/stable/krita/4.4.0/krita-4.4.0-x86_64.appimage krita-4.4.0.appimage krita
+#install_appimage https://download.kde.org/stable/krita/4.4.0/krita-4.4.0-x86_64.appimage krita-4.4.0.appimage krita
