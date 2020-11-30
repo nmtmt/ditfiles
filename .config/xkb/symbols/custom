@@ -1,0 +1,5 @@
+partial modifier_keys
+xkb_symbols "mymap" {
+    key <CAPS>  { [ Control_L, Control_L ] };
+    key <AB11>  { [ underscore, underscore ] };
+};

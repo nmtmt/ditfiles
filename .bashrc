@@ -124,7 +124,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ ! -z $XDG_CURRENT_DESKTOP ];then
+if [ ! -z $XDG_CURRENT_DESKTOP ] && [ ! -z $DISPLAY ];then
     source $HOME/.xprofile
 fi
 

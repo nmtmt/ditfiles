@@ -22,7 +22,7 @@ if [ -z $SHELL ];then
     export SHELL=`which zsh`
 fi
 
-if [ ! -z $XDG_CURRENT_DESKTOP ];then
+if [ ! -z $XDG_CURRENT_DESKTOP ] && [ ! -z $DISPLAY ];then
     source $HOME/.xprofile
 fi
 

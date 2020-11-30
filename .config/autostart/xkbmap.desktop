@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=fcitx
+Exec=bash /home/matsumoto/.config/autostart/xkbmap &
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=fcitx
-Name=fcitx
+Name[en_US]=setxkbmap
+Name=setxkbmap
 Comment[en_US]=
 Comment=

@@ -47,7 +47,6 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf$opt $HOME/dotfiles/.tmux.conf     $HOME/.tmux.conf
     ln -sf$opt $HOME/dotfiles/.rsync_exclude $HOME/.rsync_exclude
     ln -sf$opt $HOME/dotfiles/.gitconfig     $HOME/.gitconfig
-    ln -sf$opt $HOME/dotfiles/.Xmodmap       $HOME/.Xmodmap
     ln -sf$opt $HOME/dotfiles/.xprofile      $HOME/.xprofile
 
     makedir $HOME/.vim/.cache/dein
@@ -57,7 +56,14 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     makedir $HOME/.config
     ln -sf$opt $HOME/dotfiles/.config/tmuxinator $HOME/.config/tmuxinator
     if [ $os = "linux" ] || [ $os = "unix" ]; then
-        ln -sf$opt $HOME/dotfiles/.config/autostart  $HOME/.config/autostart
+        makedir $HOME/.config/autostart
+        current_d=`pwd`
+        cd $HOME/.config/autostart
+        ln -sf $HOME/dotfiles/.config/autostart/*  .
+        makedir $HOME/.config/xkb
+        cd $HOME/.config/xkb
+        ln -sf $HOME/dotfiles/.config/xkb/*  .
+        cd $current_d
     fi
     makedir $HOME/.config/nvim
     ln -sf$opt $HOME/.vimrc  $HOME/.config/nvim/init.vim

@@ -2,6 +2,8 @@ export QTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export GTK_IM_MODULE=fcitx
-setxkbmap -model pc106 -layout jp
-xmodmap $HOME/.Xmodmap
+if [ -f $HOME/.config/xkbmap_state ]; then
+    map_name=$(head -n 1 $HOME/.config/xkbmap_state)
+    xkbcomp -I$HOME/.config/xkb $HOME/.config/xkb/keymap/$map_name $DISPLAY 2> /dev/null
+fi
 xset r rate 200 50

@@ -62,4 +62,30 @@ wait_finish(){
     done
 }
 
+create_xkbmap_state(){
+    if [ ! -d $HOME/.config ];then
+        mkdir -p $HOME/.config
+    fi
+    if [ ! -f $HOME/.config/.xkbmap_state ];then
+        touch $HOME/.config/.xkbmap_state
+    fi
+}
+reset_xkbmap(){
+    create_xkbmap_state
+    setxkbmap -option
+    echo "" > $HOME/.config/xkbmap_state
+}
+swapcaps(){
+    create_xkbmap_state
+    reset_xkbmap
+    xkbcomp -I$HOME/.config/xkb ~/.config/xkb/keymap/mymap_swapcaps $DISPLAY 2> /dev/null
+    echo "mymap_swapcaps" > $HOME/.config/xkbmap_state
+}
+nocaps(){
+    create_xkbmap_state
+    reset_xkbmap
+    xkbcomp -I$HOME/.config/xkb ~/.config/xkb/keymap/mymap_nocaps $DISPLAY 2> /dev/null
+    echo "mymap_nocaps" > $HOME/.config/xkbmap_state
+}
+
 # vim: filetype=zsh
