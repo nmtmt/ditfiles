@@ -73,7 +73,8 @@ create_xkbmap_state(){
 reset_xkbmap(){
     create_xkbmap_state
     setxkbmap -option
-    echo "" > $HOME/.config/xkbmap_state
+    xkbcomp -I$HOME/.config/xkb ~/.config/xkb/keymap/mymap $DISPLAY 2> /dev/null
+    echo "mymap" > $HOME/.config/xkbmap_state
 }
 swapcaps(){
     create_xkbmap_state

@@ -1,5 +1,17 @@
 partial modifier_keys
 xkb_symbols "mymap" {
+    key <AB11>  { [ underscore, underscore ] };
+};
+
+partial modifier_keys
+xkb_symbols "mymap-nocaps" {
     key <CAPS>  { [ Control_L, Control_L ] };
+    key <AB11>  { [ underscore, underscore ] };
+};
+
+partial modifier_keys
+xkb_symbols "mymap-swapcaps" {
+    key <CAPS>  { [ Control_L, Control_L ] };
+    key <LCTL>  { [ Caps_Lock, Caps_Lock ] };
     key <AB11>  { [ underscore, underscore ] };
 };
