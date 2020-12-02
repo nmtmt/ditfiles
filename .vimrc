@@ -27,6 +27,8 @@ set wildmenu           " commamd mode completion
 set wildmode=longest:full " setting for command line mode completion
 set undofile           " enable undo folder
 
+set autochdir " automatically chdir to dir where buffer exists
+
 " not show preview window with word completion
 set completeopt=menuone,noselect
 " show preview window with word completion
@@ -252,7 +254,7 @@ let g:quickrun_config = {
       \'python': {'command': 'python3'}, 
       \}
 
-let g:acp_enableAtStartup = 0 " Disable AutoComplPop.     
+let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
 
 if use_deoplete
   " =========== deoplete setting ============
@@ -357,3 +359,40 @@ let g:mdvimtex_config = {
 
 let g:better_whitespace_ctermcolor="darkgray"
 let g:better_whitespace_guicolor="darkgray"
+
+" ========== setting for tab ==========
+function! s:SID_PREFIX()
+  return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
+endfunction
+
+function! s:my_tabline()
+  let s = ''
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr  = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let no    = i " display 0-origin tabpagenr.
+    let mod   = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let title = title
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= no . ':' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
+endfunction
+let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+
+nnoremap [Tag]   <Nop>
+nmap     t [Tag]
+for n in range(1, 9)
+  execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+
+map <silent> [Tag]c :tablast <bar> tabnew<CR>
+map <silent> [Tag]x :tabclose<CR>
+map <silent> [Tag]n :tabnext<CR>
+map <silent> [Tag]p :tabprevious<CR>
+" ========== end of setting for tab ==========

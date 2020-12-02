@@ -14,3 +14,4 @@ selenium
 bs4
 jsmin
 pyinstaller
+seaborn
