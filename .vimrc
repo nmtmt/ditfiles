@@ -47,8 +47,6 @@ function! Mkdir(path)
 endfunction
 
 if has('nvim')
-  set pumblend=40
-  set winblend=30
   if has("mac") || has("unix")
     let tmpdirectory   =expand("~/.nvim/tmp")
     let undodirectory  =expand("~/.nvim/undo")
@@ -212,7 +210,13 @@ runtime macros/matchit.vim
 " gruvbox
 colorscheme gruvbox
 set background=dark
-set t_Co=256
+" set t_Co=256
+
+if has('nvim')
+  set pumblend=15
+  set winblend=15
+  hi PmenuSel blend=0
+endif
 
 " spell check highlight
 hi clear SpellBad
