@@ -37,6 +37,9 @@ set previewheight=2
 
 set nrformats="alpha" " disable octal, enable alphabet incremental
 
+" for true color
+set termguicolors
+
 function! Mkdir(path)
   if !isdirectory(a:path)
     call mkdir(a:path, 'p')
@@ -44,6 +47,8 @@ function! Mkdir(path)
 endfunction
 
 if has('nvim')
+  set pumblend=40
+  set winblend=30
   if has("mac") || has("unix")
     let tmpdirectory   =expand("~/.nvim/tmp")
     let undodirectory  =expand("~/.nvim/undo")
@@ -260,10 +265,10 @@ if use_deoplete
   " =========== deoplete setting ============
   let g:deoplete#enable_at_startup = 1
   call deoplete#custom#option({
-        \'auto_complete_delay':50,
+        \'auto_complete_delay':10,
         \'auto_complete_popup':"auto",
-        \'max_list':8,
-        \'min_pattern_length':2,
+        \'max_list':6,
+        \'min_pattern_length':1,
         \'skip_chars':['(', ')', ','],
         \})
   " =========== deoplete setting ============
