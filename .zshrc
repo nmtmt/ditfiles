@@ -6,10 +6,8 @@ if [ -f $HOME/.termcap ]; then
 fi
 
 in_docker=0
-if [[ $(groups $USER) = *root* ]];then
-    if [ -f /root/.dockerenv ];then
-        in_docker=1
-    fi
+if [ -f /.dockerenv ];then
+    in_docker=1
 fi
 export IN_DOCKER=$in_docker
 if [ $IN_DOCKER ]; then
