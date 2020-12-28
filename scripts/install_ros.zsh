@@ -9,10 +9,10 @@ case $release in
         distro="melodic";;
 esac
 sudo apt update
-sudo apt install ros-$distro-desktop-full ros-$distro-joint-state-publisher-gui ros-$distro-gripper-action-controller
-sudo apt install ros-$distro-ros-control ros-$distro-ros-controllers ros-$distro-robot-state-publisher
-sudo apt install ros-$distro-gazebo-ros-control ros-$distro-moveit
-sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
+sudo apt install -y ros-$distro-desktop-full ros-$distro-joint-state-publisher-gui ros-$distro-gripper-action-controller
+sudo apt install -y ros-$distro-ros-control ros-$distro-ros-controllers ros-$distro-robot-state-publisher
+sudo apt install -y ros-$distro-gazebo-ros-control ros-$distro-moveit
+sudo apt install -y python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential
 sudo rosdep init
 rosdep update
 source $HOME/.zshrc

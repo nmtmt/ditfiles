@@ -19,6 +19,9 @@ set_alias ln    'gln'          gln
 set_alias rm    'trash-put'    trash-put
 set_alias open  'xdg-open'     xdg-open
 
+set_alias nvidia-clock 'nvidia-smi -q -d CLOCK' nvidia-smi
+set_alias nvidia-performance 'nvidia-smi -q -d PERFORMANCE' nvidia-smi
+
 alias sudo='sudo ' # will derives aliases when execute sudo command
 
 alias ll='ls -Alh'

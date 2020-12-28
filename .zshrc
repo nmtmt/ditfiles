@@ -5,6 +5,17 @@ if [ -f $HOME/.termcap ]; then
     export TERMPATH=$HOME/.termcap
 fi
 
+in_docker=0
+if [[ $(groups $USER) = *root* ]];then
+    if [ -f /root/.dockerenv ];then
+        in_docker=1
+    fi
+fi
+export IN_DOCKER=$in_docker
+if [ $IN_DOCKER ]; then
+    export DISPLAY=host.docker.internal:0.0
+fi
+
 if [ -f $HOME/.dircolors ]; then
     if type dircolors > /dev/null 2>&1; then
         eval $(dircolors $HOME/.dircolors)

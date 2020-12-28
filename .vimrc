@@ -37,8 +37,15 @@ set previewheight=2
 
 set nrformats="alpha" " disable octal, enable alphabet incremental
 
+let g:in_docker = 0
+if $IN_DOCKER
+  let g:in_docker = 1
+endif
+
 " for true color
-set termguicolors
+if !has("mac") && !g:in_docker " I'm using Terminal.app which is not compatible with true color...
+  set termguicolors
+endif
 
 function! Mkdir(path)
   if !isdirectory(a:path)
@@ -212,7 +219,7 @@ colorscheme gruvbox
 set background=dark
 " set t_Co=256
 
-if has('nvim')
+if has('nvim') && !has('mac') && !g:in_docker
   set pumblend=15
   set winblend=15
   hi PmenuSel blend=0
@@ -260,7 +267,7 @@ set splitright " open new window on right side
 set splitbelow " open new window below the current one
 let g:quickrun_config = {
       \'*': { 'outputter/buffer/split': ':40vsplit'},
-      \'python': {'command': 'python3'}, 
+      \'python': {'command': 'python3'},
       \}
 
 let g:acp_enableAtStartup = 0 " Disable AutoComplPop.
@@ -271,7 +278,7 @@ if use_deoplete
   call deoplete#custom#option({
         \'auto_complete_delay':10,
         \'auto_complete_popup':"auto",
-        \'max_list':6,
+        \'max_list':8,
         \'min_pattern_length':1,
         \'skip_chars':['(', ')', ','],
         \})
