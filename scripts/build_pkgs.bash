@@ -35,7 +35,7 @@ compress_pkgs=("zlib" "xz" "bzip2" "libarchive" "pbzip2" "pixz" "pigz")
 
 compilers=("gcc")
 
-util_pkgs=("util-linux" "openssl" "libffi" "ncurses" "libsm" "libevent" "tmux" "colordiff")
+util_pkgs=("util-linux" "bc" "openssl" "libffi" "ncurses" "libsm" "libevent" "tmux" "colordiff")
 
 programming_langs=("ruby" "lua" "python2" "python3")
 
