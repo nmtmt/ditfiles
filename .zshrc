@@ -10,7 +10,7 @@ if [ -f /.dockerenv ];then
     in_docker=1
 fi
 export IN_DOCKER=$in_docker
-if [ $IN_DOCKER ]; then
+if [ $IN_DOCKER -eq 1 ]; then
     export DISPLAY=host.docker.internal:0.0
 fi
 
