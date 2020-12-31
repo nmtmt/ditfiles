@@ -102,6 +102,9 @@ if [ -d $HOME/.local/cuda-$cuda_ver ]; then
 elif [ -d /usr/local/cuda-$cuda_ver ]; then
     CUDA_HOME=/usr/local/cuda-$cuda_ver
     has_cuda=true
+elif [ -d /usr/local/cuda ]; then
+    CUDA_HOME=/usr/local/cuda
+    has_cuda=true
 fi
 
 if $has_cuda; then

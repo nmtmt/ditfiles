@@ -39,6 +39,10 @@ elif [ -d /usr/local/cuda-$cuda_ver ]; then
     CUDA_HOME=/usr/local/cuda-$cuda_ver
     export PATH=$CUDA_HOME/bin:$PATH
     has_cuda=true
+elif [ -d /usr/local/cuda ]; then
+    CUDA_HOME=/usr/local/cuda
+    export PATH=$CUDA_HOME/bin:$PATH
+    has_cuda=true
 fi
 
 export PATH=$HOME/.local/bin:$PATH
