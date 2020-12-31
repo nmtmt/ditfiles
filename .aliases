@@ -16,7 +16,8 @@ set_alias diff  'colordiff -u' colordiff
 set_alias sed   'gsed'         gsed
 set_alias ln    'gln'          gln
 
-set_alias rm    'trash-put'    trash-put
+set_alias tp    'trash-put'    trash-put
+set_alias tl    'trash-list'   trash-list
 set_alias open  'xdg-open'     xdg-open
 
 set_alias nvidia-clock 'nvidia-smi -q -d CLOCK' nvidia-smi
