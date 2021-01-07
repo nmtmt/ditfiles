@@ -7,7 +7,7 @@ _ffmpeggif(){
 
     echo -e "\e[36mConvert $input_path to $output_path...\e[m"
 
-    ffmpeg -i $input_path -filter_complex "[0:v] fps=20,scale=640:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" $output_path
+    ffmpeg -i $input_path -filter_complex "[0:v] fps=30,scale=640:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" $output_path
 }
 
 ffmpeggif(){
@@ -34,6 +34,30 @@ ffmpeggif(){
             _ffmpeggif $movie
         done
     done
+}
+
+_ffmpegcrop(){
+    input_path=$1
+    dirname=$(dirname $input_path)
+    filename=$(basename $input_path)
+    output_path=$dirname/cropped_$filename
+
+    echo -e "\e[36mCrop $input_path to $output_path...\e[m"
+
+    pixel_width=$2
+    pixel_height=$3
+    left_up_x=$4
+    left_up_y=$5
+    echo ffmpeg -i $input_path -filter:v "crop=$pixel_width:$pixel_height:$left_up_x:$left_up_y" -c:a copy $output_path
+    ffmpeg -i $input_path -filter:v "crop=$pixel_width:$pixel_height:$left_up_x:$left_up_y" -c:a copy $output_path
+}
+
+ffmpegcrop(){
+    if [ -z $1 ];then
+        echo Invalid input. You must specify movie be cropped
+        return
+    fi
+    _ffmpegcrop $@
 }
 
 wait_finish(){
