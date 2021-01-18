@@ -33,7 +33,8 @@ if has("mac") " has(mac) line have to be checked before has(unix)
   " set linespace=7
 else
   if has("win64") || has("win32") || has("win32unix")
-    set guifont=Cica:h12
+    set guifont=Osaka-Mono:h12
+    set linespace=2
     " for deoplete on vim8
     let g:python3_host_prog=glob("$HOME/AppData/Local/Programs/Python/Python37/python.exe")
     let &pythonthreehome=glob("$HOME/AppData/Local/Programs/Python/Python37")
