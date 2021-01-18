@@ -34,6 +34,10 @@ if has("mac") " has(mac) line have to be checked before has(unix)
 else
   if has("win64") || has("win32") || has("win32unix")
     set guifont=Cica:h12
+    " for deoplete on vim8
+    let g:python3_host_prog=glob("$HOME/AppData/Local/Programs/Python/Python37/python.exe")
+    let &pythonthreehome=glob("$HOME/AppData/Local/Programs/Python/Python37")
+    let &pythonthreedll =glob("$HOME/AppData/Local/Programs/Python/Python37/python3.dll")
     " set linespace=5
   elseif has("unix")
     " set guifont=Cica\ Regular\ 12
