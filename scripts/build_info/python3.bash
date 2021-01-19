@@ -4,7 +4,7 @@ case $OSTYPE in
         # seems like multiprocessing of python3.8 has a bug and cannot run dataloader of pytorch
         ver="3.7.9";;
     *)
-        ver="3.8.5";;
+        ver="3.8.7";;
 esac
 url=https://www.python.org/ftp/python/$ver/Python-$ver.tgz
 pkg_tarname=Python-$ver.tgz
@@ -33,19 +33,21 @@ commands(){
     esac
 
     make -j4
-    read -p "Is the result of make right?" ys
-    case $ys in
-        [Yy]*)
-            echo "installing python..."
-            make install
-            echo "Done!"
-            ;;
-        [Nn]*) 
-            echo abord
-            exit 1
-            ;;
-        *) 
-            echo "Invalid input. abord"
-            exit 1
-    esac
+    while true; do
+        read -p "Is the result of make right?" ys
+        case $ys in
+            [Yy]*)
+                echo "installing python..."
+                make install
+                echo "Done!"
+                break
+                ;;
+            [Nn]*)
+                echo abord
+                exit 1
+                ;;
+            *)
+                echo "Invalid input"
+        esac
+    done
 }

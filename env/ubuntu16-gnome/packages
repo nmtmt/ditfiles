@@ -6,6 +6,8 @@ samba
 gettext
 curl
 htop
+cmake
+cargo
 git
 vim
 tmux
@@ -67,7 +69,6 @@ zsh
 plank
 libc++1
 xsel
-neovim
 gnome
 gnome-shell
 ubuntu-gnome-desktop
@@ -91,3 +92,6 @@ network-manager-l2tp-gnome
 vlc
 docker
 docker-compose
+texinfo
+libevent1-dev
+autossh

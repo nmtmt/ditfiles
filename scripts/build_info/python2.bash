@@ -27,19 +27,21 @@ commands(){
     esac
 
     make -j4
-    read -p "Is the result of make right?" ys
-    case $ys in
-        [Yy]*)
-            echo "installing python..."
-            make install
-            echo "Done!"
-            ;;
-        [Nn]*) 
-            echo abord
-            exit 1
-            ;;
-        *) 
-            echo "Invalid input. abord"
-            exit 1
-    esac
+    while true; do
+        read -p "Is the result of make right?" ys
+        case $ys in
+            [Yy]*)
+                echo "installing python..."
+                make install
+                echo "Done!"
+                break
+                ;;
+            [Nn]*)
+                echo abord
+                exit 1
+                ;;
+            *)
+                echo "Invalid input"
+        esac
+    done
 }

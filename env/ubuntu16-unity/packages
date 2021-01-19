@@ -6,6 +6,8 @@ samba
 gettext
 curl
 htop
+cmake
+cargo
 git
 vim
 tmux
@@ -71,7 +73,6 @@ plank
 libc++1
 lightdm-gtk-greeter-settings
 xsel
-neovim
 libqt5svg5-dev
 pulseaudio-module-bluetooth
 ofono
@@ -84,3 +85,6 @@ network-manager-l2tp-gnome
 vlc
 docker
 docker-compose
+texinfo
+libevent1-dev
+autossh

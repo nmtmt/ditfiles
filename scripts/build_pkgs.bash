@@ -16,6 +16,8 @@ else
 fi
 
 install(){
+    hash -r
+    source $HOME/.bashrc
     pkgs=$@
     for pkg in $pkgs; do
         if `echo ${installed_pkgs[@]} | grep -q "$pkg"` ; then
@@ -25,7 +27,7 @@ install(){
             echo "Installing $pkg ... "
             # load param and 'commands' function for build
             source $script_dir/build_info/$pkg.bash
-            install_pkg $src_dir $url $pkg_tarname $pkg_dirname 
+            install_pkg $src_dir $url $pkg_tarname $pkg_dirname
             echo $pkg >> $src_dir/.installed_pkgs
         fi
     done
