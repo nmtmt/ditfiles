@@ -75,3 +75,6 @@ docker-compose
 libevent1-dev
 pandoc
 krita
+texinfo
+qt5-default
+libqt5svg5-dev
