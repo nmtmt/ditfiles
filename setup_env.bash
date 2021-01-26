@@ -51,7 +51,7 @@ create_terminfo(){
 
 if [ $os = "mac" ]; then
     cat ./env/mac/packages      | xargs brew install
-    cat ./env/mac/cask_packages | xargs brew cask install
+    cat ./env/mac/cask_packages | xargs brew install --cask
     install_appimage
     build_source
     create_terminfo

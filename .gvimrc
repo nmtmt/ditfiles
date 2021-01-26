@@ -30,7 +30,7 @@ if has("mac") " has(mac) line have to be checked before has(unix)
     " support using python2.x and python3.x at the same time
   catch
   endtry
-  " set linespace=7
+  set linespace=4
 else
   if has("win64") || has("win32") || has("win32unix")
     set guifont=Osaka-Mono:h12

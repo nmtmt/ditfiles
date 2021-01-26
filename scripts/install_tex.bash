@@ -31,6 +31,7 @@ cd ..
 rm -rf install-tl-*
 
 if [ $os = mac ];then
+    hash -r
     # setting for embedding hiragino to pdf
     echo "Set hiragino font for font embedding"
     sudo tlmgr update --self --all

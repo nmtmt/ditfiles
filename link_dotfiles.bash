@@ -21,7 +21,10 @@ makedir(){
 
 # link dotfiles
 if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
-    if [ $os = "mac" ] && which gls > /dev/null 2>&1; then
+    if [ $os = "mac" ];then
+        if ! which gls > /dev/null 2>&1; then
+            brew install coreutils
+        fi
         ln(){
             gln $*
         }
