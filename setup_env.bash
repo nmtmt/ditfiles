@@ -287,5 +287,7 @@ if [ $os = "linux" ] && [ $(cat /etc/lsb-release | grep ID | cut -d '=' -f 2) = 
             *)
                 echo Skip modifying grub setting;;
         esac
+
+        source ./scripts/set_natural_scrolling.bash
     fi
 fi
