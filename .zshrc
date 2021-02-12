@@ -14,6 +14,11 @@ if [ $IN_DOCKER -eq 1 ]; then
     export DISPLAY=host.docker.internal:0.0
 fi
 
+# vim starts slow when DISPLAY variable set and vim cannot reach out X11 server
+if uname -r | grep microsoft >/dev/null; then
+    unset DISPLAY
+fi
+
 if [ -f $HOME/.dircolors ]; then
     if type dircolors > /dev/null 2>&1; then
         eval $(dircolors $HOME/.dircolors)

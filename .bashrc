@@ -81,6 +81,11 @@ if [ $IN_DOCKER -eq 1 ]; then
     export DISPLAY=host.docker.internal:0.0
 fi
 
+# vim starts slow when DISPLAY variable set and vim cannot reach out X11 server
+if uname -r | grep microsoft >/dev/null; then
+    unset DISPLAY
+fi
+
 if [ -z $SHELL ];then
     export SHELL=`which bash`
 fi
