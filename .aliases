@@ -40,7 +40,7 @@ if [[ $OSTYPE = darwin* ]];then
     alias disablesleep='sudo pmset -a disablesleep 1'
     alias enablesleep='sudo pmset -a disablesleep 0'
 
-elif [[ $OSTYPE = linux* ]]; then
+elif [[ $OSTYPE = linux* ]] || [ $OSTYPE = msys ]; then
     alias ls="ls --color=auto"
 
 elif [[ $OSTYPE = freebsd* ]]; then

@@ -99,6 +99,10 @@ if [ -f $HOME/.dircolors ]; then
     fi
 fi
 
+if [ -z $LANG ];then
+    export LANG=ja_JP.UTF-8
+fi
+
 cuda_ver="10.2"
 has_cuda=false
 if [ -d $HOME/.local/cuda-$cuda_ver ]; then

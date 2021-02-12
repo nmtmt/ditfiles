@@ -77,6 +77,11 @@ elif [ $os = "windows" ]; then
     ln -sfT $HOME/dotfiles/.gvimrc $HOME/_gvimrc
 
     makedir $HOME/vimfiles/cache/dein
-    ln -sfT $HOME/dotfiles/vim/ftplugin $HOME/vimfiles/ftplugin
+    if [ ! -e $HOME/vimfiles/ftplugin ];then
+        ln -sfT $HOME/dotfiles/vim/ftplugin $HOME/vimfiles/ftplugin
+    fi
+    ln -sfT $HOME/dotfiles/.bashrc    $HOME/.bashrc
+    ln -sfT $HOME/dotfiles/.aliases   $HOME/.aliases
+    ln -sfT $HOME/dotfiles/.func      $HOME/.func
 fi
 ln -sf ~/dotfiles/.latexmkrc ~/.latexmkrc
