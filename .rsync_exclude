@@ -1,9 +1,12 @@
-*.localized
+._*
 *.DS_Store
-*:Zone.Identifier
-*~\$*
+*.localized
 *~
 *.swp
+*.tmp*
+*.temp*
 *.*library
-.tmp*
-名称未設定フォルダ
+*:Zone.Identifier
+*~$*
+.*/
+名称未設定フォルダ/
