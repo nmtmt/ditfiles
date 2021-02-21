@@ -12,6 +12,8 @@ setopt nolistbeep
 setopt append_history # when using multiple zsh
 #setopt share_history  # with multiple terminal
 
+setopt no_beep
+
 # enable advanced tab completion
 autoload -U compinit
 compinit
