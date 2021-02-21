@@ -43,6 +43,7 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf$opt $HOME/dotfiles/.zshrc         $HOME/.zshrc
     ln -sf$opt $HOME/dotfiles/.zshenv        $HOME/.zshenv
     ln -sf$opt $HOME/dotfiles/.bashrc        $HOME/.bashrc
+    ln -sf$opt $HOME/dotfiles/.bash_profile  $HOME/.bash_profile
     ln -sf$opt $HOME/dotfiles/.aliases       $HOME/.aliases
     ln -sf$opt $HOME/dotfiles/.func          $HOME/.func
 

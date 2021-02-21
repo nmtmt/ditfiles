@@ -6,7 +6,7 @@
 <% num = @args[0].to_i %>
 <%- end %>
 name: ros<%= num %>
-root: ~/l2ws_matsumoto/master/baxter_ws
+root: ~/l2ws_matsumoto/baxter_ws
 
 # Optional tmux socket
 # socket_name: foo
@@ -33,7 +33,7 @@ root: ~/l2ws_matsumoto/master/baxter_ws
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
-pre_window: export ROS_MASTER_URI=http://localhost:<%= 11311 + num %>; export GAZEBO_MASTER_URI=http://localhost:<%= 11345 + num %>; source $HOME/l2ws_matsumoto/baxter_ws/setup.bash
+pre_window: source $HOME/.bashrc; export ROS_MASTER_URI=http://localhost:<%= 11311 + num %>; export GAZEBO_MASTER_URI=http://localhost:<%= 11345 + num %>; source $HOME/l2ws_matsumoto/baxter_ws/setup.bash
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
