@@ -42,8 +42,10 @@ if [ $os = mac ];then
     sudo tlmgr path add
     sudo cjk-gs-integrate --link-texmf --cleanup
     sudo cjk-gs-integrate-macos --link-texmf
-    sudo mktexlsr
-    sudo kanji-config-updmap-sys --jis2004 hiragino-highsierra-pron
+    #sudo mktexlsr
+    #sudo kanji-config-updmap-sys --jis2004 hiragino-highsierra-pron
+    mktexlsr
+    kanji-config-updmap -user hiragino
 
     if [ $? == 0 ]; then
         echo "Set hiragino Done"
