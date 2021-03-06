@@ -2,9 +2,9 @@
 case $OSTYPE in
     darwin*)
         # seems like multiprocessing of python3.8 has a bug and cannot run dataloader of pytorch
-        ver="3.7.9";;
+        ver="3.7.10";;
     *)
-        ver="3.8.7";;
+        ver="3.8.8";;
 esac
 url=https://www.python.org/ftp/python/$ver/Python-$ver.tgz
 pkg_tarname=Python-$ver.tgz

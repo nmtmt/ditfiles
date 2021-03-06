@@ -20,6 +20,9 @@ set_alias tp    'trash-put'    trash-put
 set_alias tl    'trash-list'   trash-list
 set_alias open  'xdg-open'     xdg-open
 
+set_alias pbcopy  'xsel --clipboard --input'  xsel
+set_alias pbpaste 'xsel --clipboard --output' xsel
+
 set_alias nvidia-clock 'nvidia-smi -q -d CLOCK' nvidia-smi
 set_alias nvidia-performance 'nvidia-smi -q -d PERFORMANCE' nvidia-smi
 

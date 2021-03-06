@@ -62,7 +62,7 @@ ffmpegcrop(){
 
 wait_finish(){
     key_phrases=($@)
-    if [ -z $1 ];then
+    if [ -z "$1" ];then
         echo "Invalid input. You must specify key phrases of jobs!"
         return
     fi
@@ -73,7 +73,7 @@ wait_finish(){
 
             ret=$(ps -o user,pid,command -u $USER | grep $key_phrase | grep -v grep)
 
-            if [ ! -z $ret ];then
+            if [ ! -z "$ret" ];then
                 echo \"$ret\" is running...
                 finished=0
             fi
