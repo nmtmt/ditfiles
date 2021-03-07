@@ -88,3 +88,4 @@ docker-compose
 texinfo
 libevent1-dev
 autossh
+psensor
