@@ -130,8 +130,24 @@ if match( &runtimepath, '/dein.vim' ) == -1
   let &runtimepath .= ','.expand(dein_plugin_dir)
 endif
 
+if has("unix")
+  let g:python_host_prog=resolve(systemlist('which python')[0])
+  let g:python3_host_prog=resolve(systemlist('which python3')[0])
+else
+  let g:python_host_prog=resolve(systemlist('where python')[0])
+  let g:python3_host_prog=resolve(systemlist('where python3')[0])
+endif
+
+let python_has_pynvim=0
+let python_has_neovim=0
+if system('pip3 show pynvim') =~ 'Name: pynvim'
+  let python_has_pynvim=1
+elseif system('pip3 show neovim') =~ 'Name: neovim'
+  let python_has_neovim=1
+endif
+
 let use_deoplete=0
-if ((has('nvim') || has('timers')) && has('python3')) && (system('pip3 show pynvim') !=# '' || system('pip3 show neovim') !=# '')
+if ((has('nvim') || has('timers')) && has('python3')) && (python_has_pynvim || python_has_neovim)
   let use_deoplete=1
 endif
 

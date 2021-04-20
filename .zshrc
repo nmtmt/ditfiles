@@ -68,10 +68,17 @@ if [ -f $HOME/.func ]; then
     source $HOME/.func
 fi
 
-export PATH=/usr/local/opt/openssl@1.1/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/opt/openssl@1.1/lib:$LD_LIBRARY_PATH
-export CPATH=/usr/local/opt/openssl@1.1/include:$CPATH
-export PKG_CONFIG_PATH=/usr/local/opt/openssl@1.1/lib/pkgconfig:$PATH
+if [ $(uname -s) = Darwin ] && [ ! -z $HOMEBREW_PREFIX ];then
+    # openssl
+    export PATH=$HOMEBREW_PREFIX/opt/openssl@1.1/bin:$PATH
+    export LD_LIBRARY_PATH=$HOMEBREW_PREFIX/opt/openssl@1.1/lib:$LD_LIBRARY_PATH
+    export CPATH=$HOMEBREW_PREFIX/opt/openssl@1.1/include:$CPATH
+    export PKG_CONFIG_PATH=$HOMEBREW_PREFIX/opt/openssl@1.1/lib/pkgconfig:$PATH
+
+    # java
+    export PATH=$HOMEBREW_PREFIX/opt/openjdk@11/bin:$PATH
+    export CPATH=$HOMEBREW_PREFIX/opt/openjdk@11/include:$CPATH
+fi
 
 if which trash-empty > /dev/null 2>&1; then
     trash-empty 50
