@@ -34,14 +34,14 @@ fi
 bindkey -e
 bindkey "^[[3~" delete-char # Fn + backspace as forward-delete
 
-cuda_ver="10.2"
+preffered_cuda_ver="10.2"
 has_cuda=false
-if [ -d $HOME/.local/cuda-$cuda_ver ]; then
-    CUDA_HOME=$HOME/.local/cuda-$cuda_ver
+if [ -d $HOME/.local/cuda-$preffered_cuda_ver ]; then
+    CUDA_HOME=$HOME/.local/cuda-$preffered_cuda_ver
     export PATH=$CUDA_HOME/bin:$PATH
     has_cuda=true
-elif [ -d /usr/local/cuda-$cuda_ver ]; then
-    CUDA_HOME=/usr/local/cuda-$cuda_ver
+elif [ -d /usr/local/cuda-$preffered_cuda_ver ]; then
+    CUDA_HOME=/usr/local/cuda-$preffered_cuda_ver
     export PATH=$CUDA_HOME/bin:$PATH
     has_cuda=true
 elif [ -d /usr/local/cuda ]; then
@@ -84,17 +84,12 @@ if which trash-empty > /dev/null 2>&1; then
     trash-empty 50
 fi
 
-if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3
+venvshell=$(which virtualenvwrapper.sh)
+if [ -f $venvshell ]; then
+    bindir=$(dirname $venvshell)
+    export VIRTUALENVWRAPPER_PYTHON=$bindir/python3
     export WORKON_HOME=$HOME/.venvs
-    source $HOME/.local/bin/virtualenvwrapper.sh
-    if [ -d $HOME/.venvs/default ];then
-        workon default
-    fi
-elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=$(PATH=/usr/local/bin:/usr/bin:/bin which python3)
-    export WORKON_HOME=$HOME/.venvs
-    source /usr/local/bin/virtualenvwrapper.sh
+    source $venvshell
     if [ -d $HOME/.venvs/default ];then
         workon default
     fi

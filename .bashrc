@@ -105,16 +105,19 @@ if [ -z $LANG ];then
     export LANG=ja_JP.UTF-8
 fi
 
-cuda_ver="10.2"
+preffered_cuda_ver="10.2"
 has_cuda=false
-if [ -d $HOME/.local/cuda-$cuda_ver ]; then
-    CUDA_HOME=$HOME/.local/cuda-$cuda_ver
+if [ -d $HOME/.local/cuda-$preffered_cuda_ver ]; then
+    CUDA_HOME=$HOME/.local/cuda-$preffered_cuda_ver
+    export PATH=$CUDA_HOME/bin:$PATH
     has_cuda=true
-elif [ -d /usr/local/cuda-$cuda_ver ]; then
-    CUDA_HOME=/usr/local/cuda-$cuda_ver
+elif [ -d /usr/local/cuda-$preffered_cuda_ver ]; then
+    CUDA_HOME=/usr/local/cuda-$preffered_cuda_ver
+    export PATH=$CUDA_HOME/bin:$PATH
     has_cuda=true
 elif [ -d /usr/local/cuda ]; then
     CUDA_HOME=/usr/local/cuda
+    export PATH=$CUDA_HOME/bin:$PATH
     has_cuda=true
 fi
 
@@ -124,7 +127,17 @@ if $has_cuda; then
 else
     export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 fi
+
 export PATH=$HOME/.local/bin:$PATH
+export CPATH=$HOME/.local/include:$CPATH
+export EDITOR=vim
+export PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH
+
+if $has_cuda; then
+    export LD_LIBRARY_PATH=$HOME/.local/lib:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+else
+    export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+fi
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
@@ -151,24 +164,22 @@ if [ ! -z $XDG_CURRENT_DESKTOP ] && [ ! -z $DISPLAY ];then
     source $HOME/.xprofile
 fi
 
-# for using host display in WSL2
+# use host display in WSL2
 if [ $(uname -s) = Linux ] && [[ $(uname -r) = *microsoft* ]];then
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 fi
 
-if [ -f $HOME/.local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=$HOME/.local/bin/python3
+if which trash-empty > /dev/null 2>&1; then
+    trash-empty 50
+fi
+
+venvshell=$(which virtualenvwrapper.sh)
+if [ -f $venvshell ]; then
+    bindir=$(dirname $venvshell)
+    export VIRTUALENVWRAPPER_PYTHON=$bindir/python3
     export WORKON_HOME=$HOME/.venvs
-    source $HOME/.local/bin/virtualenvwrapper.sh
-    if [ -d $HOME/.venvs/default ];then
-        workon default
-    fi
-elif [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export VIRTUALENVWRAPPER_PYTHON=$(PATH=/usr/local/bin:/usr/bin:/bin which python3)
-    export WORKON_HOME=$HOME/.venvs
-    source /usr/local/bin/virtualenvwrapper.sh
+    source $venvshell
     if [ -d $HOME/.venvs/default ];then
         workon default
     fi
 fi
-export PATH=/usr/local/opt/openssl@1.1/bin:$PATH

@@ -122,14 +122,12 @@ if [ ! $os = "mac" ]; then
 fi
 
 make_venv_with_local_python(){
-    venv_shell=$HOME/.local/bin/virtualenvwrapper.sh
     venv_python=$HOME/.local/bin/python3
     pip3 install --upgrade pip
     pip3 install -r $HOME/dotfiles/env/system_pip_pkgs
 }
 
 make_venv_with_system_python(){
-    venv_shell=/usr/local/bin/virtualenvwrapper.sh
     if [ -f /usr/local/bin/python3 ]; then
         venv_python=/usr/local/bin/python3
     elif [ -f /usr/bin/python3 ]; then
@@ -156,9 +154,11 @@ else
             make_venv_with_system_python;;
     esac
 fi
-hash -r
 
-if [ -f $venv_shell ]; then
+hash -r
+venv_shell=$(which virtualenvwrapper.sh)
+
+if [ ! -z $venv_shell ] && [ -f $venv_shell ]; then
     deactivate > /dev/null 2>&1
     export VIRTUALENVWRAPPER_PYTHON=$venv_python
     export WORKON_HOME=$HOME/.venvs
@@ -182,7 +182,7 @@ if [ -f $venv_shell ]; then
     fi
     deactivate > /dev/null 2>&1
 else
-    echo Cannot find $venv_shell. Abort installing virtualenvwrapper
+    echo Failed to install virtualenvwrapper
     exit 1
 fi
 
