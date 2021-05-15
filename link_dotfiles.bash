@@ -37,6 +37,7 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
 
     ln -sf$opt $HOME/dotfiles/.vimrc         $HOME/.vimrc
     ln -sf$opt $HOME/dotfiles/.gvimrc        $HOME/.gvimrc
+    ln -sf$opt $HOME/dotfiles/.vrapperrc     $HOME/.vrapperrc
     makedir $HOME/.vim
     ln -sf$opt $HOME/dotfiles/vim/ftplugin  $HOME/.vim/ftplugin
 
@@ -74,13 +75,15 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf$opt $HOME/.gvimrc $HOME/.config/nvim/ginit.vim
 
 elif [ $os = "windows" ]; then
-    ln -sfT $HOME/dotfiles/.vimrc  $HOME/_vimrc
-    ln -sfT $HOME/dotfiles/.gvimrc $HOME/_gvimrc
+    ln -sfT $HOME/dotfiles/.vimrc     $HOME/_vimrc
+    ln -sfT $HOME/dotfiles/.gvimrc    $HOME/_gvimrc
+    ln -sfT $HOME/dotfiles/.vrapperrc $HOME/.vrapperrc
 
     makedir $HOME/vimfiles/cache/dein
     if [ ! -e $HOME/vimfiles/ftplugin ];then
         ln -sfT $HOME/dotfiles/vim/ftplugin $HOME/vimfiles/ftplugin
     fi
+
     ln -sfT $HOME/dotfiles/.bashrc    $HOME/.bashrc
     ln -sfT $HOME/dotfiles/.aliases   $HOME/.aliases
     ln -sfT $HOME/dotfiles/.func      $HOME/.func
