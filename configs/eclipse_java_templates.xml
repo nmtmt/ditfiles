@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="javadoc" deleted="false" description="作成者名" enabled="true" id="org.eclipse.jdt.ui.templates.author" name="@author">@author ${user}</template><template autoinsert="true" context="javadoc" deleted="false" description="&lt;b&gt;&lt;/b&gt;" enabled="true" id="org.eclipse.jdt.ui.templates.b_tag" name="&lt;b&gt;">&lt;b&gt;${word_selection}${}&lt;/b&gt;${cursor}</template><template autoinsert="true" context="javadoc" deleted="false" description="&lt;code&gt;&lt;/code&gt;" enabled="true" id="org.eclipse.jdt.ui.templates.code_tag" name="&lt;code&gt;">&lt;code&gt;${word_selection}${}&lt;/code&gt;${cursor}</template><template autoinsert="true" context="javadoc" deleted="false" description="&lt;i&gt;&lt;/i&gt;" enabled="true" id="org.eclipse.jdt.ui.templates.i_tag" name="&lt;i&gt;">&lt;i&gt;${word_selection}${}&lt;/i&gt;${cursor}</template><template autoinsert="true" context="javadoc" deleted="false" description="&lt;pre&gt;&lt;/pre&gt;" enabled="true" id="org.eclipse.jdt.ui.templates.pre_tag" name="&lt;pre&gt;">&lt;pre&gt;${word_selection}${}&lt;/pre&gt;${cursor}</template><template autoinsert="true" context="javadoc" deleted="false" description="アクティブ・タスク" enabled="true" id="org.eclipse.mylyn.ide.ui.template.activeTask" name="active_task">${activeTaskPrefix}${activeTaskKey}</template><template autoinsert="true" context="java" deleted="false" description="Apache Copyright License embedded in Java Comments" enabled="true" id="org.springframework.ide.eclipse.boot.templates.license.apache" name="asl">
+/*
+ * Copyright ${year} the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+</template><template autoinsert="false" context="java-statements" deleted="false" description="catch ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.catch" name="catch">catch (${Exception} ${cursor}) {
+}</template><template autoinsert="false" context="java-empty" deleted="false" description="新規クラスの作成" enabled="true" id="org.eclipse.jdt.ui.templates.new_class" name="class">package ${enclosing_package};
+
+public class ${primary_type_name} ${cursor} {
+
+}</template><template autoinsert="true" context="postfix" deleted="false" description="Creates a do-while loop" enabled="true" id="org.eclipse.jdt.postfixcompletion.dowhile" name="dowhile">do {&#13;
+	${cursor}&#13;
+} while (${i:inner_expression(boolean)});</template><template autoinsert="false" context="java-statements" deleted="false" description="else ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.else" name="else">else {
+	${cursor}
+}</template><template autoinsert="false" context="java-statements" deleted="false" description="else if ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.elseif" name="elseif">else if (${condition:var(boolean)}) {
+	${cursor}
+}</template><template autoinsert="false" context="java-empty" deleted="false" description="create new enumeration" enabled="true" name="enum">package ${enclosing_package};
+
+public enum ${primary_type_name} ${cursor} {
+
+}</template><template autoinsert="false" context="java-statements" deleted="false" description="finally ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.finally" name="finally">finally {
+	${cursor}
+}</template><template autoinsert="false" context="java-statements" deleted="false" description="use index on array" enabled="true" id="org.eclipse.jdt.ui.templates.for_array" name="for">for (${cursor}) {
+}</template><template autoinsert="false" context="java-statements" deleted="false" description="配列または Iterable の繰り返し" enabled="true" id="org.eclipse.jdt.ui.templates.for_iterable" name="foreach">for (${iterable_type} ${iterable_element} : ${iterable}) {
+}</template><template autoinsert="false" context="java-statements" deleted="false" description="if 文" enabled="true" id="org.eclipse.jdt.ui.templates.if" name="if">if (${condition:var(boolean)}) {
+	${line_selection}${cursor}
+}</template><template autoinsert="false" context="java-empty" deleted="false" description="新規インターフェースの作成" enabled="true" id="org.eclipse.jdt.ui.templates.new_iface" name="interface">package ${enclosing_package};
+
+public interface ${primary_type_name} ${cursor} {
+
+}</template><template autoinsert="true" context="java" deleted="false" description="import java.io." enabled="true" name="jio">import java.io.${cursor}</template><template autoinsert="true" context="java" deleted="false" description="import java.sql." enabled="true" name="jsql">import java.sql.${cursor}</template><template autoinsert="true" context="java" deleted="false" description="import java.util." enabled="true" name="jutil">import java.util.${cursor}</template><template autoinsert="false" context="java-statements" deleted="false" description="明示的なロック取得" enabled="true" id="org.eclipse.jdt.ui.templates.lock" name="lock">${lock:var(java.util.concurrent.locks.Lock)}.lock();
+try {
+	${line_selection}${cursor}
+} finally {
+	${lock}.unlock();
+}</template><template autoinsert="false" context="java-members" deleted="false" description="main メソッド" enabled="true" id="org.eclipse.jdt.ui.templates.main" name="main">public static void main(String[] args) {
+	${cursor}
+}</template><template autoinsert="false" context="module" deleted="false" description="create module declaration" enabled="true" id="org.eclipse.jdt.ui.templates.new_module" name="module">module ${name} {
+	${cursor}
+}</template><template autoinsert="true" context="postfix" deleted="false" description="Creates an if statement and checks if the expression does not resolve to null" enabled="true" id="org.eclipse.jdt.postfixcompletion.nnull" name="nnull">if (${i:inner_expression(java.lang.Object,array)} != null) {&#13;
+	${cursor}&#13;
+}</template><template autoinsert="true" context="java-statements" deleted="false" description="" enabled="true" name="print">System.out.print(${cursor});</template><template autoinsert="true" context="java-statements" deleted="false" description="" enabled="true" name="printf">System.out.printf(${cursor});</template><template autoinsert="true" context="java-statements" deleted="false" description="" enabled="true" name="println">System.out.println(${cursor});</template><template autoinsert="false" context="java-members" deleted="false" description="private メソッド" enabled="true" id="org.eclipse.jdt.ui.templates.private_method" name="private_method">private ${void} ${name}(${}) {
+	${cursor}
+}</template><template autoinsert="false" context="java-members" deleted="false" description="private static メソッド" enabled="true" id="org.eclipse.jdt.ui.templates.private_static_method" name="private_static_method">private static ${void} ${name}(${}) {
+	${cursor}
+}</template><template autoinsert="false" context="java-members" deleted="false" description="protected メソッド" enabled="true" id="org.eclipse.jdt.ui.templates.protected_method" name="protected_method">protected ${void} ${name}(${}) {
+	${cursor}
+}</template><template autoinsert="false" context="java-members" deleted="false" description="public メソッド" enabled="true" id="org.eclipse.jdt.ui.templates.public_method" name="public_method">public ${void} ${name}(${}) {
+	${cursor}
+}</template><template autoinsert="false" context="java-members" deleted="false" description="public static method" enabled="true" id="org.eclipse.jdt.ui.templates.public_static_method" name="public_static_method">public static ${void} ${name}(${}) {
+	${cursor}
+}</template><template autoinsert="false" context="java-empty" deleted="false" description="新規レコードの作成" enabled="true" id="org.eclipse.jdt.ui.templates.new_record" name="record">package ${enclosing_package};
+
+public record ${primary_type_name}(${cursor}) {
+
+}</template><template autoinsert="true" context="boot-statements" deleted="false" description="Call restTemplate.exchange" enabled="true" id="org.springframework.ide.eclipse.boot.templates.rtexchange" name="rtex">
+${:import(org.springframework.core.ParameterizedTypeReference,org.springframework.hateoas.PagedResources,org.springframework.http.HttpEntity,org.springframework.http.HttpMethod,org.springframework.http.ResponseEntity)}
+ResponseEntity&lt;PagedResources&lt;?&gt;&gt; result = ${restTemplate:var(org.springframework.web.client.RestTemplate)}.exchange("", 
+     HttpMethod.GET, 
+     new HttpEntity&lt;Void&gt;((Void) null),
+     new ParameterizedTypeReference&lt;PagedResources&lt;${cursor}&gt;&gt;() {});
+</template><template autoinsert="false" context="java-members" deleted="false" description="static final フィールド" enabled="true" id="org.eclipse.jdt.ui.templates.static_final" name="static_final">${visibility:link('public ','protected ','','private ')}static final ${type:link(String,int)} ${NAME} = ${expr:link('""',0)};</template><template autoinsert="true" context="postfix" deleted="false" description="Creates a new stream using Stream.of" enabled="true" id="org.eclipse.jdt.postfixcompletion.stream" name="stream">Stream.of(${i:inner_expression(array)})${cursor}</template><template autoinsert="true" context="java-statements" deleted="false" description="switch statement" enabled="true" name="switchs">switch (${key}) {&#13;
+	case ${cursor}:&#13;
+		break;&#13;
+	default:&#13;
+}</template><template autoinsert="false" context="java-statements" deleted="false" description="synchronized ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.synchronized" name="synchronized">synchronized (${mutex:var}) {
+	${line_selection}
+}</template><template autoinsert="true" context="java-statements" deleted="false" description="標準エラー出力へ出力" enabled="true" id="org.eclipse.jdt.ui.templates.syserr" name="syserr">System.err.println(${word_selection}${});${cursor}</template><template autoinsert="true" context="java-statements" deleted="false" description="標準出力へ出力" enabled="true" id="org.eclipse.jdt.ui.templates.sysout" name="sysout">System.out.println(${word_selection}${});${cursor}</template><template autoinsert="true" context="java-statements" deleted="false" description="現在のメソッドを標準出力へ出力" enabled="true" id="org.eclipse.jdt.ui.templates.systrace" name="systrace">System.out.println("${enclosing_type}.${enclosing_method}()");</template><template autoinsert="true" context="postfix" deleted="false" description="Throws the given Exception" enabled="true" id="org.eclipse.jdt.postfixcompletion.throw" name="throw">throw ${true:inner_expression(java.lang.Throwable)};</template><template autoinsert="false" context="java" deleted="false" description="コレクションから配列への変換" enabled="true" id="org.eclipse.jdt.ui.templates.toarray" name="toarray">(${type:elemType(collection)}[]) ${collection}.toArray(new ${type}[${collection}.size()])</template><template autoinsert="false" context="java-statements" deleted="false" description="try catch ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.try" name="try_catch">try {
+	${cursor}
+} catch (${Exception} ${exception_variable_name}) {
+}</template><template autoinsert="false" context="java-statements" deleted="false" description="try finally ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.tryfinally" name="try_finally">try {
+	${cursor}
+} finally {
+}</template><template autoinsert="true" context="java-statements" deleted="false" description="creates a while loop" enabled="true" name="while">while (${cursor}) {&#13;
+}</template><template autoinsert="true" context="java-statements" deleted="false" description="try with resources" enabled="true" name="with">try (${cursor}){&#13;
+} catch (${Exception} ${exception_variable_name}) {&#13;
+}</template></templates>
