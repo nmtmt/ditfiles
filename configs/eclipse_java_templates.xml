@@ -19,8 +19,8 @@
 
 public class ${primary_type_name} ${cursor} {
 
-}</template><template autoinsert="true" context="postfix" deleted="false" description="Creates a do-while loop" enabled="true" id="org.eclipse.jdt.postfixcompletion.dowhile" name="dowhile">do {&#13;
-	${cursor}&#13;
+}</template><template autoinsert="true" context="postfix" deleted="false" description="Creates a do-while loop" enabled="true" id="org.eclipse.jdt.postfixcompletion.dowhile" name="dowhile">do {;
+	${cursor};
 } while (${i:inner_expression(boolean)});</template><template autoinsert="false" context="java-statements" deleted="false" description="else ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.else" name="else">else {
 	${cursor}
 }</template><template autoinsert="false" context="java-statements" deleted="false" description="else if ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.elseif" name="elseif">else if (${condition:var(boolean)}) {
@@ -48,8 +48,8 @@ try {
 	${cursor}
 }</template><template autoinsert="false" context="module" deleted="false" description="create module declaration" enabled="true" id="org.eclipse.jdt.ui.templates.new_module" name="module">module ${name} {
 	${cursor}
-}</template><template autoinsert="true" context="postfix" deleted="false" description="Creates an if statement and checks if the expression does not resolve to null" enabled="true" id="org.eclipse.jdt.postfixcompletion.nnull" name="nnull">if (${i:inner_expression(java.lang.Object,array)} != null) {&#13;
-	${cursor}&#13;
+}</template><template autoinsert="true" context="postfix" deleted="false" description="Creates an if statement and checks if the expression does not resolve to null" enabled="true" id="org.eclipse.jdt.postfixcompletion.nnull" name="nnull">if (${i:inner_expression(java.lang.Object,array)} != null) {
+	${cursor};
 }</template><template autoinsert="true" context="java-statements" deleted="false" description="" enabled="true" name="print">System.out.print(${cursor});</template><template autoinsert="true" context="java-statements" deleted="false" description="" enabled="true" name="printf">System.out.printf(${cursor});</template><template autoinsert="true" context="java-statements" deleted="false" description="" enabled="true" name="println">System.out.println(${cursor});</template><template autoinsert="false" context="java-members" deleted="false" description="private メソッド" enabled="true" id="org.eclipse.jdt.ui.templates.private_method" name="private_method">private ${void} ${name}(${}) {
 	${cursor}
 }</template><template autoinsert="false" context="java-members" deleted="false" description="private static メソッド" enabled="true" id="org.eclipse.jdt.ui.templates.private_static_method" name="private_static_method">private static ${void} ${name}(${}) {
@@ -64,16 +64,10 @@ try {
 
 public record ${primary_type_name}(${cursor}) {
 
-}</template><template autoinsert="true" context="boot-statements" deleted="false" description="Call restTemplate.exchange" enabled="true" id="org.springframework.ide.eclipse.boot.templates.rtexchange" name="rtex">
-${:import(org.springframework.core.ParameterizedTypeReference,org.springframework.hateoas.PagedResources,org.springframework.http.HttpEntity,org.springframework.http.HttpMethod,org.springframework.http.ResponseEntity)}
-ResponseEntity&lt;PagedResources&lt;?&gt;&gt; result = ${restTemplate:var(org.springframework.web.client.RestTemplate)}.exchange("", 
-     HttpMethod.GET, 
-     new HttpEntity&lt;Void&gt;((Void) null),
-     new ParameterizedTypeReference&lt;PagedResources&lt;${cursor}&gt;&gt;() {});
-</template><template autoinsert="false" context="java-members" deleted="false" description="static final フィールド" enabled="true" id="org.eclipse.jdt.ui.templates.static_final" name="static_final">${visibility:link('public ','protected ','','private ')}static final ${type:link(String,int)} ${NAME} = ${expr:link('""',0)};</template><template autoinsert="true" context="postfix" deleted="false" description="Creates a new stream using Stream.of" enabled="true" id="org.eclipse.jdt.postfixcompletion.stream" name="stream">Stream.of(${i:inner_expression(array)})${cursor}</template><template autoinsert="true" context="java-statements" deleted="false" description="switch statement" enabled="true" name="switchs">switch (${key}) {&#13;
-	case ${cursor}:&#13;
-		break;&#13;
-	default:&#13;
+}</template><template autoinsert="false" context="java-members" deleted="false" description="static final フィールド" enabled="true" id="org.eclipse.jdt.ui.templates.static_final" name="static_final">${visibility:link('public ','protected ','','private ')}static final ${type:link(String,int)} ${NAME} = ${expr:link('""',0)};</template><template autoinsert="true" context="postfix" deleted="false" description="Creates a new stream using Stream.of" enabled="true" id="org.eclipse.jdt.postfixcompletion.stream" name="stream">Stream.of(${i:inner_expression(array)})${cursor}</template><template autoinsert="true" context="java-statements" deleted="false" description="switch statement" enabled="true" name="switchs">switch (${key}) {;
+	case ${cursor}:;
+		break;;
+	default:;
 }</template><template autoinsert="false" context="java-statements" deleted="false" description="synchronized ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.synchronized" name="synchronized">synchronized (${mutex:var}) {
 	${line_selection}
 }</template><template autoinsert="true" context="java-statements" deleted="false" description="標準エラー出力へ出力" enabled="true" id="org.eclipse.jdt.ui.templates.syserr" name="syserr">System.err.println(${word_selection}${});${cursor}</template><template autoinsert="true" context="java-statements" deleted="false" description="標準出力へ出力" enabled="true" id="org.eclipse.jdt.ui.templates.sysout" name="sysout">System.out.println(${word_selection}${});${cursor}</template><template autoinsert="true" context="java-statements" deleted="false" description="現在のメソッドを標準出力へ出力" enabled="true" id="org.eclipse.jdt.ui.templates.systrace" name="systrace">System.out.println("${enclosing_type}.${enclosing_method}()");</template><template autoinsert="true" context="postfix" deleted="false" description="Throws the given Exception" enabled="true" id="org.eclipse.jdt.postfixcompletion.throw" name="throw">throw ${true:inner_expression(java.lang.Throwable)};</template><template autoinsert="false" context="java" deleted="false" description="コレクションから配列への変換" enabled="true" id="org.eclipse.jdt.ui.templates.toarray" name="toarray">(${type:elemType(collection)}[]) ${collection}.toArray(new ${type}[${collection}.size()])</template><template autoinsert="false" context="java-statements" deleted="false" description="try catch ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.try" name="try_catch">try {
@@ -82,7 +76,7 @@ ResponseEntity&lt;PagedResources&lt;?&gt;&gt; result = ${restTemplate:var(org.sp
 }</template><template autoinsert="false" context="java-statements" deleted="false" description="try finally ブロック" enabled="true" id="org.eclipse.jdt.ui.templates.tryfinally" name="try_finally">try {
 	${cursor}
 } finally {
-}</template><template autoinsert="true" context="java-statements" deleted="false" description="creates a while loop" enabled="true" name="while">while (${cursor}) {&#13;
-}</template><template autoinsert="true" context="java-statements" deleted="false" description="try with resources" enabled="true" name="with">try (${cursor}){&#13;
-} catch (${Exception} ${exception_variable_name}) {&#13;
+}</template><template autoinsert="true" context="java-statements" deleted="false" description="creates a while loop" enabled="true" name="while">while (${cursor}) {;
+}</template><template autoinsert="true" context="java-statements" deleted="false" description="try with resources" enabled="true" name="with">try (${cursor}){;
+} catch (${Exception} ${exception_variable_name}) {;
 }</template></templates>
