@@ -173,8 +173,8 @@ if which trash-empty > /dev/null 2>&1; then
     trash-empty 50
 fi
 
-venvshell=$(which virtualenvwrapper.sh > /dev/null 2>&1)
-if [ $? -eq 0 ] && [ -f $venvshell ]; then
+venvshell=$(which virtualenvwrapper.sh 2>&1)
+if [ $? -eq 0 ] && [ ! -z $venvshell ] && [ -f $venvshell ]; then
     bindir=$(dirname $venvshell)
     export VIRTUALENVWRAPPER_PYTHON=$bindir/python3
     export WORKON_HOME=$HOME/.venvs
