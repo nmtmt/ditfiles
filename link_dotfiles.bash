@@ -74,6 +74,11 @@ if [ $os = "mac" ] || [ $os = "linux" ] || [ $os = "unix" ]; then
     ln -sf$opt $HOME/.vimrc  $HOME/.config/nvim/init.vim
     ln -sf$opt $HOME/.gvimrc $HOME/.config/nvim/ginit.vim
 
+    if [ $os="mac" ]; then
+        makedir $HOME/.config/karabiner
+        ln -sf$opt $HOME/dotfiles/.config/karabiner/karabiner.json $HOME/.config/karabiner/karabiner.json
+    fi
+
 elif [ $os = "windows" ]; then
     ln -sfT $HOME/dotfiles/.vimrc     $HOME/_vimrc
     ln -sfT $HOME/dotfiles/.gvimrc    $HOME/_gvimrc
