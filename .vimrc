@@ -169,6 +169,7 @@ if dein#load_state(dein_dir)
   call dein#add('flazz/vim-colorschemes')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-obsession')
+  call dein#add('tpope/vim-sleuth') " auto indent setting
 
   call dein#add('scrooloose/nerdtree')
 
