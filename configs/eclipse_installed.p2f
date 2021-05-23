@@ -1,7 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?p2f version='1.0.0'?>
 <p2f version='1.0.0'>
-  <ius size='19'>
+  <ius size='20'>
+    <iu id='com.github.eclipsecolortheme.feature.feature.group' name='Eclipse Color Theme' version='1.0.0.201410260308'>
+      <repositories size='1'>
+        <repository location='http://eclipse-color-theme.github.io/update'/>
+      </repositories>
+    </iu>
     <iu id='org.python.pydev.feature.feature.group' name='PyDev for Eclipse' version='8.3.0.202104101217'>
       <repositories size='1'>
         <repository location='https://github.com/fabioz/Pydev/releases/download/pydev_8_3_0/'/>
