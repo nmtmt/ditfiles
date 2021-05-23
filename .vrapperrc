@@ -1,4 +1,3 @@
-
 set autoindent
 set number
 
@@ -6,13 +5,7 @@ set imdisable
 
 set contentassistmode " enable CTRL+N in content-assist mode
 
-" Required:
-syntax enable
-
 " disable highlight with search command
 set nohlsearch
 " enable highlight when entering search string
 set incsearch
-
-set splitright " open new window to right side
-set splitbelow " open new window below the current one
