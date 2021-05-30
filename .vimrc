@@ -185,6 +185,7 @@ if dein#load_state(dein_dir)
   call dein#add('plasticboy/vim-markdown')
   call dein#add('kannokanno/previm')
   call dein#add('tyru/open-browser.vim')
+  call dein#add('aklt/plantuml-syntax')
 
   call dein#add('elzr/vim-json')      " check json syntax
   call dein#add('kevinoid/vim-jsonc') " check jsonc syntax
