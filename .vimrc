@@ -222,7 +222,7 @@ colorscheme gruvbox
 set background=dark
 
 let g:in_docker = empty(glob('/.dockerenv')) ? 0 : 1
-if !g:in_docker
+if !g:in_docker && $TERM=="xterm-256color"
   set termguicolors " true color
 endif
 
