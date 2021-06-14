@@ -768,6 +768,7 @@
 /instance/org.eclipse.e4.CSS/org.eclipse.e4.CSS.syntaxColorer.tokenStyles.punctuation.color=216,216,216
 /instance/org.eclipse.e4.CSS/org.eclipse.e4.CSS.syntaxColorer.tokenStyles.string.bgColor=
 /instance/org.eclipse.e4.CSS/org.eclipse.e4.CSS.syntaxColorer.tokenStyles.string.color=230,219,116
+/instance/org.eclipse.jdt.ui/editor_folding_enabled=false
 /instance/org.eclipse.jdt.ui/java_bracket=216,216,216
 /instance/org.eclipse.jdt.ui/java_comment_task_tag=204,223,50
 /instance/org.eclipse.jdt.ui/java_default=248,248,242
