@@ -19,7 +19,7 @@ set guioptions-=l " remove left scroll bar
 set guioptions-=L " remove left scroll bar
 
 if has("mac") " has(mac) line have to be checked before has(unix)
-  set guifont=Osaka-Mono:h14
+  set guifont=Osaka-Mono:h14,Cica:h12
   let &pythonhome      = split(g:python_host_prog , '/bin/python')[0]
   let &pythonthreehome = split(g:python3_host_prog, '/bin/python')[0]
   let &pythondll      = &pythonhome      . '/Python'
@@ -33,7 +33,7 @@ if has("mac") " has(mac) line have to be checked before has(unix)
   set linespace=4
 else
   if has("win64") || has("win32") || has("win32unix")
-    set guifont=Osaka-Mono:h12
+    set guifont=Osaka-Mono:h12,Cica:h12
     set linespace=2
     " for deoplete
     let g:python3_host_prog=glob("$HOME/AppData/Local/Programs/Python/Python37/python.exe")
@@ -46,7 +46,7 @@ else
       Guifont! Osaka-Mono:h12
       set linespace=4
     else
-      set guifont=Osaka-Mono\ 12
+      set guifont=Osaka-Mono\ 12,Cica\ 12
     endif
     " set linespace=5
   endif
