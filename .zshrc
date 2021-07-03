@@ -78,6 +78,9 @@ if [ $(uname -s) = Darwin ] && [ ! -z $HOMEBREW_PREFIX ];then
     # java
     export PATH=$HOMEBREW_PREFIX/opt/openjdk@11/bin:$PATH
     export CPATH=$HOMEBREW_PREFIX/opt/openjdk@11/include:$CPATH
+
+    # nodebrew node and npm path
+    export PATH=$PATH:$HOME/.nodebrew/current/bin
 fi
 
 if which trash-empty > /dev/null 2>&1; then
