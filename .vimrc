@@ -88,13 +88,14 @@ let &backupdir=tmpdirectory
 let &undodir=undodirectory
 let &viewdir=viewdirectory
 
-if has("unix")
-  let g:python_host_prog=resolve(systemlist('which python')[0])
-  let g:python3_host_prog=resolve(systemlist('which python3')[0])
-else
-  let g:python_host_prog=resolve(systemlist('where python')[0])
-  let g:python3_host_prog=resolve(systemlist('where python3')[0])
-endif
+" these lines slows launch
+"if has("unix")
+  "let g:python_host_prog=resolve(systemlist('which python')[0])
+  "let g:python3_host_prog=resolve(systemlist('which python3')[0])
+"else
+  "let g:python_host_prog=resolve(systemlist('where python')[0])
+  "let g:python3_host_prog=resolve(systemlist('where python3')[0])
+"endif
 
 let python_has_pynvim=0
 let python_has_neovim=0
@@ -170,6 +171,7 @@ if dein#load_state(dein_dir)
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-obsession')
   call dein#add('tpope/vim-sleuth') " auto indent setting
+  call dein#add('tpope/vim-commentary')
 
   call dein#add('scrooloose/nerdtree')
 
@@ -399,3 +401,6 @@ inoremap <expr><TAB>   pumvisible() ? "\<C-y><TAB>" : "\<TAB>"
 noremap <silent> \tree :NERDTreeToggle<CR>
 noremap <silent> \md :PrevimOpen<CR>
 cnoremap recache silent execute '!hash -r' <bar> call dein#recache_runtimepath() <bar> source $MYVIMRC
+cnoremap <C-A> <HOME>
+cnoremap <C-B> <S-LEFT>
+cnoremap <C-F> <S-RIGHT>
