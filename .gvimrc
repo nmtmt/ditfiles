@@ -2,6 +2,8 @@ set columns=150
 set lines=50
 
 colorscheme Tomorrow
+hi NonText guifg=bg
+" conceal tildes which appear in file with fewer lines
 
 nnoremap j gj
 nnoremap k gk
